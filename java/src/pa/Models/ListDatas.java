@@ -30,7 +30,8 @@ public abstract class ListDatas {
 
         // Recupere resultat requete
         String json = Api.callAPI("GET", "group/", empty);
-        JSONArray jArray = new JSONArray(json);
+        JSONObject obj = new JSONObject(json);
+        JSONArray jArray = new JSONArray(obj.getString("datas"));
         Group[] groups = new Group[jArray.length()];
 
         for (int i = 0; i < jArray.length(); i++) {
@@ -74,6 +75,7 @@ public abstract class ListDatas {
             JSONObject schedule = jArray.getJSONObject( i );
             schedules[i] = new Schedule();
             schedules[i].setId(schedule.getString("id"));
+            schedules[i].setDay(schedule.getString("day"));
             schedules[i].setDoorId(schedule.getString("door_id"));
             schedules[i].setGroupId(schedule.getString("group_id"));
             schedules[i].setHStart(schedule.getString("h_start"));

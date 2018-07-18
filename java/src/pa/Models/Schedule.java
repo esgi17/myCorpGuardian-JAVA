@@ -16,6 +16,11 @@ public class Schedule {
     private String _id;
 
     /**
+     * Le jour schedule
+     */
+    private String _day;
+
+    /**
      * L'ID du schedule
      */
     private String _h_start;
@@ -41,8 +46,9 @@ public class Schedule {
      * @param schedule
      *                  Tableau contenant les propriétés du planning
      */
-    public void Schedule(String id, String h_start, String h_stop, String group_id, String door_id) {
+    public void Schedule(String id, String day, String h_start, String h_stop, String group_id, String door_id) {
         this._id = id;
+        this._day = day;
         this._door_id = door_id;
         this._group_id = group_id;
         this._h_start = h_start;
@@ -125,5 +131,21 @@ public class Schedule {
      */
     public void setDoorId(String door_id) {
         this._door_id = door_id;
+    }
+
+    /**
+     * Getter : Récupération de l'ID
+     * @return L'ID du groupe
+     */
+    public String getDay() {
+        return _day;
+    }
+    /**
+     * Setter : Modification de l'ID
+     * @param day
+     *                  L'ID du groupe
+     */
+    public void setDay(String day) {
+        this._day = day;
     }
 }

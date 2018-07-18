@@ -30,6 +30,12 @@ public class Api {
             case "POST" :
                 res = Api.post(url, body);
                 break;
+            case "PUT" :
+                res = Api.put(url, body);
+                break;
+            case "DELETE" :
+                res = Api.delete(url, body);
+                break;
             default : System.out.println("ERROR");
         }
         return res;
@@ -43,8 +49,6 @@ public class Api {
         con.setRequestMethod("GET");
 
         int responseCode = con.getResponseCode();
-        System.out.println("\nSending 'GET' request to URL : " + url);
-        System.out.println("Response Code : " + responseCode);
 
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(con.getInputStream()));
@@ -60,6 +64,7 @@ public class Api {
         return res;
 
     }
+
     // HTTP POST request
     public static String post(String url, JSONObject body) throws Exception {
 
@@ -76,10 +81,10 @@ public class Api {
         wr.flush();
         wr.close();
 
-        int responseCode = con.getResponseCode();
-        System.out.println("\nSending 'POST' request to URL : " + url);
-        System.out.println("Post parameters : " + body);
-        System.out.println("Response Code : " + responseCode);
+        //int responseCode = con.getResponseCode();
+        //System.out.println("\nSending 'POST' request to URL : " + url);
+        //System.out.println("Post parameters : " + body);
+        //System.out.println("Response Code : " + responseCode);
 
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(con.getInputStream()));
@@ -94,6 +99,77 @@ public class Api {
         String res = response.toString();
         return res;
     }
+
+        // HTTP PUT request
+          public static String put(String url, JSONObject body) throws Exception {
+
+                URL obj = new URL(url);
+                HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+                con.setRequestMethod("PUT");
+                con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+
+                // Send put request
+                con.setDoOutput(true);
+                DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+                wr.writeBytes(body.toString());
+                wr.flush();
+                wr.close();
+
+                int responseCode = con.getResponseCode();
+                System.out.println("\nSending 'PUT' request to URL : " + url);
+                System.out.println("Post parameters : " + body);
+                System.out.println("Response Code : " + responseCode);
+
+                BufferedReader in = new BufferedReader(
+                new InputStreamReader(con.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+
+                String res = response.toString();
+                return res;
+            }
+
+            // HTTP DELETE request
+            public static String delete(String url, JSONObject body) throws Exception {
+
+                URL obj = new URL(url);
+                HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+                con.setRequestMethod("DELETE");
+                con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+
+                // Send put request
+                con.setDoOutput(true);
+                DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+                wr.writeBytes(body.toString());
+                wr.flush();
+                wr.close();
+
+                int responseCode = con.getResponseCode();
+                System.out.println("\nSending 'DELETE' request to URL : " + url);
+                System.out.println("Post parameters : " + body);
+                System.out.println("Response Code : " + responseCode);
+
+                        BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+
+                String res = response.toString();
+                return res;
+            }
+
 
     public static Boolean checkToken() {
         // Verification Token API
