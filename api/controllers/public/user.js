@@ -32,8 +32,7 @@ UserController.delete = function(id) {
 /**
 *  Modification d'un User en base
 **/
-UserController.update = function(user_id, firstname, lastname, job, group_id) {
-  console.log(typeof user_id);
+UserController.update = function(id, firstname, lastname, job, group_id) {
     return User.update({
         firstname: firstname,
         lastname: lastname,
@@ -41,7 +40,7 @@ UserController.update = function(user_id, firstname, lastname, job, group_id) {
         group_id: group_id
     },{
         where: {
-          id : user_id
+          id : id
         }
     });
 };
@@ -60,7 +59,6 @@ UserController.affectGroup = function(group_id, user_id) {
 *  Récupération des élements en base
 **/
 UserController.getAll = function (id) {
-    console.log("yo3");
     const options = {
       include: [{
         model: ModelIndex.Group,

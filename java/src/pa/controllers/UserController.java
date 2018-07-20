@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import pa.Models.Api;
+import pa.Models.Group;
 import pa.Models.ListDatas;
 import pa.Models.User;
 
@@ -73,7 +74,10 @@ public class UserController {
     //Rempli la combobox avec tout les groupes
     public void fillGroupList() throws Exception {
         listGroup.getItems().clear();
-        groups.addAll(getGroups());
+        Group[] group = ListDatas.getGroups();
+        for(int i = 0 ; i <group.length ; i++){
+            groups.add(group[i].getId() + " : " + group[i].getName());
+        }
         listGroup.setItems(groups);
     }
 

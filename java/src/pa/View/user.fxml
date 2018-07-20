@@ -13,87 +13,106 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pa.controllers.UserController">
-  <children>
-    <TitledPane animated="false" prefHeight="400.0" prefWidth="600.0" text="USER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <content>
-        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <HBox prefHeight="376.0" prefWidth="286.0">
-                     <children>
-                        <VBox prefHeight="387.0" prefWidth="637.0">
-                           <children>
-                              <Button fx:id="loadUsers" mnemonicParsing="false" onMouseClicked="#fillUserList" prefHeight="25.0" prefWidth="286.0" text="Load Users">
-                                 <VBox.margin>
-                                    <Insets top="10.0" />
-                                 </VBox.margin>
-                              </Button>
-                              <HBox prefHeight="20.0" prefWidth="206.0" />
-                              <HBox prefHeight="315.0" prefWidth="287.0">
-                                 <children>
-                                    <ListView fx:id="usersList" onMouseClicked="#modifUser" prefWidth="310.0" />
-                                 </children>
-                              </HBox>
-                           </children>
-                           <HBox.margin>
-                              <Insets bottom="20.0" left="20.0" />
-                           </HBox.margin>
+    <children>
+        <TitledPane animated="false" prefHeight="400.0" prefWidth="600.0" text="HOME" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <content>
+                <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <children>
+                        <HBox prefHeight="376.0" prefWidth="286.0">
+                            <children>
+                                <VBox prefHeight="387.0" prefWidth="637.0">
+                                    <children>
+                                        <HBox>
+                                            <children>
+                                                <Button fx:id="loadUsers" mnemonicParsing="false" onMouseClicked="#fillUserList" prefHeight="25.0" prefWidth="286.0" text="Load Users">
+                                                    <HBox.margin>
+                                                        <Insets right="5.0" top="10.0" />
+                                                    </HBox.margin>
+                                                </Button>
+                                                <Button fx:id="newUser" mnemonicParsing="false" onMouseClicked="#createForm" prefHeight="25.0" prefWidth="286.0" text="New User">
+                                                    <HBox.margin>
+                                                        <Insets left="5.0" top="10.0" />
+                                                    </HBox.margin>
+                                                </Button>
+                                            </children>
+                                        </HBox>
+                                        <HBox prefHeight="20.0" prefWidth="206.0" />
+                                        <HBox prefHeight="315.0" prefWidth="287.0">
+                                            <children>
+                                                <ListView fx:id="usersList" onMouseClicked="#updateForm" prefWidth="310.0" />
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                    <HBox.margin>
+                                        <Insets bottom="20.0" left="20.0" />
+                                    </HBox.margin>
+                                </VBox>
+                            </children>
+                        </HBox>
+                        <VBox layoutX="286.0" layoutY="-1.0" prefHeight="375.0" prefWidth="311.0">
+                            <children>
+                                <Label fx:id="head" alignment="CENTER" prefWidth="310.0" text="New User">
+                                    <font>
+                                        <Font name="Berlin Sans FB" size="16.0" />
+                                    </font>
+                                    <VBox.margin>
+                                        <Insets top="10.0" />
+                                    </VBox.margin>
+                                </Label>
+                                <Label fx:id="labelFirstname" alignment="CENTER" prefHeight="25.0" prefWidth="310.0" text="Firstname">
+                                    <VBox.margin>
+                                        <Insets bottom="5.0" />
+                                    </VBox.margin>
+                                </Label>
+                                <TextField fx:id="firstname">
+                                    <VBox.margin>
+                                        <Insets bottom="10.0" left="40.0" right="40.0" />
+                                    </VBox.margin>
+                                </TextField>
+                                <Label fx:id="labelLastname" alignment="CENTER" prefHeight="25.0" prefWidth="310.0" text="Lastname">
+                                    <VBox.margin>
+                                        <Insets bottom="5.0" />
+                                    </VBox.margin>
+                                </Label>
+                                <TextField fx:id="lastname">
+                                    <VBox.margin>
+                                        <Insets bottom="10.0" left="40.0" right="40.0" />
+                                    </VBox.margin>
+                                </TextField>
+                                <Label fx:id="labelJob" alignment="CENTER" prefHeight="25.0" prefWidth="310.0" text="Job">
+                                    <VBox.margin>
+                                        <Insets bottom="5.0" />
+                                    </VBox.margin>
+                                </Label>
+                                <TextField fx:id="job">
+                                    <VBox.margin>
+                                        <Insets bottom="20.0" left="40.0" right="40.0" />
+                                    </VBox.margin>
+                                </TextField>
+                                <ComboBox fx:id="listGroup" onMouseClicked="#fillGroupList" prefWidth="310.0" promptText="User Group">
+                                    <VBox.margin>
+                                        <Insets bottom="10.0" left="40.0" right="40.0" />
+                                    </VBox.margin>
+                                </ComboBox>
+                                <Button fx:id="deleteBtn" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#deleteUser" prefWidth="310.0" text="Delete User" visible="false">
+                                    <VBox.margin>
+                                        <Insets bottom="10.0" left="40.0" right="40.0" />
+                                    </VBox.margin>
+                                </Button>
+                                <Button fx:id="updateBtn" mnemonicParsing="false" onMouseClicked="#updateUser" prefWidth="310.0" text="Update User" visible="false">
+                                    <VBox.margin>
+                                        <Insets bottom="10.0" left="40.0" right="40.0" />
+                                    </VBox.margin>
+                                </Button>
+                                <Button fx:id="addBtn" mnemonicParsing="false" onMouseClicked="#addUser" prefWidth="310.0" text="Add User">
+                                    <VBox.margin>
+                                        <Insets left="40.0" right="40.0" />
+                                    </VBox.margin>
+                                </Button>
+                            </children>
                         </VBox>
-                     </children>
-                  </HBox>
-                  <VBox layoutX="286.0" layoutY="-1.0" prefHeight="375.0" prefWidth="311.0">
-                     <children>
-                        <Label fx:id="head" alignment="CENTER" prefWidth="310.0" text="New User">
-                           <font>
-                              <Font name="Berlin Sans FB" size="16.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </Label>
-                        <Label fx:id="labelFirstname" alignment="CENTER" prefHeight="25.0" prefWidth="310.0" text="Firstname">
-                           <VBox.margin>
-                              <Insets bottom="10.0" top="20.0" />
-                           </VBox.margin>
-                        </Label>
-                        <TextField fx:id="firstname">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="40.0" right="40.0" />
-                           </VBox.margin>
-                        </TextField>
-                        <Label fx:id="labelLastname" alignment="CENTER" prefHeight="25.0" prefWidth="310.0" text="Lastname">
-                           <VBox.margin>
-                              <Insets bottom="10.0" />
-                           </VBox.margin>
-                        </Label>
-                        <TextField fx:id="lastname">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="40.0" right="40.0" />
-                           </VBox.margin>
-                        </TextField>
-                        <Label fx:id="labelJob" alignment="CENTER" prefHeight="25.0" prefWidth="310.0" text="Job">
-                           <VBox.margin>
-                              <Insets bottom="10.0" />
-                           </VBox.margin>
-                        </Label>
-                        <TextField fx:id="job">
-                           <VBox.margin>
-                              <Insets bottom="20.0" left="40.0" right="40.0" />
-                           </VBox.margin>
-                        </TextField>
-                        <ComboBox fx:id="listGroup" onMouseClicked="#fillGroupList" prefWidth="310.0" promptText="User Group">
-                           <VBox.margin>
-                              <Insets bottom="30.0" left="40.0" right="40.0" />
-                           </VBox.margin>
-                        </ComboBox>
-                        <Button fx:id="addBtn" mnemonicParsing="false" onMouseClicked="#addUser" prefWidth="310.0" text="Add User">
-                           <VBox.margin>
-                              <Insets left="40.0" right="40.0" />
-                           </VBox.margin>
-                        </Button>
-                     </children>
-                  </VBox>
-               </children></AnchorPane>
-      </content>
-    </TitledPane>
-  </children>
+                    </children></AnchorPane>
+            </content>
+        </TitledPane>
+    </children>
 </AnchorPane>

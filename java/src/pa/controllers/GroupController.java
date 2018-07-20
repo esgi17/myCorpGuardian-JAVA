@@ -12,53 +12,20 @@ import pa.Models.ListDatas;
 import pa.Models.User;
 
 public class GroupController {
-    @FXML Label mondayOpen;
-    @FXML Slider mondayOpenSlider;
-    @FXML Label mondayClose;
-    @FXML Slider mondayCloseSlider;
-    @FXML Label tuesdayOpen;
-    @FXML Slider tuesdayOpenSlider;
-    @FXML Label tuesdayClose;
-    @FXML Slider tuesdayCloseSlider;
-    @FXML Label wednesdayOpen;
-    @FXML Slider wednesdayOpenSlider;
-    @FXML Label wednesdayClose;
-    @FXML Slider wednesdayCloseSlider;
-    @FXML Label thursdayOpen;
-    @FXML Slider thursdayOpenSlider;
-    @FXML Label thursdayClose;
-    @FXML Slider thursdayCloseSlider;
-    @FXML Label fridayOpen;
-    @FXML Slider fridayOpenSlider;
-    @FXML Label fridayClose;
-    @FXML Slider fridayCloseSlider;
-    @FXML Label saturdayOpen;
-    @FXML Slider saturdayOpenSlider;
-    @FXML Label saturdayClose;
-    @FXML Slider saturdayCloseSlider;
-    @FXML Label sundayOpen;
-    @FXML Slider sundayOpenSlider;
-    @FXML Label sundayClose;
-    @FXML Slider sundayCloseSlider;
 
     @FXML ListView groupList;
     @FXML ListView usersList;
     @FXML Button loadGroups;
-    @FXML TextField groupNameField;
-    @FXML Label head;
+    @FXML Label usersFromGroup;
+
+    @FXML TextField newGroupField;
+    @FXML Label newGroupLabel;
 
     ObservableList<String> users = FXCollections.observableArrayList();
     ObservableList<String> groups = FXCollections.observableArrayList();
 
-    public void setHour(){
-    }
 
-    public String getHour(double number){
-        return " ";
-    }
-
-
-
+    Group groupSelected = new Group();
     // Affiche la liste des groupes
     public Group[] fillGroupList() throws Exception {
         Group res[] = ListDatas.getGroups();
@@ -79,9 +46,9 @@ public class GroupController {
 
     // Affiche la liste des users du groupe
     public User[] fillUsersList() throws Exception {
-        Group selectedGroup = getGroupSelected();
-        User res[] = selectedGroup.getUsers();
-        groupNameField.setText(selectedGroup.getName());
+        groupSelected = getGroupSelected();
+        User res[] = groupSelected.getUsers();
+        usersFromGroup.setText("Users from "+ groupSelected.getName()+" :");
         usersList.getItems().clear();
         // Rempli le tableau de users
         for(int i=0 ; i<res.length ; i++ ){
@@ -94,5 +61,47 @@ public class GroupController {
     // Cree une ligne dans la listview de users
     public String userCreateLine(User user){
         return user.getLastname().toUpperCase() + ", " + user.getFirstname();
+    }
+
+    public boolean isGoodGroupName() throws Exception {
+        boolean res = true;
+        Group groups[] = ListDatas.getGroups();
+        if(newGroupField.getText().equalsIgnoreCase("")){
+            res = false;
+            newGroupLabel.setText("Empty Group Name");
+        }
+        else{
+            for(int i=0 ; i< groups.length ; i++ ){
+                if(groups[i].getName().equalsIgnoreCase(newGroupField.getText())){
+                    res = false;
+                    newGroupLabel.setText("Already exist");
+                }
+            }
+        }
+        if(res){
+            newGroupLabel.setText("New Group");
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public void createGroup() throws Exception {
+        if(isGoodGroupName()){
+            JSONObject body = new JSONObject();
+            body.put( "name", newGroupField.getText() );
+            Api.callAPI( "POST", "group/", body );
+            fillGroupList();
+        }
+    }
+
+    public void deleteGroup() throws Exception {
+        System.out.println(groupList.getSelectionModel().getSelectedIndex());
+        if(Integer.parseInt(groupSelected.getId()) > 0){
+            JSONObject body = new JSONObject();
+            Api.callAPI( "DELETE", "group/"+groupSelected.getId(), body );
+            fillGroupList();
+        }
     }
 }

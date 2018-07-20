@@ -22,9 +22,9 @@ userRouter.get('/:id?', function(req, res) {
     UserController.getAll(id)
       .then( (user) => {
           // Si la méthode ne renvoie pas d'erreur, on renvoie le resultat
-          res.status(201).json({
+          res.status(200).json({
               success : true,
-              status : 201,
+              status : 200,
               datas : user
           });
       })
@@ -53,7 +53,7 @@ userRouter.post('/', function(req, res) {
     const firstname = req.body.firstname;
     const lastname = req.body.lastname;
     const job = req.body.job || "host";
-    const group_id = req.body.group_id || 0;
+    const group_id = req.body.group_id || 1;
 
     // Si les parametres obligatoires ne sont pas tous remplis
     if( firstname === undefined || lastname === undefined) {
@@ -71,7 +71,7 @@ userRouter.post('/', function(req, res) {
           // Si la methode ne renvoie pas d'erreur, on renvoie le résultat
           res.status(200).json({
               success : true,
-              status : 201,
+              status : 200,
               datas : user
           });
       }).catch( (err) => {
@@ -146,10 +146,8 @@ userRouter.delete('/', function (req, res) {
 * @apiUse error400
 */
 userRouter.put('/', function(req, res) {
-  console.log("yo");
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
-  const login = req.body.login;
   const job = req.body.job || "host";
   const group_id = req.body.group_id || 0;
   const id = parseInt(req.body.id);
@@ -157,7 +155,6 @@ userRouter.put('/', function(req, res) {
   UserController.getAll(id)
     .then( (user) => {
       if (user) {
-        console.log(id);
           UserController.update(id, firstname, lastname, job, group_id)
             .then( (user) => {
                 res.status(200).json({

@@ -33,18 +33,6 @@ DeviceController.getAll = function (id) {
       include: [{
         model: ModelIndex.DeviceType,
         as : 'deviceType'
-      },
-      {
-        model: ModelIndex.Pass,
-        as : 'pDevice'
-      },
-      {
-        model: ModelIndex.Door,
-        as : 'dDevice'
-      },
-      {
-        model: ModelIndex.Captor,
-        as : 'cDevice'
       }]
     };
     const where = {};

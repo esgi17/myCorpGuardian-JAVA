@@ -15,7 +15,11 @@ groupRouter.get('/:id?', function(req, res) {
     const id = req.params.id;
     GroupController.getAll( id )
       .then( (group) => {
-          res.status(201).json(group);
+        res.status(200).json({
+            success : true,
+            status : 200,
+            datas : group
+        });
       })
       .catch( (err) => {
           console.error(err);
@@ -29,14 +33,14 @@ groupRouter.get('/:id?', function(req, res) {
 * @route : /user/
 */
 groupRouter.post('/', function(req, res) {
-    const description = req.body.description;
-    if( description === undefined ) {
+    const name = req.body.name;
+    if( name === undefined ) {
         res.status(400).end();
         return;
     }
-    GroupController.add(description)
+    GroupController.add(name)
       .then( (group) => {
-          res.status(201).json(group);
+          res.status(200).json(group);
       })
       .catch( (err) => {
           console.error(err);

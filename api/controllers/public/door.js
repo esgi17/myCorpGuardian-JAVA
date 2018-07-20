@@ -21,7 +21,8 @@ DoorController.getAll = function (id) {
       options.where = where;
       return Door.findAll(options);
   };
-  
+
+
 /**
 *  Retrouver une porte en base
 **/

@@ -18,9 +18,9 @@ scheduleRouter.get('/:id?', function(req, res) {
     ScheduleController.getAll(id)
       .then( (schedule) => {
         // Si la methode ne renvoie pas d'erreur, on renvoie le résultat
-        res.status(201).json({
+        res.status(200).json({
             success : true,
-            status : 201,
+            status : 200,
             datas : schedule
         });
       })
@@ -50,7 +50,7 @@ scheduleRouter.post('/', function(req, res) {
   const door_id = req.body.door_id;
   const group_id = req.body.group_id;
 
-    if( ip === undefined || type === undefined ) {
+    if( h_start === undefined || h_stop === undefined || day === undefined) {
       // Renvoi d'une erreur
       res.status(400).json({
           success : false,
@@ -61,9 +61,9 @@ scheduleRouter.post('/', function(req, res) {
     ScheduleController.add( h_start, h_stop, day, door_id, group_id )
       .then( (schedule) => {
         // Si la methode ne renvoie pas d'erreur, on renvoie le résultat
-        res.status(201).json({
+        res.status(200).json({
             success : true,
-            status : 201,
+            status : 200,
             datas : schedule
         });
     }).catch( (err) => {
@@ -94,14 +94,14 @@ scheduleRouter.post('/', function(req, res) {
 */
 scheduleRouter.delete('/:id', function (req, res) {
   var id = parseInt(req.params.id);
-  ScheduleController.find(id)
+  ScheduleController.getAll(id)
   .then( (schedule) => {
     if (schedule) {
       ScheduleController.delete(id)
         .then( schedule => {
-          res.status(201).json({
+          res.status(200).json({
               success : true,
-              status : 201,
+              status : 200,
               message : "Schedule deleted"
           });
         });

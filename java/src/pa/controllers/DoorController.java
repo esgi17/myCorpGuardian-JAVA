@@ -50,6 +50,14 @@ public class DoorController {
     @FXML TextField newDoorRefField;
     @FXML Button newDoorBtn;
 
+    @FXML Label mondayLabel;
+    @FXML Label tuesdayLabel;
+    @FXML Label wednesdayLabel;
+    @FXML Label thursdayLabel;
+    @FXML Label fridayLabel;
+    @FXML Label saturdayLabel;
+    @FXML Label sundayLabel;
+
     @FXML ComboBox groupsList;
     @FXML Button createBtn;
     @FXML Button deleteBtn;
@@ -349,8 +357,33 @@ public class DoorController {
         }
     }
 
+    public void resetDayLabels(){/*
+        mondayOpenSlider.setValue(0);
+        mondayCloseSlider.setValue(0);
+        tuesdayOpenSlider.setValue(0);
+        tuesdayCloseSlider.setValue(0);
+        wednesdayOpenSlider.setValue(0);
+        wednesdayCloseSlider.setValue(0);
+        thursdayOpenSlider.setValue(0);
+        thursdayCloseSlider.setValue(0);
+        fridayOpenSlider.setValue(0);
+        fridayCloseSlider.setValue(0);
+        saturdayOpenSlider.setValue(0);
+        saturdayCloseSlider.setValue(0);
+        sundayOpenSlider.setValue(0);
+        sundayCloseSlider.setValue(0);*/
+        mondayLabel.setText("Monday");
+        tuesdayLabel.setText("Tuesday");
+        wednesdayLabel.setText("Wednesday");
+        thursdayLabel.setText("Thursday");
+        fridayLabel.setText("Friday");
+        saturdayLabel.setText("Saturday");
+        sundayLabel.setText("Sunday");
+        setHour();
+    }
+
     public void createSchedules() throws Exception{
-        if(isGroupAndDoorSelected()){
+        if(isGroupAndDoorSelected() && isGoodSchedule()){
             for(int i = 0 ; i < 7 ; i++){
                 String h_start = "";
                 String h_stop = "";
@@ -359,7 +392,6 @@ public class DoorController {
                         h_start = getStringHour(mondayOpenSlider.getValue());
                         h_stop = getStringHour(mondayCloseSlider.getValue());
                         createSchedule(h_start, h_stop, i);
-
                         break;
                     case 1:
                         h_start = getStringHour(tuesdayOpenSlider.getValue());
@@ -423,7 +455,6 @@ public class DoorController {
     public void deleteSchedules() throws Exception {
         if(isGroupAndDoorSelected()){
             Schedule[] schedules = getSchedulesSelected();
-            System.out.println(schedules.length);
 
             if(schedules.length>0) {
                 for (int i = 0; i < schedules.length; i++) {
@@ -432,6 +463,65 @@ public class DoorController {
                 }
             }
         }
+    }
+
+    public void updateSchedules() throws Exception {
+        deleteSchedules();
+        createSchedules();
+    }
+
+    public boolean isGoodSchedule(){
+        boolean res = true;
+        if(mondayOpenSlider.getValue() > mondayCloseSlider.getValue() ){
+            mondayLabel.setText("Wrong Hour");
+            res = false;
+        }
+        else{
+            mondayLabel.setText(" Monday");
+        }
+        if(tuesdayOpenSlider.getValue() > tuesdayCloseSlider.getValue() ){
+            tuesdayLabel.setText("Wrong Hour");
+            res = false;
+        }
+        else{
+            tuesdayLabel.setText(" Tuesday");
+        }
+        if(wednesdayOpenSlider.getValue() > wednesdayCloseSlider.getValue() ){
+            wednesdayLabel.setText("Wrong Hour");
+            res = false;
+        }
+        else{
+            wednesdayLabel.setText(" Wednesday");
+        }
+        if(thursdayOpenSlider.getValue() > thursdayCloseSlider.getValue() ){
+            thursdayLabel.setText("Wrong Hour");
+            res = false;
+        }
+        else{
+            thursdayLabel.setText(" Thursday");
+        }
+        if(fridayOpenSlider.getValue() > fridayCloseSlider.getValue() ){
+            fridayLabel.setText("Wrong Hour");
+            res = false;
+        }
+        else{
+            fridayLabel.setText(" Friday");
+        }
+        if(saturdayOpenSlider.getValue() > saturdayCloseSlider.getValue() ){
+            saturdayLabel.setText("Wrong Hour");
+            res = false;
+        }
+        else{
+            saturdayLabel.setText(" Saturday");
+        }
+        if(sundayOpenSlider.getValue() > sundayCloseSlider.getValue() ){
+            sundayLabel.setText("Wrong Hour");
+            res = false;
+        }
+        else{
+            sundayLabel.setText(" Sunsday");
+        }
+        return res;
     }
 
 }
