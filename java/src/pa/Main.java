@@ -28,8 +28,8 @@ public class Main extends Application {
             openGroupPage();
 
         } else {
-            //openDoorPage();
-            openGroupPage();
+            openDoorPage();
+            //openGroupPage();
             //openUserPage();
             //openHomePage();
             //openAddUserPage();
