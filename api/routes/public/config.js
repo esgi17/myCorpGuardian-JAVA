@@ -9,6 +9,8 @@ module.exports = {
         door_path : '../../controllers/public/door',
         deviceType_path : '../../controllers/public/deviceType',
         device_path : '../../controllers/public/device',
-        captor_path : '../../controllers/public/captor'
+        captor_path : '../../controllers/public/captor',
+        camera_path : '../../controllers/public/camera',
+        state_path : '../../controllers/public/state'
     }
 }
