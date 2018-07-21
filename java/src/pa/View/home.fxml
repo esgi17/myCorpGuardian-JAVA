@@ -29,26 +29,6 @@
                            </font>
                         </Label>
                         <HBox prefHeight="50.0" prefWidth="200.0">
-                           <VBox.margin>
-                              <Insets top="20.0" />
-                           </VBox.margin>
-                           <children>
-                              <Label prefHeight="30.0" prefWidth="151.0" text="Manage your groups ">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets left="111.5" />
-                                 </HBox.margin>
-                              </Label>
-                              <Button fx:id="groupBtn" mnemonicParsing="false" onMouseClicked="#openGroupPage" text="here">
-                                 <font>
-                                    <Font size="13.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="50.0" prefWidth="200.0">
                            <children>
                               <Label prefHeight="30.0" prefWidth="151.0" text="Manage your users ">
                                  <font>
@@ -64,10 +44,16 @@
                                  </font>
                               </Button>
                            </children>
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
                         </HBox>
                         <HBox prefHeight="50.0" prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
                            <children>
-                              <Label prefHeight="30.0" prefWidth="151.0" text="Manage your devices ">
+                              <Label prefHeight="30.0" prefWidth="151.0" text="Manage your groups ">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -75,7 +61,7 @@
                                     <Insets left="111.5" />
                                  </HBox.margin>
                               </Label>
-                              <Button fx:id="deviceBtn" mnemonicParsing="false" onMouseClicked="#openDevicePage" text="here">
+                              <Button fx:id="groupBtn" mnemonicParsing="false" onMouseClicked="#openGroupPage" text="here">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
@@ -110,6 +96,23 @@
                                  </HBox.margin>
                               </Label>
                               <Button fx:id="scheduleBtn1" mnemonicParsing="false" onMouseClicked="#openEventPage" text="here">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="50.0" prefWidth="200.0">
+                           <children>
+                              <Label prefHeight="30.0" prefWidth="151.0" text="Manage your devices ">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="111.5" />
+                                 </HBox.margin>
+                              </Label>
+                              <Button fx:id="deviceBtn" mnemonicParsing="false" onMouseClicked="#openDevicePage" text="here">
                                  <font>
                                     <Font size="13.0" />
                                  </font>

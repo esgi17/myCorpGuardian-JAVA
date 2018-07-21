@@ -65,15 +65,17 @@ public class EventController {
         return res;
     }
 
+    // Affiche la liste des doors
     public Door[] fillDoorList() throws Exception {
-        Door res[] = ListDatas.getDoors();;
+        Door doorsArray[] = ListDatas.getDoors();
         doorList.getItems().clear();
-        // Rempli le tableau de groupes
-        for(int i=0 ; i< res.length ; i++ ){
-            doors.add(res[i].getName());
+        // Rempli le tableau de doors
+        for(int i=0 ; i< doorsArray.length ; i++ ){
+            Device device = ListDatas.getDevice(doorsArray[i].getId());
+            doors.add(device.getName());
         }
         doorList.setItems(doors);
-        return res;
+        return doorsArray;
     }
 
     public User[] fillUserList() throws Exception {

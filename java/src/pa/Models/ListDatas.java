@@ -19,8 +19,6 @@ public abstract class ListDatas {
                 JSONObject door = jArray.getJSONObject( i );
                 doors[i] = new Door();
                 doors[i].setId( door.getString( "id" ) );
-                doors[i].setName( door.getString( "name" ) );
-                doors[i].setRef( door.getString( "ref" ) );
                 doors[i].setDeviceId( door.getString( "device_id" ) );
             }
             return doors;
@@ -169,5 +167,47 @@ public abstract class ListDatas {
             Event[] eventEmpty = new Event[0];
         return  eventEmpty;
         }
+    }
+
+    public static Device[] getDevices() throws Exception {
+        JSONObject empty = new JSONObject();
+
+        // Recupere resultat requete
+        String json = Api.callAPI("GET", "device/", empty);
+        if (!json.equalsIgnoreCase("")) {
+            JSONObject datas = new JSONObject( json );
+            JSONArray jArray = new JSONArray( datas.getString( "datas" ) );
+            Device[] devices = new Device[jArray.length()];
+
+            for (int i = 0; i < jArray.length(); i++) {
+                JSONObject device = jArray.getJSONObject( i );
+                devices[i] = new Device();
+                devices[i].setId( device.getString( "id" ) );
+                devices[i].setName( device.getString( "name" ) );
+                devices[i].setRef( device.getString( "ref" ) );
+                devices[i].setDeviceTypeId( device.getString( "device_type_id" ) );
+            }
+            return devices;
+        }
+        else{
+            Device[] deviceEmpty = new Device[0];
+            return  deviceEmpty;
+        }
+    }
+
+    public static Device getDevice(String id) throws Exception {
+        JSONObject empty = new JSONObject();
+        Device device = new Device();
+        String json = Api.callAPI("GET", "device/" + id, empty);
+        if (!json.equalsIgnoreCase("")) {
+            JSONObject datas = new JSONObject( json );
+            JSONArray jArray = new JSONArray( datas.getString( "datas" ) );
+            JSONObject dev = jArray.getJSONObject(0);
+            device.setId(dev.getString("id"));
+            device.setName(dev.getString("name"));
+            device.setRef(dev.getString("ref"));
+            device.setDeviceTypeId(dev.getString("device_type_id"));
+        }
+        return device;
     }
 }

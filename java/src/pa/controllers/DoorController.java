@@ -104,7 +104,8 @@ public class DoorController {
         doorsList.getItems().clear();
         // Rempli le tableau de doors
         for(int i=0 ; i< doorsArray.length ; i++ ){
-            doors.add(doorsArray[i].getName());
+            Device device = ListDatas.getDevice(doorsArray[i].getId());
+            doors.add(device.getName());
         }
         doorsList.setItems(doors);
         return doorsArray;

@@ -21,16 +21,6 @@ public class Door extends SecuritySystem {
     private String _id;
 
     /**
-     * Le nom de la porte
-     */
-    private String _name;
-
-    /**
-     * La ref de la porte
-     */
-    private String _ref;
-
-    /**
      * L'ID de la device
      */
     private String _device_id;
@@ -40,17 +30,11 @@ public class Door extends SecuritySystem {
      *
      * @param id
      *                      id de la porte
-     * @param name
-     *                      Nom de la porte
-     * @param ref
-     *                      Reference de la porte
      * @param device_id
      *                      id de la device
      */
-    public void Door( String id, String ref, String name, String device_id ) {
+    public void Door( String id,String device_id ) {
         this._id = id;
-        this._ref = ref;
-        this._name = name;
         this._device_id = device_id;
     }
 
@@ -68,42 +52,6 @@ public class Door extends SecuritySystem {
      */
     public void setId(String id) {
         this._id = id;
-    }
-
-    /**
-     * Getter : Récupération du nom
-     * @return Le nom du groupe
-     */
-    public String getName() {
-        return _name;
-    }
-
-    /**
-     * Setter : Modification du nom
-     *
-     * @param name
-     *                  Nom du groupe
-     */
-    public void setName(String name) {
-        this._name = name;
-    }
-
-    /**
-     * Getter : Récupération du nom
-     * @return Le nom du groupe
-     */
-    public String getRef() {
-        return _ref;
-    }
-
-    /**
-     * Setter : Modification du nom
-     *
-     * @param ref
-     *                  Nom du groupe
-     */
-    public void setRef(String ref) {
-        this._ref = ref;
     }
 
     /**

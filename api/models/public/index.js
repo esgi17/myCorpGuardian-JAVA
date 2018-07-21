@@ -36,14 +36,24 @@ Object.keys(ModelIndex)
     if (ModelIndex[modelName].associate) {
         ModelIndex[modelName].associate(ModelIndex);
     }
-});
+})
+
 
 ModelIndex.sequelize = sequelize;
 ModelIndex.Sequelize = Sequelize;
 ModelIndex.openDatabase = function() {
   return sequelize
       .authenticate()
-      .then(() => sequelize.sync());
+      .then(() => sequelize.sync({force : false})
+        .then(() =>{
+          Object.keys(ModelIndex)
+            .forEach((modelName) => {
+
+          if (ModelIndex[modelName].synchro){
+            ModelIndex[modelName].synchro(ModelIndex);
+          }
+        })
+        }));
 };
 
 module.exports = ModelIndex;
