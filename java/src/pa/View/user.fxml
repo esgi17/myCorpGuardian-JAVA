@@ -117,7 +117,7 @@
             <ButtonBar buttonMinWidth="60.0" prefHeight="40.0" prefWidth="462.0">
                <buttons>
                   <Button mnemonicParsing="false" onMouseClicked="#openHomePage" text="HOME" />
-                  <Button mnemonicParsing="false" text="USER" visible="false" />
+                  <Button mnemonicParsing="false" style="-fx-background-insets: 0;" text="USER" />
                   <Button mnemonicParsing="false" onMouseClicked="#openGroupPage" text="GROUP" />
                   <Button minWidth="0.0" mnemonicParsing="false" onMouseClicked="#openDoorPage" prefHeight="25.0" prefWidth="139.0" text="DOOR" />
                   <Button mnemonicParsing="false" onMouseClicked="#openEventPage" text="EVENT" />

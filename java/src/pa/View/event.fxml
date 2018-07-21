@@ -7,10 +7,8 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -20,20 +18,33 @@
       <content>
         <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <HBox prefHeight="376.0" prefWidth="478.0">
+                  <HBox prefHeight="376.0">
                      <children>
-                        <VBox prefHeight="356.0" prefWidth="414.0">
+                        <VBox prefHeight="356.0" prefWidth="290.0">
                            <children>
-                              <Button fx:id="loadEvent" mnemonicParsing="false" onMouseClicked="#fillEventList" prefHeight="25.0" prefWidth="426.0" text="Load Event">
+                              <Button fx:id="loadEvent" mnemonicParsing="false" onMouseClicked="#loadDatas" prefHeight="25.0" prefWidth="120.0" text="Load All Events">
                                  <VBox.margin>
-                                    <Insets top="10.0" />
+                                    <Insets bottom="10.0" left="85.0" top="10.0" />
                                  </VBox.margin>
                               </Button>
-                              <HBox prefHeight="20.0" prefWidth="206.0" />
+                              <HBox prefHeight="20.0" prefWidth="206.0">
+                                 <children>
+                                    <Label alignment="CENTER" prefWidth="290.0" text="Events">
+                                       <font>
+                                          <Font name="Berlin Sans FB" size="17.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children></HBox>
                               <HBox prefHeight="280.0" prefWidth="426.0">
                                  <children>
-                                    <ListView fx:id="eventList" prefHeight="250.0" prefWidth="442.0" />
-                                    <ScrollBar fx:id="scrollBar" orientation="VERTICAL" />
+                                    <ListView fx:id="eventList" maxHeight="262.0" prefHeight="230.0" prefWidth="266.0">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin></ListView>
+                                    <ScrollBar fx:id="scrollBar" maxHeight="262.0" orientation="VERTICAL" />
                                  </children>
                               </HBox>
                            </children>
@@ -43,21 +54,34 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <VBox layoutX="445.0" layoutY="52.0" prefHeight="322.0" prefWidth="152.0">
+                  <VBox layoutX="320.0" layoutY="8.0" prefHeight="341.0" prefWidth="277.0">
                      <children>
-                        <Label fx:id="Armed" alignment="CENTER" prefWidth="310.0" text="Armed">
+                        <Label alignment="CENTER" prefWidth="277.0" text="Users">
                            <font>
-                              <Font name="Berlin Sans FB" size="16.0" />
+                              <Font name="Berlin Sans FB" size="17.0" />
                            </font>
                            <VBox.margin>
-                              <Insets top="10.0" />
+                              <Insets bottom="10.0" />
                            </VBox.margin>
                         </Label>
-                        <Pane prefHeight="23.0" prefWidth="152.0" />
-                        <ToggleButton fx:id="armButton" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#setArm" prefHeight="25.0" prefWidth="158.0" text="Arm">
+                        <ListView fx:id="userList" onMouseClicked="#fillUserEvent" prefHeight="130.0" prefWidth="200.0">
                            <VBox.margin>
-                              <Insets left="10.0" right="10.0" />
-                           </VBox.margin></ToggleButton>
+                              <Insets left="20.0" right="20.0" />
+                           </VBox.margin>
+                        </ListView>
+                        <Label alignment="CENTER" prefWidth="277.0" text="Doors">
+                           <font>
+                              <Font name="Berlin Sans FB" size="17.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <ListView fx:id="doorList" onMouseClicked="#fillDoorEvent" prefHeight="130.0" prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </VBox.margin>
+                        </ListView>
                      </children>
                   </VBox>
                </children></AnchorPane>
@@ -69,7 +93,7 @@
                   <Button mnemonicParsing="false" onMouseClicked="#openUserPage" text="USER" />
                   <Button mnemonicParsing="false" onMouseClicked="#openGroupPage" text="GROUP" />
                   <Button minWidth="0.0" mnemonicParsing="false" onMouseClicked="#openDoorPage" prefHeight="25.0" prefWidth="139.0" text="DOOR" />
-                  <Button mnemonicParsing="false" text="EVENT" visible="false" />
+                  <Button mnemonicParsing="false" style="-fx-background-insets: 0;" text="EVENT" />
                   <Button mnemonicParsing="false" onMouseClicked="#openDevicePage" text="DEVICE" />
                </buttons>
                <padding>

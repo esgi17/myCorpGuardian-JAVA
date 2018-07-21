@@ -10,7 +10,7 @@
   <children>
     <TitledPane alignment="TOP_LEFT" animated="false" contentDisplay="RIGHT" text="DEVICE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <content>
-        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        <AnchorPane id="Content" disable="true" focusTraversable="true" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
       </content>
          <graphic>
             <ButtonBar buttonMinWidth="60.0" prefHeight="40.0" prefWidth="462.0">
@@ -20,7 +20,7 @@
                   <Button mnemonicParsing="false" onMouseClicked="#openGroupPage" text="GROUP" />
                   <Button minWidth="0.0" mnemonicParsing="false" onMouseClicked="#openDoorPage" prefHeight="25.0" prefWidth="139.0" text="DOOR" />
                   <Button mnemonicParsing="false" onMouseClicked="#openEventPage" text="EVENT" />
-                  <Button mnemonicParsing="false" text="DEVICE" visible="false" />
+                  <Button mnemonicParsing="false" style="-fx-border-style: none; -fx-background-insets: 0; -fx-border-width: 0;" text="DEVICE" />
               </buttons>
                <padding>
                   <Insets left="10.0" />

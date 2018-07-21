@@ -48,6 +48,46 @@ public abstract class ListDatas {
         return groups;
     }
 
+    public static User[] getUsers() throws Exception {
+        JSONObject empty = new JSONObject();
+
+        // Recupere resultat requete
+        String json = Api.callAPI("GET", "user/", empty);
+        JSONObject obj = new JSONObject(json);
+        JSONArray jArray = new JSONArray(obj.getString("datas"));
+        User[] users = new User[jArray.length()];
+
+        for (int i = 0; i < jArray.length(); i++) {
+            JSONObject user = jArray.getJSONObject( i );
+            users[i] = new User();
+            users[i].setId( user.getString( "id" ) );
+            users[i].setFirstname( user.getString( "firstname" ) );
+            users[i].setLastname( user.getString( "lastname" ) );
+            users[i].setJob( user.getString( "job" ) );
+            users[i].setIdGroup( user.getString( "group_id" ) );
+        }
+        return users;
+    }
+
+    public static Pass[] getPass() throws Exception {
+        JSONObject empty = new JSONObject();
+
+        // Recupere resultat requete
+        String json = Api.callAPI("GET", "pass/", empty);
+        JSONObject obj = new JSONObject(json);
+        JSONArray jArray = new JSONArray(obj.getString("datas"));
+        Pass[] passes = new Pass[jArray.length()];
+
+        for (int i = 0; i < jArray.length(); i++) {
+            JSONObject pass = jArray.getJSONObject( i );
+            passes[i] = new Pass();
+            passes[i].setId( pass.getString( "id" ) );
+            passes[i].setIdDevice( pass.getString( "device_id" ) );
+            passes[i].setIdUser( pass.getString( "user_id" ) );
+        }
+        return passes;
+    }
+
     public static User[] createUsersArray(JSONArray usersArray) throws Exception {
         User[] users = new User[usersArray.length()];
         for (int j = 0; j < usersArray.length(); j++) {
@@ -83,5 +123,26 @@ public abstract class ListDatas {
 
         }
         return schedules;
+    }
+
+    public static Event[] getEvent() throws Exception {
+        JSONObject empty = new JSONObject();
+
+        // Recupere resultat requete
+        String json = Api.callAPI("GET", "event/", empty);
+        JSONObject datas = new JSONObject(json);
+        JSONArray jArray = new JSONArray(datas.getString("datas"));
+        Event[] events = new Event[jArray.length()];
+
+        for (int i = 0; i < jArray.length(); i++) {
+            JSONObject door = jArray.getJSONObject( i );
+            events[i] = new Event();
+            events[i].setId(door.getString("id"));
+            events[i].setTitle(door.getString("title"));
+            events[i].setDate(door.getString("date"));
+            events[i].setPassId(door.getString("pass_id"));
+            events[i].setDeviceId(door.getString("device_id"));
+        }
+        return events;
     }
 }

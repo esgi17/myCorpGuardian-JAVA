@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import pa.Main;
+import pa.controllers.UserController;
 
 import java.io.IOException;
 

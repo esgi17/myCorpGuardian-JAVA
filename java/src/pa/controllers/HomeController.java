@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import pa.Main;
@@ -15,6 +16,7 @@ import java.io.IOException;
 public class HomeController{
 
     @FXML AnchorPane pane;
+    @FXML ToggleButton armBtn;
 
 
     public void openDevicePage() throws Exception {
@@ -35,6 +37,15 @@ public class HomeController{
 
     public void openEventPage() throws Exception {
         NavHandler.openEventPage(pane);
+    }
+
+    public void armedOrDisarmed(){
+        if(armBtn.getText().equalsIgnoreCase("Arm")){
+            armBtn.setText("Disarm");
+        }
+        else{
+            armBtn.setText("Arm");
+        }
     }
 
 

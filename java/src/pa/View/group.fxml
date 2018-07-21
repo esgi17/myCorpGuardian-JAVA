@@ -86,7 +86,7 @@
                <buttons>
                   <Button mnemonicParsing="false" onMouseClicked="#openHomePage" text="HOME" />
                   <Button mnemonicParsing="false" onMouseClicked="#openUserPage" text="USER" />
-                  <Button mnemonicParsing="false" text="GROUP" visible="false" />
+                  <Button mnemonicParsing="false" style="-fx-background-insets: 0;" text="GROUP" />
                   <Button minWidth="0.0" mnemonicParsing="false" onMouseClicked="#openDoorPage" prefHeight="25.0" prefWidth="139.0" text="DOOR" />
                   <Button mnemonicParsing="false" onMouseClicked="#openEventPage" text="EVENT" />
                   <Button mnemonicParsing="false" onMouseClicked="#openDevicePage" text="DEVICE" />

@@ -16,11 +16,15 @@ passRouter.use(bodyParser.json());
 * @apiUse error500
 * @apiUse error404
 */
-passRouter.get('/:id', function(req, res) {
+passRouter.get('/:id?', function(req, res) {
     const id = req.params.id;
     PassController.getAll(id)
       .then( (pass) => {
-          res.status(200).json(pass);
+          res.status(200).json({
+          success : true,
+          status : 200,
+          datas : pass
+        });
       })
       .catch( (err) => {
           console.error(err);
