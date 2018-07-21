@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -12,9 +13,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pa.controllers.UserController">
+<AnchorPane id="AnchorPane" fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pa.controllers.UserController">
     <children>
-        <TitledPane animated="false" prefHeight="400.0" prefWidth="600.0" text="HOME" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <TitledPane animated="false" contentDisplay="RIGHT" prefHeight="400.0" prefWidth="600.0" text="USER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <content>
                 <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     <children>
@@ -36,12 +37,11 @@
                                                 </Button>
                                             </children>
                                         </HBox>
-                                        <HBox prefHeight="20.0" prefWidth="206.0" />
-                                        <HBox prefHeight="315.0" prefWidth="287.0">
-                                            <children>
-                                                <ListView fx:id="usersList" onMouseClicked="#updateForm" prefWidth="310.0" />
-                                            </children>
-                                        </HBox>
+                                          <ListView fx:id="usersList" onMouseClicked="#updateForm" prefHeight="293.0" prefWidth="267.0">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </ListView>
                                     </children>
                                     <HBox.margin>
                                         <Insets bottom="20.0" left="20.0" />
@@ -66,7 +66,7 @@
                                 </Label>
                                 <TextField fx:id="firstname">
                                     <VBox.margin>
-                                        <Insets bottom="10.0" left="40.0" right="40.0" />
+                                        <Insets left="40.0" right="40.0" />
                                     </VBox.margin>
                                 </TextField>
                                 <Label fx:id="labelLastname" alignment="CENTER" prefHeight="25.0" prefWidth="310.0" text="Lastname">
@@ -76,7 +76,7 @@
                                 </Label>
                                 <TextField fx:id="lastname">
                                     <VBox.margin>
-                                        <Insets bottom="10.0" left="40.0" right="40.0" />
+                                        <Insets left="40.0" right="40.0" />
                                     </VBox.margin>
                                 </TextField>
                                 <Label fx:id="labelJob" alignment="CENTER" prefHeight="25.0" prefWidth="310.0" text="Job">
@@ -86,7 +86,7 @@
                                 </Label>
                                 <TextField fx:id="job">
                                     <VBox.margin>
-                                        <Insets bottom="20.0" left="40.0" right="40.0" />
+                                        <Insets bottom="10.0" left="40.0" right="40.0" />
                                     </VBox.margin>
                                 </TextField>
                                 <ComboBox fx:id="listGroup" onMouseClicked="#fillGroupList" prefWidth="310.0" promptText="User Group">
@@ -113,6 +113,21 @@
                         </VBox>
                     </children></AnchorPane>
             </content>
+         <graphic>
+            <ButtonBar buttonMinWidth="60.0" prefHeight="40.0" prefWidth="462.0">
+               <buttons>
+                  <Button mnemonicParsing="false" onMouseClicked="#openHomePage" text="HOME" />
+                  <Button mnemonicParsing="false" text="USER" visible="false" />
+                  <Button mnemonicParsing="false" onMouseClicked="#openGroupPage" text="GROUP" />
+                  <Button minWidth="0.0" mnemonicParsing="false" onMouseClicked="#openDoorPage" prefHeight="25.0" prefWidth="139.0" text="DOOR" />
+                  <Button mnemonicParsing="false" onMouseClicked="#openEventPage" text="EVENT" />
+                  <Button mnemonicParsing="false" onMouseClicked="#openDevicePage" text="DEVICE" />
+               </buttons>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </ButtonBar>
+         </graphic>
         </TitledPane>
     </children>
 </AnchorPane>

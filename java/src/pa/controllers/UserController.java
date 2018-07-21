@@ -4,12 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import pa.Models.Api;
-import pa.Models.Group;
-import pa.Models.ListDatas;
-import pa.Models.User;
+import pa.Models.*;
 
 public class UserController {
     @FXML ListView usersList;
@@ -28,6 +26,28 @@ public class UserController {
 
     ObservableList<String> users = FXCollections.observableArrayList();
     ObservableList<String> groups = FXCollections.observableArrayList();
+
+    @FXML AnchorPane pane;
+
+    public void openHomePage() throws Exception {
+        NavHandler.openHomePage(pane);
+    }
+
+    public void openDevicePage() throws Exception {
+        NavHandler.openDevicePage(pane);
+    }
+
+    public void openGroupPage() throws Exception {
+        NavHandler.openGroupPage(pane);
+    }
+
+    public void openDoorPage() throws Exception {
+        NavHandler.openDoorPage(pane);
+    }
+
+    public void openEventPage() throws Exception {
+        NavHandler.openEventPage(pane);
+    }
 
     // Affiche la liste des users
     public User[] fillUserList() throws Exception {
@@ -164,7 +184,7 @@ public class UserController {
                 String groupId = listGroup.getValue().toString().substring( 0, listGroup.getValue().toString().indexOf( " " ) );
                 body.put( "group_id", groupId );
             } else {
-                body.put( "group_id", "0" );
+                body.put( "group_id", "1" );
             }
             String res = Api.callAPI( method, "user/", body );
             JSONObject apiReturn = new JSONObject( res );
@@ -235,5 +255,6 @@ public class UserController {
         body.put( "id", userSelected.getId());
         Api.callAPI( "DELETE", "user/", body );
         fillUserList();
+        createForm();
     }
 }

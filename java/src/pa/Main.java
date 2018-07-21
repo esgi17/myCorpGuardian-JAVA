@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -13,7 +14,7 @@ import static pa.Models.Api.getToken;
 
 
 public class Main extends Application {
-    private Stage primaryStage;
+    public static Stage primaryStage;
 
     public void start(Stage primaryStage) throws Exception{
         this.primaryStage = primaryStage;
@@ -25,14 +26,10 @@ public class Main extends Application {
     private void initApp() throws IOException {
         System.out.println("App initializing..."); // LOG
         if( checkLogin() ) {
-            openGroupPage();
+            openHomePage();
 
         } else {
-            openDoorPage();
-            //openGroupPage();
-            //openUserPage();
-            //openHomePage();
-            //openAddUserPage();
+            openHomePage();
             //openLoginPage();
         }
     }
@@ -65,23 +62,11 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public void openUserPage() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("View/user.fxml"));
-        primaryStage.setTitle("My Corp Guardian - USER");
+    public void openHomePage() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("View/home.fxml"));
+        primaryStage.setTitle("My Corp Guardian - Home");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
     }
 
-    public void openGroupPage() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("View/group.fxml"));
-        primaryStage.setTitle("My Corp Guardian - GROUP");
-        primaryStage.setScene(new Scene(root, 600, 400));
-        primaryStage.show();
-    }
-    public void openDoorPage() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("View/door.fxml"));
-        primaryStage.setTitle("My Corp Guardian - DOOR");
-        primaryStage.setScene(new Scene(root, 600, 400));
-        primaryStage.show();
-    }
 }

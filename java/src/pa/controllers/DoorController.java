@@ -2,11 +2,21 @@ package pa.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import pa.Main;
 import pa.Models.*;
 
 import java.util.ArrayList;
@@ -63,9 +73,30 @@ public class DoorController {
     @FXML Button deleteBtn;
     @FXML Button updateBtn;
 
+    @FXML AnchorPane pane;
+
     ObservableList<String> doors = FXCollections.observableArrayList();
     ObservableList<String> groups = FXCollections.observableArrayList();
 
+    public void openHomePage() throws Exception {
+        NavHandler.openHomePage(pane);
+    }
+
+    public void openUserPage() throws Exception {
+        NavHandler.openUserPage(pane);
+    }
+
+    public void openGroupPage() throws Exception {
+        NavHandler.openGroupPage(pane);
+    }
+
+    public void openDevicePage() throws Exception {
+        NavHandler.openDevicePage(pane);
+    }
+
+    public void openEventPage() throws Exception {
+        NavHandler.openEventPage(pane);
+    }
 
     // Affiche la liste des doors
     public Door[] fillDoorsList() throws Exception {
@@ -171,20 +202,13 @@ public class DoorController {
         if (!stringVerification()) {
             return false;
         } else {
-            //Creation device
-            JSONObject bodyDevice = new JSONObject();
-            bodyDevice.put( "device_type_id", "1");
-            String res = Api.callAPI( "POST", "device/", bodyDevice );
-            JSONObject device = new JSONObject(res);
-            JSONObject deviceId = new JSONObject(device.getString("datas"));
 
             //Creation door avec id de la device
             JSONObject bodyDoor = new JSONObject();
             bodyDoor.put( "name", newDoorNameField.getText());
             bodyDoor.put( "ref", newDoorRefField.getText());
-            bodyDoor.put( "device_id", deviceId.getString("id"));
 
-            res = Api.callAPI( "POST", "door/", bodyDoor );
+            String res = Api.callAPI( "POST", "door/", bodyDoor );
             JSONObject apiReturn = new JSONObject( res );
 
             if (apiReturn.getString( "success" ) == "true") {

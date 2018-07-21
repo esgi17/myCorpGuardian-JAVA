@@ -47,7 +47,7 @@ doorRouter.post('/', function(req, res) {
     const name = req.body.name;
     const ref = req.body.ref;
 
-    if( ip === undefined || type === undefined ) {
+    if( name === undefined || ref === undefined ) {
       // Renvoi d'une erreur
         res.status(400).json({
             success : false,
@@ -55,7 +55,7 @@ doorRouter.post('/', function(req, res) {
             message : "Bad Request"
         }).end();
     }
-    DoorController.add( ip, name, ref )
+    DoorController.add( name, ref )
       .then( (door) => {
         // Si la methode ne renvoie pas d'erreur, on renvoie le résultat
         res.status(200).json({

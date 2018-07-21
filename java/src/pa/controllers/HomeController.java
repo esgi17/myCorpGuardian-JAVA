@@ -1,14 +1,24 @@
 package pa.controllers;
 
+import javafx.application.Application;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import pa.Main;
 import pa.Models.NavHandler;
 
-public class DeviceController {
+import java.io.IOException;
+
+public class HomeController{
+
     @FXML AnchorPane pane;
 
-    public void openHomePage() throws Exception {
-        NavHandler.openHomePage(pane);
+
+    public void openDevicePage() throws Exception {
+        NavHandler.openDevicePage(pane);
     }
 
     public void openUserPage() throws Exception {
@@ -26,4 +36,6 @@ public class DeviceController {
     public void openEventPage() throws Exception {
         NavHandler.openEventPage(pane);
     }
+
+
 }

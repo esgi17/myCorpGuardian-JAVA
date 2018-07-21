@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pa.controllers.HomeController">
+  <children>
+    <TitledPane animated="false" text="HOME" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <content>
+        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <VBox layoutX="99.0" layoutY="-3.0" prefHeight="380.0" prefWidth="400.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="30.0" prefWidth="400.0" text="Welcome into MyCorpGuardian APP">
+                           <font>
+                              <Font name="Berlin Sans FB" size="25.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="30.0" prefWidth="400.0" text="The best solution to secure your company">
+                           <font>
+                              <Font name="Berlin Sans FB" size="14.0" />
+                           </font>
+                        </Label>
+                        <HBox prefHeight="50.0" prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                           <children>
+                              <Label prefHeight="30.0" prefWidth="151.0" text="Manage your groups ">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="111.5" />
+                                 </HBox.margin>
+                              </Label>
+                              <Button fx:id="groupBtn" mnemonicParsing="false" onMouseClicked="#openGroupPage" text="here">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="50.0" prefWidth="200.0">
+                           <children>
+                              <Label prefHeight="30.0" prefWidth="151.0" text="Manage your users ">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="111.5" />
+                                 </HBox.margin>
+                              </Label>
+                              <Button fx:id="userBtn" mnemonicParsing="false" onMouseClicked="#openUserPage" text="here">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="50.0" prefWidth="200.0">
+                           <children>
+                              <Label prefHeight="30.0" prefWidth="151.0" text="Manage your devices ">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="111.5" />
+                                 </HBox.margin>
+                              </Label>
+                              <Button fx:id="deviceBtn" mnemonicParsing="false" onMouseClicked="#openDevicePage" text="here">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="50.0" prefWidth="200.0">
+                           <children>
+                              <Label prefHeight="30.0" prefWidth="151.0" text="Manage your schedules ">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="111.5" />
+                                 </HBox.margin>
+                              </Label>
+                              <Button fx:id="scheduleBtn" mnemonicParsing="false" onMouseClicked="#openDoorPage" text="here">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="50.0" prefWidth="200.0">
+                           <children>
+                              <Label prefHeight="30.0" prefWidth="151.0" text="Manage your events">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="111.5" />
+                                 </HBox.margin>
+                              </Label>
+                              <Button fx:id="scheduleBtn1" mnemonicParsing="false" onMouseClicked="#openEventPage" text="here">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <ToggleButton mnemonicParsing="false" prefWidth="100.0" text="Arm">
+                           <VBox.margin>
+                              <Insets left="150.0" top="20.0" />
+                           </VBox.margin>
+                        </ToggleButton>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+               </children></AnchorPane>
+      </content>
+    </TitledPane>
+  </children>
+</AnchorPane>
