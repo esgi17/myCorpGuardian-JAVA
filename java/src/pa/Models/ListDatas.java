@@ -1,5 +1,7 @@
 package pa.Models;
 
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -210,4 +212,5 @@ public abstract class ListDatas {
         }
         return device;
     }
+
 }

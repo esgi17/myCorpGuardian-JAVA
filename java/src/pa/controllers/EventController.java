@@ -4,11 +4,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 import pa.Models.*;
 
-public class EventController {
+
+public class EventController  {
     @FXML ListView eventList;
     @FXML ListView doorList;
     @FXML ListView userList;
@@ -17,6 +17,7 @@ public class EventController {
     ObservableList<String> events = FXCollections.observableArrayList();
     ObservableList<String> doors  = FXCollections.observableArrayList();
     ObservableList<String> users  = FXCollections.observableArrayList();
+
 
     public void openHomePage() throws Exception {
         NavHandler.openHomePage(pane);
@@ -36,6 +37,10 @@ public class EventController {
 
     public void openDevicePage() throws Exception {
         NavHandler.openDevicePage(pane);
+    }
+
+    public void initialize() throws Exception{
+        loadDatas();
     }
 
     public Event[] fillEventList(int searchType, String doorId, String passId) throws Exception {
@@ -121,7 +126,6 @@ public class EventController {
         User userSelected = getUser();
         Pass[] passes = ListDatas.getPass();
         for(int i=0 ; i< passes.length ; i++ ){
-            System.out.println(passes.length);
             if(passes[i].getIdUser().equalsIgnoreCase(userSelected.getId())){
                 res = passes[i].getId();
                 break;

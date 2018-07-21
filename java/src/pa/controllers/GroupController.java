@@ -44,6 +44,10 @@ public class GroupController {
         NavHandler.openEventPage(pane);
     }
 
+    public void initialize() throws Exception{
+        fillGroupList();
+    }
+
 
     Group groupSelected = new Group();
     // Affiche la liste des groupes

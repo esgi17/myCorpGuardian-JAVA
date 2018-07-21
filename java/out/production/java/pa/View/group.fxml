@@ -22,15 +22,15 @@
                      <children>
                         <VBox prefHeight="356.0" prefWidth="223.0">
                            <children>
-                              <HBox>
-                                 <children>
-                                    <Button fx:id="loadGroups" mnemonicParsing="false" onMouseClicked="#fillGroupList" prefHeight="25.0" prefWidth="100.0" text="Load Groups">
-                                       <HBox.margin>
-                                          <Insets left="60.0" top="10.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                 </children>
-                              </HBox>
+                              <HBox />
+                              <Label prefHeight="25.0" prefWidth="223.0" text="Groups :">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="Berlin Sans FB" size="16.0" />
+                                 </font>
+                              </Label>
                               <ListView fx:id="groupList" onMouseClicked="#fillUsersList" prefHeight="150.0" prefWidth="223.0">
                                  <VBox.margin>
                                     <Insets bottom="10.0" top="10.0" />

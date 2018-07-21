@@ -98,14 +98,21 @@ public class DoorController {
         NavHandler.openEventPage(pane);
     }
 
+    public void initialize() throws Exception{
+        fillDoorsList();
+        fillGroupsList();
+    }
+
     // Affiche la liste des doors
     public Door[] fillDoorsList() throws Exception {
         Door doorsArray[] = ListDatas.getDoors();
+        Device devicesArray[] = ListDatas.getDevices();
         doorsList.getItems().clear();
         // Rempli le tableau de doors
-        for(int i=0 ; i< doorsArray.length ; i++ ){
-            Device device = ListDatas.getDevice(doorsArray[i].getId());
-            doors.add(device.getName());
+        for(int i=0 ; i< devicesArray.length ; i++ ){
+            if(devicesArray[i].getDeviceTypeId().equalsIgnoreCase("1")) {
+                doors.add( devicesArray[i].getName() );
+            }
         }
         doorsList.setItems(doors);
         return doorsArray;
@@ -175,7 +182,7 @@ public class DoorController {
             newDoorRefLabel.setText("Empty Ref.");
             res = false;
         } else{
-            newDoorNameLabel.setText("Ref.");
+            newDoorRefLabel.setText("Ref.");
         }
         for(int i=0 ; i < newDoorNameField.getText().length() ; i++){
             char car = newDoorNameField.getText().charAt(i);
@@ -206,9 +213,9 @@ public class DoorController {
             bodyDoor.put( "name", newDoorNameField.getText());
             bodyDoor.put( "ref", newDoorRefField.getText());
 
-            String res = Api.callAPI( "POST", "door/", bodyDoor );
-            JSONObject apiReturn = new JSONObject( res );
+            Api.callAPI( "POST", "door/", bodyDoor );
         }
+        fillDoorsList();
     }
 
     public int parseHour(String time){
@@ -372,30 +379,6 @@ public class DoorController {
         }
     }
 
-    public void resetDayLabels(){/*
-        mondayOpenSlider.setValue(0);
-        mondayCloseSlider.setValue(0);
-        tuesdayOpenSlider.setValue(0);
-        tuesdayCloseSlider.setValue(0);
-        wednesdayOpenSlider.setValue(0);
-        wednesdayCloseSlider.setValue(0);
-        thursdayOpenSlider.setValue(0);
-        thursdayCloseSlider.setValue(0);
-        fridayOpenSlider.setValue(0);
-        fridayCloseSlider.setValue(0);
-        saturdayOpenSlider.setValue(0);
-        saturdayCloseSlider.setValue(0);
-        sundayOpenSlider.setValue(0);
-        sundayCloseSlider.setValue(0);*/
-        mondayLabel.setText("Monday");
-        tuesdayLabel.setText("Tuesday");
-        wednesdayLabel.setText("Wednesday");
-        thursdayLabel.setText("Thursday");
-        fridayLabel.setText("Friday");
-        saturdayLabel.setText("Saturday");
-        sundayLabel.setText("Sunday");
-        setHour();
-    }
 
     public void createSchedules() throws Exception{
         if(isGroupAndDoorSelected() && isGoodSchedule()){

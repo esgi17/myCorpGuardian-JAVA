@@ -49,6 +49,11 @@ public class UserController {
         NavHandler.openEventPage(pane);
     }
 
+    public void initialize() throws Exception{
+        fillUserList();
+        fillGroupList();
+    }
+
     // Affiche la liste des users
     public User[] fillUserList() throws Exception {
         User res[] = ListDatas.getUsers();
@@ -61,18 +66,6 @@ public class UserController {
         return res;
     }
 
-
-    // Renvoie le nom de groupe avec l'id en parametre
-    public String getGroupName(String id) throws Exception {
-        JSONObject empty = new JSONObject();
-
-        // Recupere resultat requete
-        String str = Api.callAPI("GET", "group/" + id, empty);
-        JSONArray jArray = new JSONArray(str);
-        JSONObject res = jArray.getJSONObject(0);
-
-        return res.getString("name");
-    }
 
     // Cree une ligne dans la listview de users
     public String userCreateLine(User user){
@@ -90,23 +83,6 @@ public class UserController {
         listGroup.setItems(groups);
     }
 
-    // Retourne un tableau de tout les groupes
-    public String[] getGroups() throws Exception {
-        JSONObject empty = new JSONObject();
-
-        // Recupere resultat requete
-        String json = Api.callAPI("GET", "group/", empty);
-        JSONArray jArray = new JSONArray(json);
-        String res[] = new String[jArray.length()];
-
-        //Met les noms de groupe dans un tableau de String
-        for (int i = 0; i < jArray.length(); i++) {
-            JSONObject group = jArray.getJSONObject( i );
-            res[i] = group.getString("id") + " : " + group.getString("name");
-        }
-
-        return res;
-    }
 
     // Verif sur un chaine de caractere
     public boolean stringVerification(){

@@ -24,15 +24,15 @@
                      <children>
                         <VBox prefHeight="356.0" prefWidth="193.0">
                            <children>
-                              <HBox>
-                                 <children>
-                                    <Button fx:id="loadDoorsBtn" mnemonicParsing="false" onMouseClicked="#fillDoorsList" prefHeight="25.0" prefWidth="286.0" text="Load Doors">
-                                       <HBox.margin>
-                                          <Insets right="5.0" top="10.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                 </children>
-                              </HBox>
+                              <HBox />
+                              <Label fx:id="setScheduleLabel1" alignment="CENTER" prefHeight="25.0" prefWidth="384.0" text="Doors :">
+                                 <font>
+                                    <Font name="Berlin Sans FB" size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Label>
                               <ListView fx:id="doorsList" prefHeight="134.0" prefWidth="193.0">
                                  <VBox.margin>
                                     <Insets bottom="10.0" top="10.0" />

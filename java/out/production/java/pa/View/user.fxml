@@ -25,11 +25,6 @@
                                     <children>
                                         <HBox>
                                             <children>
-                                                <Button fx:id="loadUsers" mnemonicParsing="false" onMouseClicked="#fillUserList" prefHeight="25.0" prefWidth="286.0" text="Load Users">
-                                                    <HBox.margin>
-                                                        <Insets right="5.0" top="10.0" />
-                                                    </HBox.margin>
-                                                </Button>
                                                 <Button fx:id="newUser" mnemonicParsing="false" onMouseClicked="#createForm" prefHeight="25.0" prefWidth="286.0" text="New User">
                                                     <HBox.margin>
                                                         <Insets left="5.0" top="10.0" />
@@ -89,7 +84,7 @@
                                         <Insets bottom="10.0" left="40.0" right="40.0" />
                                     </VBox.margin>
                                 </TextField>
-                                <ComboBox fx:id="listGroup" onMouseClicked="#fillGroupList" prefWidth="310.0" promptText="User Group">
+                                <ComboBox fx:id="listGroup" prefWidth="310.0" promptText="User Group">
                                     <VBox.margin>
                                         <Insets bottom="10.0" left="40.0" right="40.0" />
                                     </VBox.margin>
