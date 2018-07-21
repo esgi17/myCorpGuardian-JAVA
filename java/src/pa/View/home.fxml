@@ -116,7 +116,7 @@
                               </Button>
                            </children>
                         </HBox>
-                        <ToggleButton fx:id="armBtn" mnemonicParsing="false" onMouseClicked="#armedOrDisarmed" prefWidth="100.0" text="Disarm">
+                        <ToggleButton fx:id="armBtn" mnemonicParsing="false" onMouseClicked="#armedOrDisarmed" prefWidth="100.0" text="Disarmed">
                            <VBox.margin>
                               <Insets left="150.0" top="20.0" />
                            </VBox.margin>

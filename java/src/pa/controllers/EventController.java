@@ -118,7 +118,6 @@ public class EventController {
         String res = "0";
         User userSelected = getUser();
         Pass[] passes = ListDatas.getPass();
-        System.out.println(passes[0].getId());
         for(int i=0 ; i< passes.length ; i++ ){
             System.out.println(passes.length);
             if(passes[i].getIdUser().equalsIgnoreCase(userSelected.getId())){

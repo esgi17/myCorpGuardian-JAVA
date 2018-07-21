@@ -51,7 +51,7 @@ public class UserController {
 
     // Affiche la liste des users
     public User[] fillUserList() throws Exception {
-        User res[] = getUsers();
+        User res[] = ListDatas.getUsers();
         usersList.getItems().clear();
         // Rempli le tableau de users
         for(int i=0 ; i<res.length ; i++ ){
@@ -61,17 +61,6 @@ public class UserController {
         return res;
     }
 
-    // Retourne un tableau de users avec tout les users
-    public User[] getUsers() throws Exception {
-        JSONObject empty = new JSONObject();
-
-        // Recupere resultat requete
-        String json = Api.callAPI("GET", "user/", empty);
-        JSONObject datas = new JSONObject(json);
-        JSONArray jArray = new JSONArray(datas.getString("datas"));
-        User[] users = ListDatas.createUsersArray(jArray);
-        return users;
-    }
 
     // Renvoie le nom de groupe avec l'id en parametre
     public String getGroupName(String id) throws Exception {
@@ -163,12 +152,9 @@ public class UserController {
     }
 
     // Execute requete add ou update d'un user
-    public boolean addOrUpdateUser(String method, String id) throws Exception {
+    public void addOrUpdateUser(String method, String id) throws Exception {
         // Verif si champ vide
-        if (!stringVerification()){
-            return false;
-        } else {
-
+        if (stringVerification()){
             //Creation json user
             JSONObject body = new JSONObject();
             body.put( "firstname", firstname.getText() );
@@ -192,19 +178,18 @@ public class UserController {
             //Raz champs
             fillUserList();
             createForm();
-
-            if (apiReturn.getString( "success" ) == "true") {
-                return true;
-            } else {
-                System.out.println( apiReturn.toString() );
-                return false;
-            }
         }
     }
 
     // Connecté au bouton add user
     public void addUser() throws Exception {
-        addOrUpdateUser("POST","0");
+        JSONObject empty = new JSONObject();
+        if(!Api.callAPI("GET","group/",empty).equalsIgnoreCase("")) {
+            addOrUpdateUser("POST","0");
+        }
+        else{
+            head.setText("Create a group first");
+        }
     }
 
     // Formulaire en mode update
@@ -253,7 +238,7 @@ public class UserController {
     public void deleteUser() throws Exception {
         JSONObject body = new JSONObject();
         body.put( "id", userSelected.getId());
-        Api.callAPI( "DELETE", "user/", body );
+        Api.callAPI( "DELETE", "user/" + userSelected.getId(), body );
         fillUserList();
         createForm();
     }

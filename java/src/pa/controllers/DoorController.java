@@ -197,12 +197,9 @@ public class DoorController {
         return res;
     }
 
-    public boolean addDoor() throws Exception {
+    public void addDoor() throws Exception {
         // Verif si champ vide
-        if (!stringVerification()) {
-            return false;
-        } else {
-
+        if (stringVerification()) {
             //Creation door avec id de la device
             JSONObject bodyDoor = new JSONObject();
             bodyDoor.put( "name", newDoorNameField.getText());
@@ -210,13 +207,6 @@ public class DoorController {
 
             String res = Api.callAPI( "POST", "door/", bodyDoor );
             JSONObject apiReturn = new JSONObject( res );
-
-            if (apiReturn.getString( "success" ) == "true") {
-                return true;
-            } else {
-                System.out.println( apiReturn.toString() );
-                return false;
-            }
         }
     }
 
