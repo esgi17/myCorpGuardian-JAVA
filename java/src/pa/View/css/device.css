@@ -13,3 +13,7 @@
     -fx-background-color: #1d1d1d;
     -fx-text-fill: white;
 }
+
+.list-cell {
+  -fx-font-size: 14px;
+}

@@ -14,9 +14,9 @@ public class EventController  {
     @FXML ListView userList;
     @FXML AnchorPane pane;
 
-    ObservableList<String> events = FXCollections.observableArrayList();
-    ObservableList<String> doors  = FXCollections.observableArrayList();
-    ObservableList<String> users  = FXCollections.observableArrayList();
+    private ObservableList<String> events = FXCollections.observableArrayList();
+    private ObservableList<String> doors  = FXCollections.observableArrayList();
+    private ObservableList<String> users  = FXCollections.observableArrayList();
 
 
     public void openHomePage() throws Exception {
@@ -43,7 +43,7 @@ public class EventController  {
         loadDatas();
     }
 
-    public Event[] fillEventList(int searchType, String doorId, String passId) throws Exception {
+    private void fillEventList(int searchType, String doorId, String passId) throws Exception {
         Event res[] = ListDatas.getEvent();;
         eventList.getItems().clear();
         // Rempli le tableau de groupes
@@ -62,28 +62,25 @@ public class EventController  {
                         events.add(parseHour(res[i].getDate()) + "  " + res[i].getTitle());
                     }
                     break;
-
             }
-
         }
         eventList.setItems(events);
-        return res;
     }
 
     // Affiche la liste des doors
-    public Door[] fillDoorList() throws Exception {
-        Door doorsArray[] = ListDatas.getDoors();
+    private void fillDoorList() throws Exception {
+        Device devicesArray[] = ListDatas.getDevices();
         doorList.getItems().clear();
         // Rempli le tableau de doors
-        for(int i=0 ; i< doorsArray.length ; i++ ){
-            Device device = ListDatas.getDevice(doorsArray[i].getId());
-            doors.add(device.getName());
+        for(int i=0 ; i< devicesArray.length ; i++ ) {
+            if (devicesArray[i].getDeviceTypeId().equalsIgnoreCase( "1" )) {
+                doors.add( devicesArray[i].getName() );
+            }
         }
         doorList.setItems(doors);
-        return doorsArray;
     }
 
-    public User[] fillUserList() throws Exception {
+    private void fillUserList() throws Exception {
         User res[] = ListDatas.getUsers();;
         userList.getItems().clear();
         // Rempli le tableau de groupes
@@ -91,7 +88,6 @@ public class EventController  {
             users.add(res[i].getFirstname().toUpperCase() + ", " + res[i].getLastname());
         }
         userList.setItems(users);
-        return res;
     }
 
     public void loadDatas() throws Exception{
@@ -121,7 +117,7 @@ public class EventController  {
         return users[selectedUserIndex];
     }
 
-    public String getUserPassId() throws Exception {
+    private String getUserPassId() throws Exception {
         String res = "0";
         User userSelected = getUser();
         Pass[] passes = ListDatas.getPass();
@@ -134,7 +130,7 @@ public class EventController  {
         return res;
     }
 
-    public String parseHour(String hour){
+    private String parseHour(String hour){
         String res = "";
         if(hour.length() > 0){
             res = hour.substring(8,10) + "/"

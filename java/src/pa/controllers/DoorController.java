@@ -59,6 +59,7 @@ public class DoorController {
     @FXML Label newDoorRefLabel;
     @FXML TextField newDoorRefField;
     @FXML Button newDoorBtn;
+    @FXML Label setScheduleLabel;
 
     @FXML Label mondayLabel;
     @FXML Label tuesdayLabel;
@@ -73,10 +74,12 @@ public class DoorController {
     @FXML Button deleteBtn;
     @FXML Button updateBtn;
 
+    @FXML Label doorLabel;
+
     @FXML AnchorPane pane;
 
-    ObservableList<String> doors = FXCollections.observableArrayList();
-    ObservableList<String> groups = FXCollections.observableArrayList();
+    private ObservableList<String> doors = FXCollections.observableArrayList();
+    private ObservableList<String> groups = FXCollections.observableArrayList();
 
     public void openHomePage() throws Exception {
         NavHandler.openHomePage(pane);
@@ -104,8 +107,7 @@ public class DoorController {
     }
 
     // Affiche la liste des doors
-    public Door[] fillDoorsList() throws Exception {
-        Door doorsArray[] = ListDatas.getDoors();
+    private void fillDoorsList() throws Exception {
         Device devicesArray[] = ListDatas.getDevices();
         doorsList.getItems().clear();
         // Rempli le tableau de doors
@@ -115,11 +117,13 @@ public class DoorController {
             }
         }
         doorsList.setItems(doors);
-        return doorsArray;
     }
 
     //Rempli la combobox avec tout les groupes
     public Group[] fillGroupsList() throws Exception {
+        if (isGroupAndDoorSelected()){
+            loadSchedules();
+        }
         groupsList.getItems().clear();
         Group[] groupsArray = ListDatas.getGroups();
         for (int i = 0 ; i < groupsArray.length ; i++){
@@ -147,7 +151,7 @@ public class DoorController {
         sundayClose.textProperty().setValue(getHour(sundayCloseSlider.getValue()));
     }
 
-    public String getHour(double number){
+    private String getHour(double number){
         int hours = (int)number / 60;
         int minutes = (int) number % 60;
         minutes -= minutes % 5;
@@ -168,8 +172,19 @@ public class DoorController {
         return hour + ":" + minute;
     }
 
+    public void writeDoor() throws Exception{
+        doorLabel.setVisible(true);
+        doorLabel.setText(doors.get(doorsList.getSelectionModel().getSelectedIndex()));
+        load();
+    }
+    public void load() throws Exception{
+        if (isGroupAndDoorSelected()){
+            loadSchedules();
+        }
+    }
+
     // Verif sur un chaine de caractere
-    public boolean stringVerification(){
+    private boolean stringVerification(){
         boolean res = true;
         if (newDoorNameField.getText().equalsIgnoreCase( "" )) {
             newDoorNameLabel.setText("Empty Name");
@@ -214,11 +229,16 @@ public class DoorController {
             bodyDoor.put( "ref", newDoorRefField.getText());
 
             Api.callAPI( "POST", "door/", bodyDoor );
+            Alert alert = new Alert( Alert.AlertType.INFORMATION);
+            alert.setTitle(null);
+            alert.setHeaderText(null);
+            alert.setContentText("Door created");
+            alert.showAndWait();
         }
         fillDoorsList();
     }
 
-    public int parseHour(String time){
+    private int parseHour(String time){
         int res = 0;
         String hours = time.substring(0,2);
         String minutes = time.substring(3,5);
@@ -238,7 +258,7 @@ public class DoorController {
         return doors[selectedDoorIndex];
     }
 
-    public Schedule getSchedule(String groupId, String doorId, String day) throws Exception{
+    private Schedule getSchedule(String groupId, String doorId, String day) throws Exception{
         boolean exist = false;
         Schedule[] schedules = ListDatas.getSchedule();
         Schedule schedule = new Schedule();
@@ -259,7 +279,7 @@ public class DoorController {
         }
     }
 
-    public Schedule loadDailySchedule(String day) throws Exception{
+    private Schedule loadDailySchedule(String day) throws Exception{
         Door door = getDoor();
         Group group = getGroup();
         return getSchedule(group.getId(), door.getId(), day);
@@ -267,6 +287,7 @@ public class DoorController {
 
     public void loadSchedules() throws Exception {
         if(isGroupAndDoorSelected()) {
+            setScheduleLabel.setText("Set Schedule");
             for (int i = 0; i < 7; i++) {
                 Schedule schedule = loadDailySchedule( Integer.toString( i ) );
                 if (schedule != null) {
@@ -302,6 +323,9 @@ public class DoorController {
                         default:
                             break;
                     }
+                    updateBtn.setDisable(false);
+                    deleteBtn.setDisable(false);
+                    createBtn.setDisable(true);
                 }else{
                     switch (i) {
                         case 0:
@@ -335,13 +359,19 @@ public class DoorController {
                         default:
                             break;
                     }
+                    updateBtn.setDisable(true);
+                    deleteBtn.setDisable(true);
+                    createBtn.setDisable(false);
                 }
                 setHour();
             }
         }
+        else{
+            setScheduleLabel.setText("Select a Door and a Group");
+        }
     }
 
-    public boolean isGroupAndDoorSelected(){
+    private boolean isGroupAndDoorSelected(){
 
         if(doorsList.getSelectionModel().getSelectedIndex()!=-1 && groupsList.getSelectionModel().getSelectedIndex()!=-1){
             return true;
@@ -351,11 +381,11 @@ public class DoorController {
         }
     }
 
-    public String getStringHour(double value){
+    private String getStringHour(double value){
         return getHour( value ) + ":00";
     }
 
-    public boolean createSchedule(String h_start, String h_stop, int day) throws Exception {
+    private void createSchedule(String h_start, String h_stop, int day) throws Exception {
         Group[] groups = ListDatas.getGroups();
         String group_id = groups[groupsList.getSelectionModel().getSelectedIndex()].getId();
         Door[] doors = ListDatas.getDoors();
@@ -370,17 +400,10 @@ public class DoorController {
 
         String res = Api.callAPI( "POST", "schedule/", body );
         JSONObject apiReturn = new JSONObject( res );
-
-        if (apiReturn.getString( "success" ) == "true") {
-            return true;
-        } else {
-            System.out.println( apiReturn.toString() );
-            return false;
-        }
     }
 
 
-    public void createSchedules() throws Exception{
+    private void createSchedules() throws Exception{
         if(isGroupAndDoorSelected() && isGoodSchedule()){
             for(int i = 0 ; i < 7 ; i++){
                 String h_start = "";
@@ -428,7 +451,7 @@ public class DoorController {
         }
     }
 
-    public Schedule[] getSchedulesSelected() throws Exception {
+    private Schedule[] getSchedulesSelected() throws Exception {
         Schedule[] schedules = ListDatas.getSchedule();
         int nbSchedules = 0;
         int j = 0;
@@ -450,7 +473,7 @@ public class DoorController {
         return schedulesInBdd;
     }
 
-    public void deleteSchedules() throws Exception {
+    public void deleteSchedule() throws Exception {
         if(isGroupAndDoorSelected()){
             Schedule[] schedules = getSchedulesSelected();
 
@@ -463,12 +486,27 @@ public class DoorController {
         }
     }
 
-    public void updateSchedules() throws Exception {
-        deleteSchedules();
-        createSchedules();
+    public void deleteSchedules() throws Exception {
+        deleteSchedule();
+        Alert alert = new Alert( Alert.AlertType.INFORMATION);
+        alert.setTitle(null);
+        alert.setHeaderText(null);
+        alert.setContentText("Schedule deleted");
+        alert.showAndWait();
     }
 
-    public boolean isGoodSchedule(){
+
+    public void updateSchedules() throws Exception {
+        deleteSchedule();
+        createSchedules();
+        Alert alert = new Alert( Alert.AlertType.INFORMATION);
+        alert.setTitle(null);
+        alert.setHeaderText(null);
+        alert.setContentText("Schedule updated");
+        alert.showAndWait();
+    }
+
+    private boolean isGoodSchedule(){
         boolean res = true;
         if(mondayOpenSlider.getValue() > mondayCloseSlider.getValue() ){
             mondayLabel.setText("Wrong Hour");

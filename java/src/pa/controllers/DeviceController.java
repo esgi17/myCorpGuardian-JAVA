@@ -36,9 +36,9 @@ public class DeviceController {
     private ObservableList<String> devicesType = FXCollections.observableArrayList();
     private ObservableList<String> passes = FXCollections.observableArrayList();
     private int deviceTypeSelected = -1;
-    User userSelected = new User();
-    Pass passSelected = new Pass();
-    int deviceSelectedId;
+    private User userSelected = new User();
+    private Pass passSelected = new Pass();
+    private int deviceSelectedId;
 
     public void openHomePage() throws Exception {
         NavHandler.openHomePage(pane);
@@ -136,15 +136,15 @@ public class DeviceController {
     }
 
     //Rempli la combobox avec tout les groupes
-    public void fillDeviceTypeList() throws Exception {
+    private void fillDeviceTypeList() throws Exception {
         deviceTypeList.getItems().clear();
-        devicesType.addAll( "Door","Captor","Pass","Camera" );
+        devicesType.addAll( "Door","Captor","Camera" );
         deviceTypeList.setItems(devicesType);
     }
 
     public void enableUrl() {
         deviceTypeSelected = deviceTypeList.getSelectionModel().getSelectedIndex();
-        if (deviceTypeSelected == 3){
+        if (deviceTypeSelected == 2){
             urlField.setDisable(false);
         }
         else{
@@ -152,7 +152,7 @@ public class DeviceController {
         }
     }
 
-    public boolean stringVerif(Label label, TextField field, String text){
+    private boolean stringVerif(Label label, TextField field, String text){
         boolean res = true;
         if (field.getText().equalsIgnoreCase( "" )) {
             label.setText("Empty "+text);
@@ -176,35 +176,35 @@ public class DeviceController {
 
     public void createDevice() throws Exception{
         if(stringVerif(nameLabel,nameField,"Name") && stringVerif(refLabel,refField,"Ref.")) {
+            Alert alert = new Alert( Alert.AlertType.INFORMATION);
+            alert.setTitle(null);
+            alert.setHeaderText(null);
+            alert.setContentText("Device created");
             JSONObject body = new JSONObject();
             body.put( "name", nameField.getText() );
             body.put( "ref", refField.getText() );
-            System.out.println(deviceTypeList.getSelectionModel().getSelectedIndex());
             switch (deviceTypeSelected) {
                 case 0:
                     Api.callAPI( "POST", "door/", body );
                     loadDevices();
                     resetValues();
+                    alert.showAndWait();
                     break;
 
                 case 1:
                     Api.callAPI( "POST", "captor/", body );
                     loadDevices();
                     resetValues();
+                    alert.showAndWait();
                     break;
 
                 case 2:
-                    Api.callAPI( "POST", "pass/", body );
-                    loadDevices();
-                    resetValues();
-                    break;
-
-                case 3:
                     if(stringVerif(urlLabel,urlField,"URL")) {
                         body.put( "url", urlField.getText() );
                         Api.callAPI( "POST", "camera/", body );
                         loadDevices();
                         resetValues();
+                        alert.showAndWait();
                     }
                     break;
 
@@ -216,7 +216,7 @@ public class DeviceController {
         }
     }
 
-    public void resetValues(){
+    private void resetValues(){
         nameLabel.setText("Name");
         nameField.setText("");
         refLabel.setText("Ref.");
@@ -227,7 +227,7 @@ public class DeviceController {
     }
 
     // Retourne le user selectionne
-    public User getUserSelected() throws Exception {
+    private User getUserSelected() throws Exception {
         int userIndex = userList.getSelectionModel().getSelectedIndex();
         if(userIndex>-1) {
             userSelected = fillUsersList()[userIndex];
@@ -239,7 +239,7 @@ public class DeviceController {
     }
 
     // Retourne le user selectionne
-    public Pass getPassSelected() throws Exception {
+    private Pass getPassSelected() throws Exception {
         int passIndex = passList.getSelectionModel().getSelectedIndex();
         if(passIndex>-1) {
             passSelected = fillPassesList()[passIndex];
@@ -257,6 +257,11 @@ public class DeviceController {
         String res = Api.callAPI( "PUT", "pass/", body );
         if(!res.equalsIgnoreCase("")){
             asignLabel.setText("Assign Pass");
+            Alert alert = new Alert( Alert.AlertType.INFORMATION);
+            alert.setTitle(null);
+            alert.setHeaderText(null);
+            alert.setContentText("Pass assigned");
+            alert.showAndWait();
         }
     }
 
@@ -283,6 +288,11 @@ public class DeviceController {
                     Api.callAPI("DELETE","camera/"+devices[deviceSelectedId].getId(),empty);
                     break;
             }
+            Alert alert = new Alert( Alert.AlertType.INFORMATION);
+            alert.setTitle(null);
+            alert.setHeaderText(null);
+            alert.setContentText("Device deleted");
+            alert.showAndWait();
         }
         loadDevices();
     }

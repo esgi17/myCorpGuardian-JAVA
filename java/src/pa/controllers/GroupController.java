@@ -13,16 +13,16 @@ public class GroupController {
 
     @FXML ListView groupList;
     @FXML ListView usersList;
-    @FXML Button loadGroups;
     @FXML Label usersFromGroup;
 
     @FXML TextField newGroupField;
     @FXML Label newGroupLabel;
 
-    ObservableList<String> users = FXCollections.observableArrayList();
-    ObservableList<String> groups = FXCollections.observableArrayList();
-
     @FXML AnchorPane pane;
+
+    private ObservableList<String> users = FXCollections.observableArrayList();
+    private ObservableList<String> groups = FXCollections.observableArrayList();
+
 
     public void openHomePage() throws Exception {
         NavHandler.openHomePage(pane);
@@ -49,9 +49,10 @@ public class GroupController {
     }
 
 
-    Group groupSelected = new Group();
+    private Group groupSelected = new Group();
+
     // Affiche la liste des groupes
-    public Group[] fillGroupList() throws Exception {
+    private Group[] fillGroupList() throws Exception {
         Group res[] = ListDatas.getGroups();
         groupList.getItems().clear();
         // Rempli le tableau de groupes
@@ -63,7 +64,7 @@ public class GroupController {
     }
 
     // Retourne le groupe selectionne
-    public Group getGroupSelected() throws Exception {
+    private Group getGroupSelected() throws Exception {
         int groupIndex = groupList.getSelectionModel().getSelectedIndex();
         return fillGroupList()[groupIndex];
     }
@@ -72,7 +73,7 @@ public class GroupController {
     public User[] fillUsersList() throws Exception {
         groupSelected = getGroupSelected();
         User res[] = groupSelected.getUsers();
-        usersFromGroup.setText("Users from "+ groupSelected.getName()+" :");
+        usersFromGroup.setText("Users from "+ groupSelected.getName()+" ( " + res.length +" ) :");
         usersList.getItems().clear();
         // Rempli le tableau de users
         for(int i=0 ; i<res.length ; i++ ){
@@ -83,11 +84,11 @@ public class GroupController {
     }
 
     // Cree une ligne dans la listview de users
-    public String userCreateLine(User user){
+    private String userCreateLine(User user){
         return user.getLastname().toUpperCase() + ", " + user.getFirstname();
     }
 
-    public boolean isGoodGroupName() throws Exception {
+    private boolean isGoodGroupName() throws Exception {
         boolean res = true;
         Group groups[] = ListDatas.getGroups();
         if(newGroupField.getText().equalsIgnoreCase("")){
@@ -117,6 +118,12 @@ public class GroupController {
             body.put( "name", newGroupField.getText() );
             Api.callAPI( "POST", "group/", body );
             fillGroupList();
+            newGroupField.setText("");
+            Alert alert = new Alert( Alert.AlertType.INFORMATION);
+            alert.setTitle(null);
+            alert.setHeaderText(null);
+            alert.setContentText("Group created");
+            alert.showAndWait();
         }
     }
 
@@ -126,6 +133,11 @@ public class GroupController {
             JSONObject body = new JSONObject();
             Api.callAPI( "DELETE", "group/"+groupSelected.getId(), body );
             fillGroupList();
+            Alert alert = new Alert( Alert.AlertType.INFORMATION);
+            alert.setTitle(null);
+            alert.setHeaderText(null);
+            alert.setContentText("Group deleted");
+            alert.showAndWait();
         }
     }
 }

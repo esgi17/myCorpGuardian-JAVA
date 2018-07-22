@@ -65,7 +65,7 @@ public class Main extends Application {
     public void openHomePage() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("View/home.fxml"));
         primaryStage.setTitle("My Corp Guardian - Home");
-        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setScene(new Scene(root, 900, 600));
         primaryStage.show();
     }
 

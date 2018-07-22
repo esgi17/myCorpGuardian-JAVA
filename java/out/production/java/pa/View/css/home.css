@@ -6,4 +6,19 @@
     -fx-border-color: #e2e2e2;
     -fx-background-color: #1d1d1d;
     -fx-text-fill: #d8d8d8;
+
+}
+
+.toggle-button:selected {
+  -fx-border-color: #98FB98;
+  -fx-background-color: #FF6347;
+}
+.toggle-button {
+  -fx-border-color: #FF6347;
+  -fx-background-color: #98FB98;
+}
+
+.nav:hover {
+  -fx-text-fill: #2f2648;
+  -fx-underline: true;
 }

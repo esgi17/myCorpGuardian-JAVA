@@ -22,10 +22,10 @@ public class UserController {
     @FXML Button deleteBtn;
     @FXML Button updateBtn;
 
-    User userSelected= new User();
+    private User userSelected= new User();
 
-    ObservableList<String> users = FXCollections.observableArrayList();
-    ObservableList<String> groups = FXCollections.observableArrayList();
+    private ObservableList<String> users = FXCollections.observableArrayList();
+    private ObservableList<String> groups = FXCollections.observableArrayList();
 
     @FXML AnchorPane pane;
 
@@ -55,7 +55,7 @@ public class UserController {
     }
 
     // Affiche la liste des users
-    public User[] fillUserList() throws Exception {
+    private User[] fillUserList() throws Exception {
         User res[] = ListDatas.getUsers();
         usersList.getItems().clear();
         // Rempli le tableau de users
@@ -68,13 +68,13 @@ public class UserController {
 
 
     // Cree une ligne dans la listview de users
-    public String userCreateLine(User user){
+    private String userCreateLine(User user){
         return user.getLastname().toUpperCase() + ", " + user.getFirstname();
     }
 
 
     //Rempli la combobox avec tout les groupes
-    public void fillGroupList() throws Exception {
+    private void fillGroupList() throws Exception {
         listGroup.getItems().clear();
         Group[] group = ListDatas.getGroups();
         for(int i = 0 ; i <group.length ; i++){
@@ -85,7 +85,7 @@ public class UserController {
 
 
     // Verif sur un chaine de caractere
-    public boolean stringVerification(){
+    private boolean stringVerification(){
         boolean res = true;
         if (firstname.getText().equalsIgnoreCase( "" )) {
             labelFirstname.setText("Empty Firstname");
@@ -128,7 +128,7 @@ public class UserController {
     }
 
     // Execute requete add ou update d'un user
-    public void addOrUpdateUser(String method, String id) throws Exception {
+    private void addOrUpdateUser(String method, String id) throws Exception {
         // Verif si champ vide
         if (stringVerification()){
             //Creation json user
@@ -178,7 +178,17 @@ public class UserController {
         firstname.setText(user.getFirstname());
         lastname.setText(user.getLastname());
         job.setText(user.getJob());
-        listGroup.getSelectionModel().select(Integer.parseInt(userSelected.getIdGroup()));
+        listGroup.getSelectionModel().select(getGroup(userSelected.getIdGroup()));
+    }
+
+    public int getGroup(String group_id){
+        int res = 0;
+        for (int i = 0 ; i<groups.size() ; i++){
+            if(group_id.equalsIgnoreCase(groups.get(i).substring(0,1))){
+                res = i;
+            }
+        }
+        return res;
     }
 
     // Formulaire en mode create
@@ -203,7 +213,7 @@ public class UserController {
     }
 
     // Retourne le user selectionne
-    public User getUserSelected() throws Exception {
+    private User getUserSelected() throws Exception {
         int userIndex = usersList.getSelectionModel().getSelectedIndex();
         userSelected = fillUserList()[userIndex];
         return userSelected;

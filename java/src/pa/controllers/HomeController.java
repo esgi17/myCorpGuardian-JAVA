@@ -43,24 +43,27 @@ public class HomeController{
         NavHandler.openEventPage(pane);
     }
 
-    public void armedOrDisarmed() throws Exception{
+    public void initialize() throws Exception{
         setArmBtn();
+    }
+
+    public void armedOrDisarmed() throws Exception{
         JSONObject body = new JSONObject();
         if(armBtn.getText().equalsIgnoreCase("Armed")){
             body.put("state","false");
             body.put("id","1");
             Api.callAPI("PUT", "state", body);
-            armBtn.setText("Disarmed");
+            armBtn.setText("DISARMED");
         }
         else{
             body.put("state","true");
             body.put("id","1");
             Api.callAPI("PUT", "state", body);
-            armBtn.setText("Armed");
+            armBtn.setText("ARMED");
         }
     }
 
-    public void setArmBtn() throws Exception {
+    private void setArmBtn() throws Exception {
         JSONObject body = new JSONObject();
         String armed = Api.callAPI("GET","state/",body);
         JSONObject json = new JSONObject(armed);
@@ -68,11 +71,11 @@ public class HomeController{
         JSONObject state = jArray.getJSONObject(0);
 
         if(state.getString("state").equalsIgnoreCase("true")){
-            armBtn.setText("Armed");
+            armBtn.setText("ARMED");
             armBtn.setSelected(true);
         }
         else{
-            armBtn.setText("Disarmed");
+            armBtn.setText("DISARMED");
             armBtn.setSelected(false);
         }
     }

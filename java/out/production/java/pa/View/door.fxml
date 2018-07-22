@@ -13,9 +13,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pa.controllers.DoorController">
+<AnchorPane id="AnchorPane" fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: transparent, derive(#1d1d1d,20%);" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pa.controllers.DoorController">
   <children>
-      <VBox prefHeight="400.0" prefWidth="600.0">
+      <VBox prefHeight="600.0" prefWidth="900.0">
          <children>
             <ButtonBar buttonMinWidth="60.0" prefHeight="40.0" prefWidth="462.0" styleClass="background" stylesheets="@css/titled.css">
                <buttons>
@@ -26,373 +26,417 @@
                   <Button mnemonicParsing="false" onMouseClicked="#openEventPage" text="EVENT" />
                   <Button mnemonicParsing="false" onMouseClicked="#openDevicePage" text="DEVICE" />
                </buttons>
-               <padding>
-                  <Insets left="10.0" />
-               </padding>
             </ButtonBar>
-        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="660.0" styleClass="background" stylesheets="@css/door.css">
+        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="560.0" prefWidth="900.0" styleClass="background" stylesheets="@css/door.css">
                <children>
-                  <HBox prefHeight="376.0" prefWidth="213.0">
+                  <HBox prefHeight="560.0" prefWidth="900.0">
                      <children>
-                        <VBox prefHeight="356.0" prefWidth="193.0">
+                        <VBox prefHeight="560.0" prefWidth="300.0">
                            <children>
                               <HBox />
                               <Label fx:id="setScheduleLabel1" alignment="CENTER" prefHeight="25.0" prefWidth="384.0" text="Doors :" textFill="WHITE">
                                  <font>
-                                    <Font name="Berlin Sans FB" size="16.0" />
+                                    <Font name="Berlin Sans FB" size="18.0" />
                                  </font>
                                  <VBox.margin>
-                                    <Insets top="10.0" />
+                                    <Insets top="20.0" />
                                  </VBox.margin>
                               </Label>
-                              <ListView fx:id="doorsList" prefHeight="134.0" prefWidth="193.0">
+                              <ListView fx:id="doorsList" onMouseClicked="#writeDoor" prefHeight="220.0" prefWidth="193.0">
                                  <VBox.margin>
-                                    <Insets bottom="10.0" top="10.0" />
+                                    <Insets bottom="10.0" left="30.0" right="30.0" top="20.0" />
                                  </VBox.margin>
                               </ListView>
                               <Label fx:id="newDoorLabel" alignment="CENTER" prefHeight="17.0" prefWidth="384.0" text="New Door" textFill="WHITE">
                                  <font>
-                                    <Font name="Berlin Sans FB" size="16.0" />
+                                    <Font name="Berlin Sans FB" size="18.0" />
                                  </font>
                                  <VBox.margin>
-                                    <Insets />
+                                    <Insets top="20.0" />
                                  </VBox.margin>
                               </Label>
                               <Label fx:id="newDoorNameLabel" alignment="CENTER" prefHeight="17.0" prefWidth="384.0" text="Name" textFill="WHITE">
                                  <VBox.margin>
-                                    <Insets top="10.0" />
+                                    <Insets bottom="5.0" top="10.0" />
                                  </VBox.margin>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
                               </Label>
                               <TextField fx:id="newDoorNameField">
                                  <VBox.margin>
-                                    <Insets left="10.0" right="10.0" />
+                                    <Insets bottom="10.0" left="30.0" right="30.0" />
                                  </VBox.margin>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
                               </TextField>
-                              <Label fx:id="newDoorRefLabel" alignment="CENTER" prefHeight="17.0" prefWidth="384.0" text="Ref." />
+                              <Label fx:id="newDoorRefLabel" alignment="CENTER" prefHeight="17.0" prefWidth="384.0" text="Ref.">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin></Label>
                               <TextField fx:id="newDoorRefField">
                                  <VBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" />
+                                    <Insets bottom="30.0" left="30.0" right="30.0" />
                                  </VBox.margin>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
                               </TextField>
-                              <Button fx:id="newDoorBtn" mnemonicParsing="false" onMouseClicked="#addDoor" prefHeight="25.0" prefWidth="286.0" text="New Door">
+                              <Button fx:id="newDoorBtn" mnemonicParsing="false" onMouseClicked="#addDoor" prefHeight="25.0" prefWidth="240.0" text="New Door">
                                  <VBox.margin>
-                                    <Insets left="10.0" right="10.0" />
+                                    <Insets left="30.0" />
                                  </VBox.margin>
                               </Button>
                            </children>
                            <HBox.margin>
-                              <Insets bottom="20.0" left="20.0" />
+                              <Insets />
                            </HBox.margin>
+                        </VBox>
+                        <VBox prefHeight="560.0" prefWidth="600.0">
+                           <children>
+                              <Label fx:id="setScheduleLabel" alignment="CENTER" prefHeight="20.0" prefWidth="600.0" text="Set Schedule" textFill="WHITE">
+                                 <font>
+                                    <Font name="Berlin Sans FB" size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" top="20.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox>
+                                 <children>
+                                    <Label fx:id="doorLabel" alignment="CENTER" prefHeight="32.0" prefWidth="150.0" styleClass="door" visible="false">
+                                       <font>
+                                          <Font name="Berlin Sans FB" size="18.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="150.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <ComboBox fx:id="groupsList" onAction="#load" onMouseClicked="#fillGroupsList" onMouseExited="#load" prefWidth="150.0" promptText="Group" stylesheets="@css/combo-box.css">
+                                       <HBox.margin>
+                                          <Insets left="80.0" />
+                                       </HBox.margin>
+                                    </ComboBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="27.0" prefWidth="381.0">
+                                 <children>
+                                    <Label alignment="CENTER" prefHeight="25.0" prefWidth="150.0" text="Opening" textFill="WHITE">
+                                       <HBox.margin>
+                                          <Insets left="146.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font name="System Italic" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" prefHeight="25.0" prefWidth="150.0" text="Closing" textFill="WHITE">
+                                       <HBox.margin>
+                                          <Insets left="78.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font name="System Italic" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="27.0" prefWidth="381.0">
+                                 <children>
+                                    <Label fx:id="mondayLabel" prefHeight="17.0" prefWidth="100.0" text="Monday">
+                                       <HBox.margin>
+                                          <Insets left="20.0" right="10.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font name="Berlin Sans FB" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <VBox prefHeight="200.0" prefWidth="180.0">
+                                       <children>
+                                          <Label fx:id="mondayOpen" alignment="CENTER" prefWidth="180.0">
+                                             <font>
+                                                <Font name="Berlin Sans FB" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Slider fx:id="mondayOpenSlider" max="1439.0" onMouseDragged="#setHour" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="180.0">
+                                       <children>
+                                          <Label fx:id="mondayClose" alignment="CENTER" prefWidth="180.0">
+                                             <font>
+                                                <Font name="Berlin Sans FB" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Slider fx:id="mondayCloseSlider" max="1439.0" onMouseDragged="#setHour" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="50.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="27.0" prefWidth="381.0">
+                                 <children>
+                                    <Label fx:id="tuesdayLabel" prefHeight="17.0" prefWidth="100.0" text="Tuesday">
+                                       <HBox.margin>
+                                          <Insets left="20.0" right="10.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font name="Berlin Sans FB" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <VBox prefHeight="200.0" prefWidth="180.0">
+                                       <children>
+                                          <Label fx:id="tuesdayOpen" alignment="CENTER" prefHeight="17.0" prefWidth="180.0">
+                                             <font>
+                                                <Font name="Berlin Sans FB" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Slider fx:id="tuesdayOpenSlider" max="1439.0" onMouseDragged="#setHour" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="180.0">
+                                       <children>
+                                          <Label fx:id="tuesdayClose" alignment="CENTER" prefHeight="17.0" prefWidth="180.0">
+                                             <font>
+                                                <Font name="Berlin Sans FB" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Slider fx:id="tuesdayCloseSlider" max="1439.0" onMouseDragged="#setHour" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="50.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="27.0" prefWidth="381.0">
+                                 <children>
+                                    <Label fx:id="wednesdayLabel" prefHeight="17.0" prefWidth="100.0" text="Wednesday">
+                                       <HBox.margin>
+                                          <Insets left="20.0" right="10.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font name="Berlin Sans FB" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <VBox prefHeight="200.0" prefWidth="180.0">
+                                       <children>
+                                          <Label fx:id="wednesdayOpen" alignment="CENTER" prefHeight="17.0" prefWidth="180.0">
+                                             <font>
+                                                <Font name="Berlin Sans FB" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Slider fx:id="wednesdayOpenSlider" max="1439.0" onMouseDragged="#setHour" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="180.0">
+                                       <children>
+                                          <Label fx:id="wednesdayClose" alignment="CENTER" prefHeight="17.0" prefWidth="180.0">
+                                             <font>
+                                                <Font name="Berlin Sans FB" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Slider fx:id="wednesdayCloseSlider" max="1439.0" onMouseDragged="#setHour" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="50.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="27.0" prefWidth="381.0">
+                                 <children>
+                                    <Label fx:id="thursdayLabel" prefHeight="17.0" prefWidth="100.0" text="Thursday">
+                                       <HBox.margin>
+                                          <Insets left="20.0" right="10.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font name="Berlin Sans FB" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <VBox prefHeight="200.0" prefWidth="180.0">
+                                       <children>
+                                          <Label fx:id="thursdayOpen" alignment="CENTER" prefHeight="17.0" prefWidth="180.0">
+                                             <font>
+                                                <Font name="Berlin Sans FB" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Slider fx:id="thursdayOpenSlider" max="1439.0" onMouseDragged="#setHour" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="180.0">
+                                       <children>
+                                          <Label fx:id="thursdayClose" alignment="CENTER" prefHeight="17.0" prefWidth="180.0">
+                                             <font>
+                                                <Font name="Berlin Sans FB" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Slider fx:id="thursdayCloseSlider" max="1439.0" onMouseDragged="#setHour" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="50.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="27.0" prefWidth="381.0">
+                                 <children>
+                                    <Label fx:id="fridayLabel" prefHeight="17.0" prefWidth="100.0" text="Friday">
+                                       <HBox.margin>
+                                          <Insets left="20.0" right="10.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font name="Berlin Sans FB" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <VBox prefHeight="200.0" prefWidth="180.0">
+                                       <children>
+                                          <Label fx:id="fridayOpen" alignment="CENTER" prefHeight="17.0" prefWidth="180.0">
+                                             <font>
+                                                <Font name="Berlin Sans FB" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Slider fx:id="fridayOpenSlider" max="1439.0" onMouseDragged="#setHour" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="180.0">
+                                       <children>
+                                          <Label fx:id="fridayClose" alignment="CENTER" prefHeight="17.0" prefWidth="180.0">
+                                             <font>
+                                                <Font name="Berlin Sans FB" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Slider fx:id="fridayCloseSlider" max="1439.0" onMouseDragged="#setHour" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="50.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="27.0" prefWidth="381.0">
+                                 <children>
+                                    <Label fx:id="saturdayLabel" prefHeight="17.0" prefWidth="100.0" text="Saturday">
+                                       <HBox.margin>
+                                          <Insets left="20.0" right="10.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font name="Berlin Sans FB" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <VBox prefHeight="200.0" prefWidth="180.0">
+                                       <children>
+                                          <Label fx:id="saturdayOpen" alignment="CENTER" prefHeight="17.0" prefWidth="180.0">
+                                             <font>
+                                                <Font name="Berlin Sans FB" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Slider fx:id="saturdayOpenSlider" max="1439.0" onMouseDragged="#setHour" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="180.0">
+                                       <children>
+                                          <Label fx:id="saturdayClose" alignment="CENTER" prefHeight="17.0" prefWidth="180.0">
+                                             <font>
+                                                <Font name="Berlin Sans FB" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Slider fx:id="saturdayCloseSlider" max="1439.0" onMouseDragged="#setHour" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="50.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="27.0" prefWidth="381.0">
+                                 <children>
+                                    <Label fx:id="sundayLabel" prefHeight="17.0" prefWidth="100.0" text="Sunday">
+                                       <HBox.margin>
+                                          <Insets left="20.0" right="10.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font name="Berlin Sans FB" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <VBox prefHeight="200.0" prefWidth="180.0">
+                                       <children>
+                                          <Label fx:id="sundayOpen" alignment="CENTER" prefHeight="17.0" prefWidth="180.0">
+                                             <font>
+                                                <Font name="Berlin Sans FB" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Slider fx:id="sundayOpenSlider" max="1439.0" onMouseDragged="#setHour" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="180.0">
+                                       <children>
+                                          <Label fx:id="sundayClose" alignment="CENTER" prefHeight="17.0" prefWidth="180.0">
+                                             <font>
+                                                <Font name="Berlin Sans FB" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Slider fx:id="sundayCloseSlider" max="1439.0" onMouseDragged="#setHour" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="50.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="50.0" prefWidth="600.0">
+                                 <children>
+                                    <Button fx:id="createBtn" disable="true" mnemonicParsing="false" onMouseClicked="#updateSchedules" prefWidth="150.0" text="Create">
+                                       <HBox.margin>
+                                          <Insets left="20.0" right="35.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="updateBtn" disable="true" mnemonicParsing="false" onMouseClicked="#updateSchedules" prefWidth="150.0" text="Update">
+                                       <HBox.margin>
+                                          <Insets right="35.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="deleteBtn" disable="true" mnemonicParsing="false" onMouseClicked="#deleteSchedules" prefWidth="150.0" text="Delete" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="40.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
                         </VBox>
                      </children>
                   </HBox>
-                  <VBox layoutX="216.0" layoutY="-1.0" prefHeight="375.0" prefWidth="381.0">
-                     <children>
-                        <Label fx:id="setScheduleLabel" alignment="CENTER" prefHeight="17.0" prefWidth="384.0" text="Set Schedule" textFill="WHITE">
-                           <font>
-                              <Font name="Berlin Sans FB" size="16.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets bottom="20.0" top="20.0" />
-                           </VBox.margin>
-                        </Label>
-                        <HBox>
-                           <children>
-                              <ComboBox fx:id="groupsList" onMouseClicked="#fillGroupsList" prefWidth="100.0" promptText="Group" stylesheets="@css/combo-box.css">
-                                 <HBox.margin>
-                                    <Insets left="90.0" />
-                                 </HBox.margin>
-                              </ComboBox>
-                              <Button fx:id="loadScheduleBtn" mnemonicParsing="false" onMouseClicked="#loadSchedules" prefWidth="100.0" text="Load Schedule">
-                                 <HBox.margin>
-                                    <Insets left="50.0" />
-                                 </HBox.margin>
-                              </Button>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="27.0" prefWidth="381.0">
-                           <children>
-                              <Label prefHeight="25.0" prefWidth="53.0" text="Opening" textFill="WHITE">
-                                 <HBox.margin>
-                                    <Insets left="115.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="System Italic" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Label prefHeight="25.0" prefWidth="53.0" text="Closing" textFill="WHITE">
-                                 <HBox.margin>
-                                    <Insets left="100.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="System Italic" size="12.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="27.0" prefWidth="381.0">
-                           <children>
-                              <Label fx:id="mondayLabel" prefHeight="17.0" prefWidth="70.0" text="Monday">
-                                 <HBox.margin>
-                                    <Insets left="10.0" right="10.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Berlin Sans FB" size="12.0" />
-                                 </font>
-                              </Label>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Label fx:id="mondayOpen" alignment="CENTER" prefHeight="17.0" prefWidth="96.0">
-                                       <font>
-                                          <Font name="Berlin Sans FB" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <Slider fx:id="mondayOpenSlider" max="1439.0" onMouseDragged="#setHour" />
-                                 </children>
-                              </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Label fx:id="mondayClose" alignment="CENTER" prefHeight="17.0" prefWidth="96.0">
-                                       <font>
-                                          <Font name="Berlin Sans FB" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <Slider fx:id="mondayCloseSlider" max="1439.0" onMouseDragged="#setHour" />
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets left="50.0" />
-                                 </HBox.margin>
-                              </VBox>
-                           </children></HBox>
-                        <HBox prefHeight="27.0" prefWidth="381.0">
-                           <children>
-                              <Label fx:id="tuesdayLabel" prefHeight="17.0" prefWidth="70.0" text="Tuesday">
-                                 <HBox.margin>
-                                    <Insets left="10.0" right="10.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Berlin Sans FB" size="12.0" />
-                                 </font>
-                              </Label>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Label fx:id="tuesdayOpen" alignment="CENTER" prefHeight="17.0" prefWidth="96.0">
-                                       <font>
-                                          <Font name="Berlin Sans FB" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <Slider fx:id="tuesdayOpenSlider" max="1439.0" onMouseDragged="#setHour" />
-                                 </children>
-                              </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Label fx:id="tuesdayClose" alignment="CENTER" prefHeight="17.0" prefWidth="96.0">
-                                       <font>
-                                          <Font name="Berlin Sans FB" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <Slider fx:id="tuesdayCloseSlider" max="1439.0" onMouseDragged="#setHour" />
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets left="50.0" />
-                                 </HBox.margin>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="27.0" prefWidth="381.0">
-                           <children>
-                              <Label fx:id="wednesdayLabel" prefHeight="17.0" prefWidth="70.0" text="Wednesday">
-                                 <HBox.margin>
-                                    <Insets left="10.0" right="10.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Berlin Sans FB" size="12.0" />
-                                 </font>
-                              </Label>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Label fx:id="wednesdayOpen" alignment="CENTER" prefHeight="17.0" prefWidth="96.0">
-                                       <font>
-                                          <Font name="Berlin Sans FB" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <Slider fx:id="wednesdayOpenSlider" max="1439.0" onMouseDragged="#setHour" />
-                                 </children>
-                              </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Label fx:id="wednesdayClose" alignment="CENTER" prefHeight="17.0" prefWidth="96.0">
-                                       <font>
-                                          <Font name="Berlin Sans FB" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <Slider fx:id="wednesdayCloseSlider" max="1439.0" onMouseDragged="#setHour" />
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets left="50.0" />
-                                 </HBox.margin>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="27.0" prefWidth="381.0">
-                           <children>
-                              <Label fx:id="thursdayLabel" prefHeight="17.0" prefWidth="70.0" text="Thursday">
-                                 <HBox.margin>
-                                    <Insets left="10.0" right="10.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Berlin Sans FB" size="12.0" />
-                                 </font>
-                              </Label>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Label fx:id="thursdayOpen" alignment="CENTER" prefHeight="17.0" prefWidth="96.0">
-                                       <font>
-                                          <Font name="Berlin Sans FB" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <Slider fx:id="thursdayOpenSlider" max="1439.0" onMouseDragged="#setHour" />
-                                 </children>
-                              </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Label fx:id="thursdayClose" alignment="CENTER" prefHeight="17.0" prefWidth="96.0">
-                                       <font>
-                                          <Font name="Berlin Sans FB" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <Slider fx:id="thursdayCloseSlider" max="1439.0" onMouseDragged="#setHour" />
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets left="50.0" />
-                                 </HBox.margin>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="27.0" prefWidth="381.0">
-                           <children>
-                              <Label fx:id="fridayLabel" prefHeight="17.0" prefWidth="70.0" text="Friday">
-                                 <HBox.margin>
-                                    <Insets left="10.0" right="10.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Berlin Sans FB" size="12.0" />
-                                 </font>
-                              </Label>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Label fx:id="fridayOpen" alignment="CENTER" prefHeight="17.0" prefWidth="96.0">
-                                       <font>
-                                          <Font name="Berlin Sans FB" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <Slider fx:id="fridayOpenSlider" max="1439.0" onMouseDragged="#setHour" />
-                                 </children>
-                              </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Label fx:id="fridayClose" alignment="CENTER" prefHeight="17.0" prefWidth="96.0">
-                                       <font>
-                                          <Font name="Berlin Sans FB" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <Slider fx:id="fridayCloseSlider" max="1439.0" onMouseDragged="#setHour" />
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets left="50.0" />
-                                 </HBox.margin>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="27.0" prefWidth="381.0">
-                           <children>
-                              <Label fx:id="saturdayLabel" prefHeight="17.0" prefWidth="70.0" text="Saturday">
-                                 <HBox.margin>
-                                    <Insets left="10.0" right="10.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Berlin Sans FB" size="12.0" />
-                                 </font>
-                              </Label>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Label fx:id="saturdayOpen" alignment="CENTER" prefHeight="17.0" prefWidth="96.0">
-                                       <font>
-                                          <Font name="Berlin Sans FB" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <Slider fx:id="saturdayOpenSlider" max="1439.0" onMouseDragged="#setHour" />
-                                 </children>
-                              </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Label fx:id="saturdayClose" alignment="CENTER" prefHeight="17.0" prefWidth="96.0">
-                                       <font>
-                                          <Font name="Berlin Sans FB" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <Slider fx:id="saturdayCloseSlider" max="1439.0" onMouseDragged="#setHour" />
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets left="50.0" />
-                                 </HBox.margin>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="27.0" prefWidth="381.0">
-                           <children>
-                              <Label fx:id="sundayLabel" prefHeight="17.0" prefWidth="70.0" text="Sunday">
-                                 <HBox.margin>
-                                    <Insets left="10.0" right="10.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Berlin Sans FB" size="12.0" />
-                                 </font>
-                              </Label>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Label fx:id="sundayOpen" alignment="CENTER" prefHeight="17.0" prefWidth="96.0">
-                                       <font>
-                                          <Font name="Berlin Sans FB" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <Slider fx:id="sundayOpenSlider" max="1439.0" onMouseDragged="#setHour" />
-                                 </children>
-                              </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Label fx:id="sundayClose" alignment="CENTER" prefHeight="17.0" prefWidth="96.0">
-                                       <font>
-                                          <Font name="Berlin Sans FB" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <Slider fx:id="sundayCloseSlider" max="1439.0" onMouseDragged="#setHour" />
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets left="50.0" />
-                                 </HBox.margin>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="27.0" prefWidth="381.0">
-                           <children>
-                              <Button fx:id="createBtn" mnemonicParsing="false" onMouseClicked="#updateSchedules" prefWidth="100.0" text="Create">
-                                 <HBox.margin>
-                                    <Insets left="10.0" right="20.0" />
-                                 </HBox.margin>
-                              </Button>
-                              <Button fx:id="updateBtn" mnemonicParsing="false" onMouseClicked="#updateSchedules" prefWidth="100.0" text="Update">
-                                 <HBox.margin>
-                                    <Insets right="20.0" />
-                                 </HBox.margin>
-                              </Button>
-                              <Button fx:id="deleteBtn" mnemonicParsing="false" onMouseClicked="#deleteSchedules" prefWidth="100.0" text="Delete" />
-                           </children>
-                           <VBox.margin>
-                              <Insets top="7.0" />
-                           </VBox.margin>
-                        </HBox>
-                     </children></VBox>
                </children></AnchorPane>
          </children>
       </VBox>
