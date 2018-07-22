@@ -5,26 +5,17 @@
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: transparent, derive(#1d1d1d,20%);" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pa.controllers.EventController">
+<AnchorPane id="AnchorPane" fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pa.controllers.EventController">
   <children>
-      <VBox prefHeight="400.0" prefWidth="598.0">
-         <children>
-            <ButtonBar buttonMinWidth="60.0" prefHeight="40.0" prefWidth="462.0" styleClass="background" stylesheets="@css/titled.css">
-               <buttons>
-                  <Button mnemonicParsing="false" onMouseClicked="#openHomePage" text="HOME" />
-                  <Button mnemonicParsing="false" onMouseClicked="#openUserPage" text="USER" />
-                  <Button mnemonicParsing="false" onMouseClicked="#openGroupPage" text="GROUP" />
-                  <Button minWidth="0.0" mnemonicParsing="false" onMouseClicked="#openDoorPage" prefHeight="25.0" prefWidth="139.0" text="DOOR" />
-                  <Button mnemonicParsing="false" style="-fx-background-color: #2f2648;" text="EVENT" />
-                  <Button mnemonicParsing="false" onMouseClicked="#openDevicePage" text="DEVICE" />
-               </buttons>
-            </ButtonBar>
-        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="380.0" prefWidth="600.0" styleClass="background" stylesheets="@css/event.css">
+    <TitledPane contentDisplay="RIGHT" prefHeight="400.0" prefWidth="600.0" stylesheets="@css/titled.css" text="EVENT" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <content>
+        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="background" stylesheets="@css/event.css">
                <children>
                   <HBox prefHeight="376.0">
                      <children>
@@ -81,9 +72,23 @@
                         </ListView>
                      </children>
                   </VBox>
-               </children>
-            </AnchorPane>
-         </children>
-      </VBox>
+               </children></AnchorPane>
+      </content>
+         <graphic>
+            <ButtonBar buttonMinWidth="60.0" prefHeight="40.0" prefWidth="462.0">
+               <buttons>
+                  <Button mnemonicParsing="false" onMouseClicked="#openHomePage" text="HOME" />
+                  <Button mnemonicParsing="false" onMouseClicked="#openUserPage" text="USER" />
+                  <Button mnemonicParsing="false" onMouseClicked="#openGroupPage" text="GROUP" />
+                  <Button minWidth="0.0" mnemonicParsing="false" onMouseClicked="#openDoorPage" prefHeight="25.0" prefWidth="139.0" text="DOOR" />
+                  <Button mnemonicParsing="false" style="-fx-background-insets: 0;" text="EVENT" />
+                  <Button mnemonicParsing="false" onMouseClicked="#openDevicePage" text="DEVICE" />
+               </buttons>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </ButtonBar>
+         </graphic>
+    </TitledPane>
   </children>
 </AnchorPane>

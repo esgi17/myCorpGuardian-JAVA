@@ -38,6 +38,7 @@ public class DeviceController {
     private int deviceTypeSelected = -1;
     User userSelected = new User();
     Pass passSelected = new Pass();
+    int deviceSelectedId;
 
     public void openHomePage() throws Exception {
         NavHandler.openHomePage(pane);
@@ -85,22 +86,22 @@ public class DeviceController {
             switch(res[i].getDeviceTypeId()){
                 case "1":
                     if(doorCheck.isSelected()){
-                        devices.add("Door    : " + res[i].getName());
+                        devices.add("Door      : " + res[i].getName());
                     }
                     break;
                 case "2":
                     if(captorCheck.isSelected()){
-                        devices.add("Captor : " + res[i].getName());
+                        devices.add("Captor   : " + res[i].getName());
                     }
                     break;
                 case "3":
                     if(passCheck.isSelected()){
-                        devices.add("Pass    : " + res[i].getName());
+                        devices.add("Pass       : " + res[i].getName());
                     }
                     break;
                 case "4":
                     if(cameraCheck.isSelected()){
-                        devices.add("Camera : " + res[i].getName());
+                        devices.add("Camera  : " + res[i].getName());
                     }
                     break;
                 default:
@@ -259,23 +260,27 @@ public class DeviceController {
         }
     }
 
+    public void getDeviceSelected(){
+        deviceSelectedId = devicesList.getSelectionModel().getSelectedIndex();
+    }
+
     public void deleteDevice() throws Exception {
         JSONObject empty = new JSONObject();
         Device[] devices = loadDevices();
-        int index = devicesList.getSelectionModel().getSelectedIndex();
-        if(index!=-1){
-            switch (devices[index].getDeviceTypeId()){
+        if(deviceSelectedId!=-1){
+            System.out.println(devices[deviceSelectedId].getDeviceTypeId());
+            switch (devices[deviceSelectedId].getDeviceTypeId()){
                 case "1" :
-                    Api.callAPI("DELETE","door/"+devices[index].getId(),empty);
+                    Api.callAPI("DELETE","door/"+devices[deviceSelectedId].getId(),empty);
                     break;
                 case "2" :
-                    Api.callAPI("DELETE","captor/"+devices[index].getId(),empty);
+                    Api.callAPI("DELETE","captor/"+devices[deviceSelectedId].getId(),empty);
                     break;
                 case "3" :
-                    Api.callAPI("DELETE","pass/"+devices[index].getId(),empty);
+                    Api.callAPI("DELETE","pass/"+devices[deviceSelectedId].getId(),empty);
                     break;
                 case "4" :
-                    Api.callAPI("DELETE","camera/"+devices[index].getId(),empty);
+                    Api.callAPI("DELETE","camera/"+devices[deviceSelectedId].getId(),empty);
                     break;
             }
         }

@@ -171,9 +171,9 @@ public class UserController {
     // Formulaire en mode update
     public void updateForm() throws Exception {
         head.setText("Update User");
-        deleteBtn.setVisible(true);
-        addBtn.setVisible(false);
-        updateBtn.setVisible(true);
+        deleteBtn.setDisable(false);
+        addBtn.setDisable(true);
+        updateBtn.setDisable(false);
         User user = getUserSelected();
         firstname.setText(user.getFirstname());
         lastname.setText(user.getLastname());
@@ -184,11 +184,11 @@ public class UserController {
     // Formulaire en mode create
     public void createForm() {
         head.setText("New User");
-        deleteBtn.setVisible(false);
-        updateBtn.setVisible(false);
+        deleteBtn.setDisable(true);
+        updateBtn.setDisable(true);
         labelFirstname.setText("Firstname");
         labelLastname.setText( "Lastname");
-        addBtn.setVisible(true);
+        addBtn.setDisable(false);
         firstname.setText("");
         lastname.setText("");
         job.setText("");

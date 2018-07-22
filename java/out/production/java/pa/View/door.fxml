@@ -8,7 +8,6 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -16,16 +15,29 @@
 
 <AnchorPane id="AnchorPane" fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pa.controllers.DoorController">
   <children>
-    <TitledPane animated="false" contentDisplay="RIGHT" text="DOOR" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <content>
-        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+      <VBox prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <ButtonBar buttonMinWidth="60.0" prefHeight="40.0" prefWidth="462.0" styleClass="background" stylesheets="@css/titled.css">
+               <buttons>
+                  <Button mnemonicParsing="false" onMouseClicked="#openHomePage" text="HOME" />
+                  <Button mnemonicParsing="false" onMouseClicked="#openUserPage" text="USER" />
+                  <Button mnemonicParsing="false" onMouseClicked="#openGroupPage" text="GROUP" />
+                  <Button minWidth="0.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: #2f2648;" text="DOOR" />
+                  <Button mnemonicParsing="false" onMouseClicked="#openEventPage" text="EVENT" />
+                  <Button mnemonicParsing="false" onMouseClicked="#openDevicePage" text="DEVICE" />
+               </buttons>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </ButtonBar>
+        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="660.0" styleClass="background" stylesheets="@css/door.css">
                <children>
                   <HBox prefHeight="376.0" prefWidth="213.0">
                      <children>
                         <VBox prefHeight="356.0" prefWidth="193.0">
                            <children>
                               <HBox />
-                              <Label fx:id="setScheduleLabel1" alignment="CENTER" prefHeight="25.0" prefWidth="384.0" text="Doors :">
+                              <Label fx:id="setScheduleLabel1" alignment="CENTER" prefHeight="25.0" prefWidth="384.0" text="Doors :" textFill="WHITE">
                                  <font>
                                     <Font name="Berlin Sans FB" size="16.0" />
                                  </font>
@@ -38,7 +50,7 @@
                                     <Insets bottom="10.0" top="10.0" />
                                  </VBox.margin>
                               </ListView>
-                              <Label fx:id="newDoorLabel" alignment="CENTER" prefHeight="17.0" prefWidth="384.0" text="New Door">
+                              <Label fx:id="newDoorLabel" alignment="CENTER" prefHeight="17.0" prefWidth="384.0" text="New Door" textFill="WHITE">
                                  <font>
                                     <Font name="Berlin Sans FB" size="16.0" />
                                  </font>
@@ -46,7 +58,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label fx:id="newDoorNameLabel" alignment="CENTER" prefHeight="17.0" prefWidth="384.0" text="Name">
+                              <Label fx:id="newDoorNameLabel" alignment="CENTER" prefHeight="17.0" prefWidth="384.0" text="Name" textFill="WHITE">
                                  <VBox.margin>
                                     <Insets top="10.0" />
                                  </VBox.margin>
@@ -76,7 +88,7 @@
                   </HBox>
                   <VBox layoutX="216.0" layoutY="-1.0" prefHeight="375.0" prefWidth="381.0">
                      <children>
-                        <Label fx:id="setScheduleLabel" alignment="CENTER" prefHeight="17.0" prefWidth="384.0" text="Set Schedule">
+                        <Label fx:id="setScheduleLabel" alignment="CENTER" prefHeight="17.0" prefWidth="384.0" text="Set Schedule" textFill="WHITE">
                            <font>
                               <Font name="Berlin Sans FB" size="16.0" />
                            </font>
@@ -86,7 +98,7 @@
                         </Label>
                         <HBox>
                            <children>
-                              <ComboBox fx:id="groupsList" onMouseClicked="#fillGroupsList" prefWidth="100.0" promptText="Group">
+                              <ComboBox fx:id="groupsList" onMouseClicked="#fillGroupsList" prefWidth="100.0" promptText="Group" stylesheets="@css/combo-box.css">
                                  <HBox.margin>
                                     <Insets left="90.0" />
                                  </HBox.margin>
@@ -100,7 +112,7 @@
                         </HBox>
                         <HBox prefHeight="27.0" prefWidth="381.0">
                            <children>
-                              <Label prefHeight="25.0" prefWidth="53.0" text="Opening">
+                              <Label prefHeight="25.0" prefWidth="53.0" text="Opening" textFill="WHITE">
                                  <HBox.margin>
                                     <Insets left="115.0" />
                                  </HBox.margin>
@@ -108,7 +120,7 @@
                                     <Font name="System Italic" size="12.0" />
                                  </font>
                               </Label>
-                              <Label prefHeight="25.0" prefWidth="53.0" text="Closing">
+                              <Label prefHeight="25.0" prefWidth="53.0" text="Closing" textFill="WHITE">
                                  <HBox.margin>
                                     <Insets left="100.0" />
                                  </HBox.margin>
@@ -382,22 +394,7 @@
                         </HBox>
                      </children></VBox>
                </children></AnchorPane>
-      </content>
-         <graphic>
-            <ButtonBar buttonMinWidth="60.0" prefHeight="40.0" prefWidth="462.0">
-               <buttons>
-                  <Button mnemonicParsing="false" onMouseClicked="#openHomePage" text="HOME" />
-                  <Button mnemonicParsing="false" onMouseClicked="#openUserPage" text="USER" />
-                  <Button mnemonicParsing="false" onMouseClicked="#openGroupPage" text="GROUP" />
-                  <Button minWidth="0.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" style="-fx-background-insets: 0;" text="DOOR" />
-                  <Button mnemonicParsing="false" onMouseClicked="#openEventPage" text="EVENT" />
-                  <Button mnemonicParsing="false" onMouseClicked="#openDevicePage" text="DEVICE" />
-               </buttons>
-               <padding>
-                  <Insets left="10.0" />
-               </padding>
-            </ButtonBar>
-         </graphic>
-    </TitledPane>
+         </children>
+      </VBox>
   </children>
 </AnchorPane>
