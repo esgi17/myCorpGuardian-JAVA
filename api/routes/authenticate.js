@@ -19,9 +19,11 @@ loginRouter.use(bodyParser.json());
 * <string>login, <string>password
 */
 loginRouter.post('/', function(req,res) {
-
+    console.log("*******************************************");
     const login = req.body.login;
     const password = req.body.password;
+    console.log(password);
+    console.log(login);
     if( login === undefined || password === undefined ) {
         res.status(400).json({
             success : false,
@@ -36,10 +38,11 @@ loginRouter.post('/', function(req,res) {
                 success: false,
                 message: 'Authentication failed. User not found' });
             } else if (user) {
-                if( !AdminController.verifyPassword(req.body.password, user.password)) {
+                console.log(user);
+                if( !AdminController.verifyPassword(req.body.password, user[0].password)) {
                     res.status(404).json({
                         success: false,
-                        message: 'Authenfication failed. Wrong password'
+                        message: 'Authentication failed. Wrong password'
                     });
                 } else {
                   const payload = {

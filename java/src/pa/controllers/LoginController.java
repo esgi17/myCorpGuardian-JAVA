@@ -22,12 +22,17 @@ public class LoginController {
     public void connect() throws Exception {
 
         JSONObject body = new JSONObject();
-        body.put("login", login.getText());
-        body.put("password", password.getText());
+        body.put( "login", login.getText() );
+        body.put( "password", password.getText() );
 
-        String res = Api.callAPI("POST", "admin/a", body);
-        JSONObject ret = new JSONObject(res);
-        System.out.println(ret.getString("success"));
+        String res = Api.callAPI( "POST", "", body );
+        if(!res.equalsIgnoreCase("")){
+            JSONObject ret = new JSONObject( res );
+            Api.setToken( ret.getString( "token" ) );
+            if (ret.getString( "success" ) == "true") {
+                openHomePage();
+            }
+        }
     }
 
     public void openHomePage() throws Exception {

@@ -128,7 +128,6 @@ public class GroupController {
     }
 
     public void deleteGroup() throws Exception {
-        System.out.println(groupList.getSelectionModel().getSelectedIndex());
         if(Integer.parseInt(groupSelected.getId()) > 0){
             JSONObject body = new JSONObject();
             Api.callAPI( "DELETE", "group/"+groupSelected.getId(), body );

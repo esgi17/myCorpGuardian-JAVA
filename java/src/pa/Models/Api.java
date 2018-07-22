@@ -12,7 +12,7 @@ public class Api {
 
     private static String charset = "UTF-8";
 
-    private static String token;
+    private static String token = "";
 
     public static void main(String[] args) throws IOException {
 
@@ -47,6 +47,7 @@ public class Api {
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
         con.setRequestMethod("GET");
+        con.setRequestProperty("Authorization",getToken());
 
         try {
             int responseCode = con.getResponseCode();
@@ -74,10 +75,9 @@ public class Api {
 
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-
         con.setRequestMethod("POST");
         con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-
+        con.setRequestProperty("Authorization", getToken() );
         try {
             // Send post request
             con.setDoOutput( true );
@@ -97,6 +97,7 @@ public class Api {
             return res;
         }
         catch(Exception e){
+            System.out.println( e );
             return "";
         }
 
@@ -110,6 +111,7 @@ public class Api {
 
         con.setRequestMethod("PUT");
         con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+      con.setRequestProperty("Authorization",getToken());
 
         try {
             // Send put request
@@ -144,6 +146,7 @@ public class Api {
 
         con.setRequestMethod("DELETE");
         con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+        con.setRequestProperty("Authorization",getToken());
 
         try {
             // Send put request
@@ -175,8 +178,15 @@ public class Api {
         JSONObject empty = new JSONObject();
 
         try{
-            callAPI("GET", "/",empty);
-            return true;
+            String res = callAPI("GET", "",empty);
+            if(res.equalsIgnoreCase("")){
+                System.out.println("pas ok");
+                return false;
+            }
+            else {
+                System.out.println("ok");
+                return true;
+            }
         }catch (Exception e) {
             return false;
         }

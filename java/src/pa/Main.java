@@ -4,7 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -29,13 +29,12 @@ public class Main extends Application {
             openHomePage();
 
         } else {
-            openHomePage();
-            //openLoginPage();
+            openLoginPage();
         }
     }
 
 
-    private boolean checkLogin() {
+    public boolean checkLogin() {
         if( getToken() == null || getToken().isEmpty() ) {
             System.out.println("No token provided...");
             return false;
@@ -58,7 +57,9 @@ public class Main extends Application {
     public void openLoginPage() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("View/login.fxml"));
         primaryStage.setTitle("My Corp Guardian - Login");
-        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setScene(new Scene(root, 350, 300));
+        primaryStage.getIcons().add(new Image("pa/View/pic/icone.png"));
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
@@ -66,6 +67,8 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("View/home.fxml"));
         primaryStage.setTitle("My Corp Guardian - Home");
         primaryStage.setScene(new Scene(root, 900, 600));
+        primaryStage.getIcons().add(new Image("pa/View/pic/icone.png"));
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 

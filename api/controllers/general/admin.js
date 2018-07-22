@@ -15,9 +15,16 @@ AdminController.add = function(login, password) {
 }
 
 AdminController.exist = function (login) {
-    return Admin.find({
-        login : login
-    });
+    const options = {};
+    const where = {}
+
+    if (login !== undefined ) {
+        where.login = {
+            [Op.eq] : `${login}`
+        }
+    }
+    options.where = where;
+    return Admin.findAll(options);
 }
 
 AdminController.verifyPassword = function (pwd, pwd1) {
