@@ -139,7 +139,19 @@ public class UserController {
 
             //Si c'est update on passe l'id
             if(method.equalsIgnoreCase("PUT")){
+                Alert alert = new Alert( Alert.AlertType.INFORMATION);
+                alert.setTitle(null);
+                alert.setHeaderText(null);
+                alert.setContentText("User updated");
+                alert.showAndWait();
                 body.put("id", id);
+            }
+            else {
+                Alert alert = new Alert( Alert.AlertType.INFORMATION);
+                alert.setTitle(null);
+                alert.setHeaderText(null);
+                alert.setContentText("User created");
+                alert.showAndWait();
             }
             // Recuperation de l'id du groupe
             if (listGroup.getValue() != null) {
@@ -227,5 +239,10 @@ public class UserController {
         Api.callAPI( "DELETE", "user/" + userSelected.getId(), body );
         fillUserList();
         createForm();
+        Alert alert = new Alert( Alert.AlertType.INFORMATION);
+        alert.setTitle(null);
+        alert.setHeaderText(null);
+        alert.setContentText("User deleted");
+        alert.showAndWait();
     }
 }

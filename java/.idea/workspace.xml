@@ -58,7 +58,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DoorController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DoorController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pa/controllers/DoorController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="565">
@@ -67,6 +67,36 @@
                 <element signature="e#16679#16680#0" expanded="true" />
                 <element signature="e#16726#16727#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HomeController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pa/controllers/HomeController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="197">
+              <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GroupController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pa/controllers/GroupController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="415">
+              <caret line="134" column="0" lean-forward="false" selection-start-line="134" selection-start-column="0" selection-end-line="138" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/pa/controllers/UserController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="175">
+              <caret line="223" column="35" lean-forward="false" selection-start-line="223" selection-start-column="35" selection-end-line="223" selection-end-column="35" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -105,7 +135,6 @@
       <find>Sys</find>
       <find>getDoor</find>
       <find>load</find>
-      <find>addOrUpdateUser</find>
       <find>createSchedules</find>
       <find>createSchedule</find>
       <find>create</find>
@@ -114,6 +143,7 @@
       <find>createSched</find>
       <find>dele</find>
       <find>asignPass</find>
+      <find>addOrUpdateUser</find>
     </findStrings>
   </component>
   <component name="FindManager">
@@ -171,7 +201,6 @@
         <option value="$PROJECT_DIR$/src/pa/Models/ListDatas.java" />
         <option value="$PROJECT_DIR$/src/pa/controllers/HomeController.java" />
         <option value="$PROJECT_DIR$/src/pa/controllers/EventController.java" />
-        <option value="$PROJECT_DIR$/src/pa/controllers/UserController.java" />
         <option value="$PROJECT_DIR$/src/pa/Models/NavHandler.java" />
         <option value="$PROJECT_DIR$/src/pa/controllers/LoginController.java" />
         <option value="$PROJECT_DIR$/src/pa/Models/Api.java" />
@@ -179,6 +208,7 @@
         <option value="$PROJECT_DIR$/src/pa/controllers/DeviceController.java" />
         <option value="$PROJECT_DIR$/src/pa/controllers/GroupController.java" />
         <option value="$PROJECT_DIR$/src/pa/controllers/DoorController.java" />
+        <option value="$PROJECT_DIR$/src/pa/controllers/UserController.java" />
       </list>
     </option>
   </component>
@@ -463,12 +493,12 @@
       <workItem from="1532179312953" duration="8192000" />
       <workItem from="1532190024524" duration="6137000" />
       <workItem from="1532201979503" duration="18364000" />
-      <workItem from="1532262941918" duration="29125000" />
+      <workItem from="1532262941918" duration="30994000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="208927000" />
+    <option name="totallyTimeSpent" value="210796000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="1942" height="1042" extended-state="6" />
@@ -728,14 +758,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pa/controllers/UserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="211" column="35" lean-forward="true" selection-start-line="211" selection-start-column="35" selection-end-line="211" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pa/Models/ListDatas.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="407">
@@ -771,14 +793,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pa/controllers/HomeController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pa/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="349">
@@ -786,14 +800,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pa/controllers/GroupController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1175">
-          <caret line="54" column="54" lean-forward="true" selection-start-line="54" selection-start-column="54" selection-end-line="54" selection-end-column="54" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -816,6 +822,30 @@
             <element signature="e#16679#16680#0" expanded="true" />
             <element signature="e#16726#16727#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pa/controllers/HomeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pa/controllers/GroupController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="415">
+          <caret line="134" column="0" lean-forward="false" selection-start-line="134" selection-start-column="0" selection-end-line="138" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pa/controllers/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="223" column="35" lean-forward="false" selection-start-line="223" selection-start-column="35" selection-end-line="223" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
