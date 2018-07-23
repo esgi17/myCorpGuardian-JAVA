@@ -73,6 +73,11 @@ public class DeviceController {
     }
 
     public Device[] loadDevices() throws Exception {
+        if(devicesList.getSelectionModel().isEmpty()){
+            devices.add("No devices");
+            devicesList.setItems(devices);
+        }
+
         if(allCheck.isSelected()){
             passCheck.setSelected(true);
             cameraCheck.setSelected(true);
@@ -126,13 +131,24 @@ public class DeviceController {
 
     //Rempli la combobox avec tout les groupes
     public Pass[] fillPassesList() throws Exception {
+        int k = 0;
         passList.getItems().clear();
         Pass[] passesArray = ListDatas.getPass();
+        Pass[] passesReturn = new Pass[passesArray.length];
+        Device[] devicesArray = ListDatas.getDevices();
         for (int i = 0 ; i < passesArray.length ; i++){
-            passes.add(passesArray[i].getId());
+            if(passesArray[i].getIdUser().equalsIgnoreCase("null")){
+                for (int j = 0 ; j < devicesArray.length ; j++){
+                    if(devicesArray[j].getId().equalsIgnoreCase(passesArray[i].getIdDevice())){
+                        passesReturn[k] = passesArray[i];
+                        k++;
+                        passes.add(devicesArray[j].getName());
+                    }
+                }
+            }
         }
         passList.setItems(passes);
-        return passesArray;
+        return passesReturn;
     }
 
     //Rempli la combobox avec tout les groupes

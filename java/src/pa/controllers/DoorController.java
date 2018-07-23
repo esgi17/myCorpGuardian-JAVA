@@ -76,6 +76,8 @@ public class DoorController {
 
     @FXML Label doorLabel;
 
+    @FXML CheckBox allDay;
+
     @FXML AnchorPane pane;
 
     private ObservableList<String> doors = FXCollections.observableArrayList();
@@ -133,22 +135,71 @@ public class DoorController {
         return groupsArray;
     }
 
+    public void allDays() {
+        if(allDay.isSelected()){
+            tuesdayOpenSlider.setDisable(true);
+            tuesdayCloseSlider.setDisable(true);
+            wednesdayOpenSlider.setDisable(true);
+            wednesdayCloseSlider.setDisable(true);
+            thursdayOpenSlider.setDisable(true);
+            thursdayCloseSlider.setDisable(true);
+            fridayOpenSlider.setDisable(true);
+            fridayCloseSlider.setDisable(true);
+            saturdayOpenSlider.setDisable(true);
+            saturdayCloseSlider.setDisable(true);
+            sundayOpenSlider.setDisable(true);
+            sundayCloseSlider.setDisable(true);
+        }
+        else {
+            tuesdayOpenSlider.setDisable(false);
+            tuesdayCloseSlider.setDisable(false);
+            wednesdayOpenSlider.setDisable(false);
+            wednesdayCloseSlider.setDisable(false);
+            thursdayOpenSlider.setDisable(false);
+            thursdayCloseSlider.setDisable(false);
+            fridayOpenSlider.setDisable(false);
+            fridayCloseSlider.setDisable(false);
+            saturdayOpenSlider.setDisable(false);
+            saturdayCloseSlider.setDisable(false);
+            sundayOpenSlider.setDisable(false);
+            sundayCloseSlider.setDisable(false);
+        }
+    }
+
 
     public void setHour(){
-        mondayOpen.textProperty().setValue(getHour(mondayOpenSlider.getValue()));
-        mondayClose.textProperty().setValue(getHour(mondayCloseSlider.getValue()));
-        tuesdayOpen.textProperty().setValue(getHour(tuesdayOpenSlider.getValue()));
-        tuesdayClose.textProperty().setValue(getHour(tuesdayCloseSlider.getValue()));
-        wednesdayOpen.textProperty().setValue(getHour(wednesdayOpenSlider.getValue()));
-        wednesdayClose.textProperty().setValue(getHour(wednesdayCloseSlider.getValue()));
-        thursdayOpen.textProperty().setValue(getHour(thursdayOpenSlider.getValue()));
-        thursdayClose.textProperty().setValue(getHour(thursdayCloseSlider.getValue()));
-        fridayOpen.textProperty().setValue(getHour(fridayOpenSlider.getValue()));
-        fridayClose.textProperty().setValue(getHour(fridayCloseSlider.getValue()));
-        saturdayOpen.textProperty().setValue(getHour(saturdayOpenSlider.getValue()));
-        saturdayClose.textProperty().setValue(getHour(saturdayCloseSlider.getValue()));
-        sundayOpen.textProperty().setValue(getHour(sundayOpenSlider.getValue()));
-        sundayClose.textProperty().setValue(getHour(sundayCloseSlider.getValue()));
+        if(allDay.isSelected()){
+            mondayOpen.textProperty().setValue(getHour(mondayOpenSlider.getValue()));
+            mondayClose.textProperty().setValue(getHour(mondayCloseSlider.getValue()));
+            tuesdayOpen.textProperty().setValue(getHour(mondayOpenSlider.getValue()));
+            tuesdayClose.textProperty().setValue(getHour(mondayCloseSlider.getValue()));
+            wednesdayOpen.textProperty().setValue(getHour(mondayOpenSlider.getValue()));
+            wednesdayClose.textProperty().setValue(getHour(mondayCloseSlider.getValue()));
+            thursdayOpen.textProperty().setValue(getHour(mondayOpenSlider.getValue()));
+            thursdayClose.textProperty().setValue(getHour(mondayCloseSlider.getValue()));
+            fridayOpen.textProperty().setValue(getHour(mondayOpenSlider.getValue()));
+            fridayClose.textProperty().setValue(getHour(mondayCloseSlider.getValue()));
+            saturdayOpen.textProperty().setValue(getHour(mondayOpenSlider.getValue()));
+            saturdayClose.textProperty().setValue(getHour(mondayCloseSlider.getValue()));
+            sundayOpen.textProperty().setValue(getHour(mondayOpenSlider.getValue()));
+            sundayClose.textProperty().setValue(getHour(mondayCloseSlider.getValue()));
+        }
+        else {
+            mondayOpen.textProperty().setValue(getHour(mondayOpenSlider.getValue()));
+            mondayClose.textProperty().setValue(getHour(mondayCloseSlider.getValue()));
+            tuesdayOpen.textProperty().setValue(getHour(tuesdayOpenSlider.getValue()));
+            tuesdayClose.textProperty().setValue(getHour(tuesdayCloseSlider.getValue()));
+            wednesdayOpen.textProperty().setValue(getHour(wednesdayOpenSlider.getValue()));
+            wednesdayClose.textProperty().setValue(getHour(wednesdayCloseSlider.getValue()));
+            thursdayOpen.textProperty().setValue(getHour(thursdayOpenSlider.getValue()));
+            thursdayClose.textProperty().setValue(getHour(thursdayCloseSlider.getValue()));
+            fridayOpen.textProperty().setValue(getHour(fridayOpenSlider.getValue()));
+            fridayClose.textProperty().setValue(getHour(fridayCloseSlider.getValue()));
+            saturdayOpen.textProperty().setValue(getHour(saturdayOpenSlider.getValue()));
+            saturdayClose.textProperty().setValue(getHour(saturdayCloseSlider.getValue()));
+            sundayOpen.textProperty().setValue(getHour(sundayOpenSlider.getValue()));
+            sundayClose.textProperty().setValue(getHour(sundayCloseSlider.getValue()));
+        }
     }
 
     private String getHour(double number){
