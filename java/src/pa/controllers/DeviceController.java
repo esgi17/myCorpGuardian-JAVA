@@ -7,7 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import org.json.JSONObject;
 import pa.Models.*;
-import pa.annotations.TesterInfo;
+import pa.annotations.FunctionParsor;
 
 public class DeviceController {
     @FXML AnchorPane pane;
@@ -73,10 +73,11 @@ public class DeviceController {
         loadDevices();
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Load all the devices on the listview",
+            lastModified = "17/07/2018",
+            apiRoutes = "GET on '/device' "
     )
     public Device[] loadDevices() throws Exception {
         if(devicesList.getSelectionModel().isEmpty()){
@@ -92,7 +93,6 @@ public class DeviceController {
         }
         Device [] res = ListDatas.getDevices();
         devicesList.getItems().clear();
-        // Rempli le tableau de groupes
         for(int i=0 ; i< res.length ; i++ ){
             switch(res[i].getDeviceTypeId()){
                 case "1":
@@ -124,12 +124,12 @@ public class DeviceController {
         return res;
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Load all the users on the choiceBox",
+            lastModified = "17/07/2018",
+            apiRoutes = "GET on '/user' "
     )
-    //Rempli la combobox avec tout les groupes
     public User[] fillUsersList() throws Exception {
         userList.getItems().clear();
         User[] usersArray = ListDatas.getUsers();
@@ -140,12 +140,12 @@ public class DeviceController {
         return usersArray;
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Load all the disponible passes on the comboBox",
+            lastModified = "17/07/2018",
+            apiRoutes = {"GET on '/device' ", "GET on '/pass' "}
     )
-    //Rempli la combobox avec tout les groupes
     public Pass[] fillPassesList() throws Exception {
         int k = 0;
         passList.getItems().clear();
@@ -167,22 +167,21 @@ public class DeviceController {
         return passesReturn;
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Load the devices type on the comboBox",
+            lastModified = "17/07/2018"
     )
-    //Rempli la combobox avec tout les groupes
     private void fillDeviceTypeList() throws Exception {
         deviceTypeList.getItems().clear();
         devicesType.addAll( "Door","Captor","Camera" );
         deviceTypeList.setItems(devicesType);
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Enable URL field if camera is chosen",
+            lastModified = "17/07/2018"
     )
     public void enableUrl() {
         deviceTypeSelected = deviceTypeList.getSelectionModel().getSelectedIndex();
@@ -194,10 +193,10 @@ public class DeviceController {
         }
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Test if string are ok for the textfield",
+            lastModified = "17/07/2018"
     )
     private boolean stringVerif(Label label, TextField field, String text){
         boolean res = true;
@@ -221,10 +220,11 @@ public class DeviceController {
     }
 
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Create a device",
+            lastModified = "17/07/2018",
+            apiRoutes = {"POST on '/door' ", "POST on '/captor'", "POST on '/camera'"}
     )
     public void createDevice() throws Exception{
         if(stringVerif(nameLabel,nameField,"Name") && stringVerif(refLabel,refField,"Ref.")) {
@@ -268,10 +268,10 @@ public class DeviceController {
         }
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Reset values of field and label",
+            lastModified = "17/07/2018"
     )
     private void resetValues(){
         nameLabel.setText("Name");
@@ -283,12 +283,11 @@ public class DeviceController {
         headCreateDevice.setText("Create Device");
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Return the user selected on the comboBox",
+            lastModified = "17/07/2018"
     )
-    // Retourne le user selectionne
     private User getUserSelected() throws Exception {
         int userIndex = userList.getSelectionModel().getSelectedIndex();
         if(userIndex>-1) {
@@ -300,12 +299,11 @@ public class DeviceController {
         return userSelected;
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Return the pass selected on the comboBox",
+            lastModified = "17/07/2018"
     )
-    // Retourne le user selectionne
     private Pass getPassSelected() throws Exception {
         int passIndex = passList.getSelectionModel().getSelectedIndex();
         if(passIndex>-1) {
@@ -317,10 +315,11 @@ public class DeviceController {
         return passSelected;
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Assign the selected pass to the user selected",
+            lastModified = "17/07/2018",
+            apiRoutes = {"PUT on '/pass' "}
     )
     public void asignPass() throws Exception {
         JSONObject body = new JSONObject();
@@ -337,19 +336,20 @@ public class DeviceController {
         }
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Set the device selected on the listview",
+            lastModified = "17/07/2018"
     )
     public void getDeviceSelected(){
         deviceSelectedId = devicesList.getSelectionModel().getSelectedIndex();
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Delete devices from listview",
+            lastModified = "17/07/2018",
+            apiRoutes = {"DELETE on '/door' ", "DELETE on '/captor' ", "DELETE on '/pass' ", "DELETE on '/' "}
     )
     public void deleteDevice() throws Exception {
         JSONObject empty = new JSONObject();

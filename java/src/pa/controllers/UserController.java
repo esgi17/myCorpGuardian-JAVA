@@ -5,10 +5,9 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import pa.Models.*;
-import pa.annotations.TesterInfo;
+import pa.annotations.FunctionParsor;
 
 public class UserController {
     @FXML ListView usersList;
@@ -55,12 +54,12 @@ public class UserController {
         fillGroupList();
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Robin Tersou",
+            description ="Fill and return the list of users",
+            lastModified = "17/07/2018",
+            apiRoutes = {"GET on '/user' "}
     )
-    // Affiche la liste des users
     private User[] fillUserList() throws Exception {
         User res[] = ListDatas.getUsers();
         usersList.getItems().clear();
@@ -73,23 +72,22 @@ public class UserController {
     }
 
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Robin Tersou",
+            description ="Create a line with information about a user",
+            lastModified = "17/07/2018"
     )
-    // Cree une ligne dans la listview de users
     private String userCreateLine(User user){
         return user.getLastname().toUpperCase() + ", " + user.getFirstname();
     }
 
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Robin Tersou",
+            description ="Fill and return the list of groups",
+            lastModified = "17/07/2018",
+            apiRoutes = {"GET on '/user' "}
     )
-    //Rempli la combobox avec tout les groupes
     private void fillGroupList() throws Exception {
         listGroup.getItems().clear();
         Group[] group = ListDatas.getGroups();
@@ -100,12 +98,11 @@ public class UserController {
     }
 
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Robin Tersou",
+            description ="Test the textfield",
+            lastModified = "17/07/2018"
     )
-    // Verif sur un chaine de caractere
     private boolean stringVerification(){
         boolean res = true;
         if (firstname.getText().equalsIgnoreCase( "" )) {
@@ -148,12 +145,12 @@ public class UserController {
         return res;
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Robin Tersou",
+            description ="Post or update a user",
+            lastModified = "17/07/2018",
+            apiRoutes = {"POST on '/user' ", "PUT on '/user' "}
     )
-    // Execute requete add ou update d'un user
     private void addOrUpdateUser(String method, String id) throws Exception {
         // Verif si champ vide
         if (stringVerification()){
@@ -188,19 +185,18 @@ public class UserController {
             }
             String res = Api.callAPI( method, "user/", body );
             JSONObject apiReturn = new JSONObject( res );
-
             //Raz champs
             fillUserList();
             createForm();
         }
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Robin Tersou",
+            description ="Add a user",
+            lastModified = "17/07/2018",
+            apiRoutes = "POST on '/user' "
     )
-    // Connecté au bouton add user
     public void addUser() throws Exception {
         JSONObject empty = new JSONObject();
         if(!Api.callAPI("GET","group/",empty).equalsIgnoreCase("")) {
@@ -211,12 +207,11 @@ public class UserController {
         }
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Robin Tersou",
+            description ="Change the added form in updated form",
+            lastModified = "17/07/2018"
     )
-    // Formulaire en mode update
     public void updateForm() throws Exception {
         head.setText("Update User");
         deleteBtn.setDisable(false);
@@ -229,10 +224,11 @@ public class UserController {
         listGroup.getSelectionModel().select(getGroup(userSelected.getIdGroup()));
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Robin Tersou",
+            description ="Return selected group",
+            lastModified = "17/07/2018",
+            apiRoutes = "POST on '/user' "
     )
     public int getGroup(String group_id){
         int res = 0;
@@ -243,8 +239,11 @@ public class UserController {
         }
         return res;
     }
-
-    // Formulaire en mode create
+    @FunctionParsor(
+            createdBy = "Robin Tersou",
+            description ="Change the updated form in added form",
+            lastModified = "17/07/2018"
+    )
     public void createForm() {
         head.setText("New User");
         deleteBtn.setDisable(true);
@@ -258,24 +257,24 @@ public class UserController {
         listGroup.getSelectionModel().clearSelection();
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Robin Tersou",
+            description ="Update a user",
+            lastModified = "17/07/2018",
+            apiRoutes = "PUT on '/user' "
     )
-    //Modifie user
     public void updateUser() throws Exception {
         fillUserList();
         String id = userSelected.getId();
         addOrUpdateUser("PUT", id);
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Robin Tersou",
+            description ="Return selected user",
+            lastModified = "17/07/2018",
+            apiRoutes = "GET on '/user' "
     )
-    // Retourne le user selectionne
     private User getUserSelected() throws Exception {
         int userIndex = usersList.getSelectionModel().getSelectedIndex();
         userSelected = fillUserList()[userIndex];
@@ -283,12 +282,12 @@ public class UserController {
     }
 
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Robin Tersou",
+            description ="Delete a user",
+            lastModified = "17/07/2018",
+            apiRoutes = "DELETE on '/user' "
     )
-    // Supprimer user
     public void deleteUser() throws Exception {
         JSONObject body = new JSONObject();
         body.put( "id", userSelected.getId());

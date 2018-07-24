@@ -5,10 +5,9 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import pa.Models.*;
-import pa.annotations.TesterInfo;
+import pa.annotations.FunctionParsor;
 
 public class GroupController {
 
@@ -52,12 +51,12 @@ public class GroupController {
 
     private Group groupSelected = new Group();
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Angelo Deliessche",
+            description ="Fill and return all groups",
+            lastModified = "13/07/2018",
+            apiRoutes = {"GET on '/group' "}
     )
-    // Affiche la liste des groupes
     private Group[] fillGroupList() throws Exception {
         Group res[] = ListDatas.getGroups();
         groupList.getItems().clear();
@@ -69,23 +68,23 @@ public class GroupController {
         return res;
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Angelo Deliessche",
+            description ="Return the selected group",
+            lastModified = "13/07/2018",
+            apiRoutes = {"GET on '/group' "}
     )
-    // Retourne le groupe selectionne
     private Group getGroupSelected() throws Exception {
         int groupIndex = groupList.getSelectionModel().getSelectedIndex();
         return fillGroupList()[groupIndex];
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Angelo Deliessche",
+            description ="Fill and return all users of the selected group",
+            lastModified = "13/07/2018",
+            apiRoutes = {"GET on '/users' "}
     )
-    // Affiche la liste des users du groupe
     public User[] fillUsersList() throws Exception {
         groupSelected = getGroupSelected();
         User res[] = groupSelected.getUsers();
@@ -99,20 +98,19 @@ public class GroupController {
         return res;
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Angelo Deliessche",
+            description ="Create a line with information about a user",
+            lastModified = "13/07/2018"
     )
-    // Cree une ligne dans la listview de users
     private String userCreateLine(User user){
         return user.getLastname().toUpperCase() + ", " + user.getFirstname();
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Angelo Deliessche",
+            description ="Test the textfield",
+            lastModified = "13/07/2018"
     )
     private boolean isGoodGroupName() throws Exception {
         boolean res = true;
@@ -138,10 +136,11 @@ public class GroupController {
         }
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Angelo Deliessche",
+            description ="Create selected group",
+            lastModified = "13/07/2018",
+            apiRoutes = {"POST on '/group' "}
     )
     public void createGroup() throws Exception {
         if(isGoodGroupName()){
@@ -158,10 +157,11 @@ public class GroupController {
         }
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Angelo Deliessche",
+            description ="Delete selected group",
+            lastModified = "13/07/2018",
+            apiRoutes = {"DELETE on '/group' "}
     )
     public void deleteGroup() throws Exception {
         if(Integer.parseInt(groupSelected.getId()) > 0){

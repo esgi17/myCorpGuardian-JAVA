@@ -7,7 +7,7 @@ import javafx.scene.layout.AnchorPane;
 import org.json.JSONObject;
 import pa.Models.Api;
 import pa.Models.NavHandler;
-import pa.annotations.TesterInfo;
+import pa.annotations.FunctionParsor;
 
 public class LoginController {
     @FXML TextField login;
@@ -15,7 +15,7 @@ public class LoginController {
     @FXML AnchorPane pane;
 
 
-    @TesterInfo(
+    @FunctionParsor(
             createdBy = "Robin Tersou",
             description = "Allow the authentication",
             lastModified = "21/07/2018"
@@ -24,7 +24,7 @@ public class LoginController {
         connect();
     }
 
-    @TesterInfo(
+    @FunctionParsor(
             createdBy = "Robin Tersou",
             description = "Set the token by connecting",
             lastModified = "21/07/2018",

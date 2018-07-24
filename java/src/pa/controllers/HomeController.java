@@ -1,22 +1,13 @@
 package pa.controllers;
 
-import javafx.application.Application;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import pa.Main;
 import pa.Models.Api;
 import pa.Models.NavHandler;
-import pa.Models.State;
-import pa.annotations.TesterInfo;
-
-import java.io.IOException;
+import pa.annotations.FunctionParsor;
 
 public class HomeController{
 
@@ -48,10 +39,11 @@ public class HomeController{
         setArmBtn();
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Angelo Deliessche",
+            description = "Initiation or stop the alarm",
+            lastModified = "02/07/2018",
+            apiRoutes = "PUT on '/state'"
     )
     public void armedOrDisarmed() throws Exception{
         JSONObject body = new JSONObject();
@@ -70,10 +62,11 @@ public class HomeController{
     }
 
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Angelo Deliessche",
+            description = "Set the alarm button",
+            lastModified = "02/07/2018",
+            apiRoutes = "GET on '/state' "
     )
     private void setArmBtn() throws Exception {
         JSONObject body = new JSONObject();

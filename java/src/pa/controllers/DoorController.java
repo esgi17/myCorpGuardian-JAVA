@@ -2,25 +2,12 @@ package pa.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import org.json.JSONArray;
 import org.json.JSONObject;
-import pa.Main;
 import pa.Models.*;
-import pa.annotations.TesterInfo;
-
-import java.util.ArrayList;
+import pa.annotations.FunctionParsor;
 
 
 public class DoorController {
@@ -109,12 +96,12 @@ public class DoorController {
         fillGroupsList();
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Load and return all the doors",
+            lastModified = "17/07/2018",
+            apiRoutes = "GET on '/door' "
     )
-    // Affiche la liste des doors
     private void fillDoorsList() throws Exception {
         Device devicesArray[] = ListDatas.getDevices();
         doorsList.getItems().clear();
@@ -127,12 +114,12 @@ public class DoorController {
         doorsList.setItems(doors);
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Load and return all the groups",
+            lastModified = "17/07/2018",
+            apiRoutes = "GET on '/group' "
     )
-    //Rempli la combobox avec tout les groupes
     public Group[] fillGroupsList() throws Exception {
         if (isGroupAndDoorSelected()){
             loadSchedules();
@@ -146,10 +133,10 @@ public class DoorController {
         return groupsArray;
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Set the same schedules everyday",
+            lastModified = "17/07/2018"
     )
     public void allDays() {
         if(allDay.isSelected()){
@@ -183,10 +170,10 @@ public class DoorController {
     }
 
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Set the hour on label with slider value",
+            lastModified = "17/07/2018"
     )
     public void setHour(){
         if(allDay.isSelected()){
@@ -223,10 +210,10 @@ public class DoorController {
         }
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Transform slider value into hour",
+            lastModified = "17/07/2018"
     )
     private String getHour(double number){
         int hours = (int)number / 60;
@@ -249,10 +236,10 @@ public class DoorController {
         return hour + ":" + minute;
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Display the selected door",
+            lastModified = "17/07/2018"
     )
     public void writeDoor() throws Exception{
         doorLabel.setVisible(true);
@@ -266,12 +253,11 @@ public class DoorController {
         }
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Robin Tersou",
+            description ="Test the textfield",
+            lastModified = "17/07/2018"
     )
-    // Verif sur un chaine de caractere
     private boolean stringVerification(){
         boolean res = true;
         if (newDoorNameField.getText().equalsIgnoreCase( "" )) {
@@ -308,15 +294,14 @@ public class DoorController {
         return res;
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Robin Tersou",
+            description ="Post a new door",
+            lastModified = "17/07/2018",
+            apiRoutes =  "POST on '/door' "
     )
     public void addDoor() throws Exception {
-        // Verif si champ vide
         if (stringVerification()) {
-            //Creation door avec id de la device
             JSONObject bodyDoor = new JSONObject();
             bodyDoor.put( "name", newDoorNameField.getText());
             bodyDoor.put( "ref", newDoorRefField.getText());
@@ -331,10 +316,10 @@ public class DoorController {
         fillDoorsList();
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Robin Tersou",
+            description ="Transform string hour from label into int value",
+            lastModified = "17/07/2018"
     )
     private int parseHour(String time){
         int res = 0;
@@ -344,10 +329,11 @@ public class DoorController {
         return res;
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Robin Tersou",
+            description ="Return selected group",
+            lastModified = "17/07/2018",
+            apiRoutes =  "GET on '/group' "
     )
     public Group getGroup() throws Exception{
         Group[] groups = ListDatas.getGroups();
@@ -355,10 +341,11 @@ public class DoorController {
         return groups[selectedGroupIndex];
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Return selected door",
+            lastModified = "17/07/2018",
+            apiRoutes = "GET on '/door' "
     )
     public Door getDoor() throws Exception{
         Door[] doors = ListDatas.getDoors();
@@ -366,10 +353,11 @@ public class DoorController {
         return doors[selectedDoorIndex];
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Recover the dailies schedules from the group and the door",
+            lastModified = "17/07/2018",
+            apiRoutes = "GET on '/schedule' "
     )
     private Schedule getSchedule(String groupId, String doorId, String day) throws Exception{
         boolean exist = false;
@@ -392,10 +380,11 @@ public class DoorController {
         }
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Load a daily schedule",
+            lastModified = "17/07/2018",
+            apiRoutes = "GET on '/schedule' "
     )
     private Schedule loadDailySchedule(String day) throws Exception{
         Door door = getDoor();
@@ -403,10 +392,11 @@ public class DoorController {
         return getSchedule(group.getId(), door.getId(), day);
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Set all the schedules on sliders and labels",
+            lastModified = "17/07/2018"
+
     )
     public void loadSchedules() throws Exception {
         if(isGroupAndDoorSelected()) {
@@ -494,6 +484,11 @@ public class DoorController {
         }
     }
 
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Return if a group and a door are selected",
+            lastModified = "17/07/2018"
+    )
     private boolean isGroupAndDoorSelected(){
 
         if(doorsList.getSelectionModel().getSelectedIndex()!=-1 && groupsList.getSelectionModel().getSelectedIndex()!=-1){
@@ -504,19 +499,20 @@ public class DoorController {
         }
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Return string hour",
+            lastModified = "17/07/2018"
     )
     private String getStringHour(double value){
         return getHour( value ) + ":00";
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Create a daily schedule",
+            lastModified = "17/07/2018",
+            apiRoutes = "POST on '/schedule' "
     )
     private void createSchedule(String h_start, String h_stop, int day) throws Exception {
         Group[] groups = ListDatas.getGroups();
@@ -536,10 +532,11 @@ public class DoorController {
     }
 
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Create all the schedules",
+            lastModified = "17/07/2018",
+            apiRoutes = "POST on '/schedule' "
     )
     private void createSchedules() throws Exception{
         if(isGroupAndDoorSelected() && isGoodSchedule()){
@@ -589,10 +586,11 @@ public class DoorController {
         }
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Recover schedules",
+            lastModified = "17/07/2018",
+            apiRoutes = "GET on '/schedule' "
     )
     private Schedule[] getSchedulesSelected() throws Exception {
         Schedule[] schedules = ListDatas.getSchedule();
@@ -616,10 +614,11 @@ public class DoorController {
         return schedulesInBdd;
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Create a daily schedule",
+            lastModified = "17/07/2018",
+            apiRoutes = "DELETE on '/schedule' "
     )
     public void deleteSchedule() throws Exception {
         if(isGroupAndDoorSelected()){
@@ -634,11 +633,6 @@ public class DoorController {
         }
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
-    )
     public void deleteSchedules() throws Exception {
         deleteSchedule();
         Alert alert = new Alert( Alert.AlertType.INFORMATION);
@@ -649,10 +643,11 @@ public class DoorController {
     }
 
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Upadate a schedule",
+            lastModified = "17/07/2018",
+            apiRoutes = "PUT on '/schedule' "
     )
     public void updateSchedules() throws Exception {
         deleteSchedule();
@@ -664,10 +659,10 @@ public class DoorController {
         alert.showAndWait();
     }
 
-    @TesterInfo(
-            createdBy = "Rou",
-            lastModified = "21/07/2018",
-            apiRoutes = "POST on '/' "
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Test if open is later than close",
+            lastModified = "17/07/2018"
     )
     private boolean isGoodSchedule(){
         boolean res = true;

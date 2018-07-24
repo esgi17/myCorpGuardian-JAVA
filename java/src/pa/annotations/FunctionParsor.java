@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD) //on class level
-public @interface TesterInfo {
+public @interface FunctionParsor {
 
     String createdBy() default "Unknown";
 

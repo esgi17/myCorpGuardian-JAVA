@@ -7,7 +7,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 
-public class RunTest {
+public class RunParsor {
 
     public static void main(String[] args) throws Exception {
 
@@ -39,7 +39,7 @@ public class RunTest {
                                             "MyCorpGuardian" +
                                             "</h1>" +
                                   "<h2 class='subtitle'>" +
-                                            "Fonction description" +
+                                            "Function description" +
                                             "</h2>" +
                                 "</div>" +
                               "</div>" +
@@ -52,37 +52,37 @@ public class RunTest {
         for(int i = 0 ; i < 7; i++ ){
 
             pw.println("<h1 class='title'>" + classes[i].getName().substring(15,classes[i].getName().indexOf("C")) + "</h1>"+
-                    "<table class='table is-striped is-fullwidth'>" +
+                    "<table class='table is-striped is-fullwidth is-hoverable'>" +
           "<thead>"+
             "<tr>" +
               "<th>Name</th>" +
               "<th>Description</th>" +
-              "<th>Created By</th>" +
-              "<th>Routes</th>" +
-              "<th>Last update</th>" +
+              "<th style='width:20%'>Created By</th>" +
+              "<th style='width:20%'>Routes</th>" +
+              "<th style='width:15%'>Last update</th>" +
             "</tr>" +
           "</thead>" +
           "<tbody>");
 
             for (Method method : classes[i].getDeclaredMethods()) {
-                if (method.isAnnotationPresent( TesterInfo.class )) {
-                    Annotation annotation = method.getAnnotation( TesterInfo.class );
-                    TesterInfo testerInfo = (TesterInfo) annotation;
+                if (method.isAnnotationPresent( FunctionParsor.class )) {
+                    Annotation annotation = method.getAnnotation( FunctionParsor.class );
+                    FunctionParsor functionParsor = (FunctionParsor) annotation;
 
                     pw.println( "<tr><th>" + method.getName() + "</th>" );
-                    pw.println( "<td>" + testerInfo.description() + "</td>" );
-                    pw.println( "<td>" + testerInfo.createdBy() + "</td><td>" );
+                    pw.println( "<td>" + functionParsor.description() + "</td>" );
+                    pw.println( "<td style='white-space:nowrap;'>" + functionParsor.createdBy() + "</td><td>" );
 
-                    int nbRoutes = testerInfo.apiRoutes().length;
-                    for (String route : testerInfo.apiRoutes()) {
+                    int nbRoutes = functionParsor.apiRoutes().length;
+                    for (String route : functionParsor.apiRoutes()) {
                         if (nbRoutes > 1) {
-                            pw.println( route + ", " );
+                            pw.println( route + ",");
                         } else {
                             pw.println( route );
                         }
                         nbRoutes--;
                     }
-                    pw.println( "</td><td>" + testerInfo.lastModified() + "</td></tr>" );
+                    pw.println( "</td><td>" + functionParsor.lastModified() + "</td></tr>" );
 
                 }
             }
