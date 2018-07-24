@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import pa.Models.*;
+import pa.annotations.TesterInfo;
 
 
 public class EventController  {
@@ -43,6 +44,11 @@ public class EventController  {
         loadDatas();
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     private void fillEventList(int searchType, String doorId, String passId) throws Exception {
         Event res[] = ListDatas.getEvent();;
         eventList.getItems().clear();
@@ -67,6 +73,11 @@ public class EventController  {
         eventList.setItems(events);
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     // Affiche la liste des doors
     private void fillDoorList() throws Exception {
         Device devicesArray[] = ListDatas.getDevices();
@@ -80,6 +91,12 @@ public class EventController  {
         doorList.setItems(doors);
     }
 
+
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     private void fillUserList() throws Exception {
         User res[] = ListDatas.getUsers();;
         userList.getItems().clear();
@@ -90,33 +107,63 @@ public class EventController  {
         userList.setItems(users);
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     public void loadDatas() throws Exception{
         fillEventList(0,"","");
         fillUserList();
         fillDoorList();
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     public void fillDoorEvent() throws Exception {
         Door selectedDoor = getDoor();
         fillEventList(1,selectedDoor.getId(),"");
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     public void fillUserEvent() throws Exception {
         fillEventList(2,"",getUserPassId());
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     public Door getDoor() throws Exception{
         Door[] doors = ListDatas.getDoors();
         int selectedDoorIndex = doorList.getSelectionModel().getSelectedIndex();
         return doors[selectedDoorIndex];
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     public User getUser() throws Exception {
         User[] users = ListDatas.getUsers();
         int selectedUserIndex = userList.getSelectionModel().getSelectedIndex();
         return users[selectedUserIndex];
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     private String getUserPassId() throws Exception {
         String res = "0";
         User userSelected = getUser();
@@ -130,6 +177,11 @@ public class EventController  {
         return res;
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     private String parseHour(String hour){
         String res = "";
         if(hour.length() > 0){

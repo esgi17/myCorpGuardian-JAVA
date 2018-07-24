@@ -7,7 +7,7 @@ import javafx.scene.layout.AnchorPane;
 import org.json.JSONObject;
 import pa.Models.Api;
 import pa.Models.NavHandler;
-
+import pa.annotations.TesterInfo;
 
 public class LoginController {
     @FXML TextField login;
@@ -15,10 +15,21 @@ public class LoginController {
     @FXML AnchorPane pane;
 
 
+    @TesterInfo(
+            createdBy = "Robin Tersou",
+            description = "Allow the authentication",
+            lastModified = "21/07/2018"
+    )
     public void authenticate() throws Exception {
         connect();
     }
 
+    @TesterInfo(
+            createdBy = "Robin Tersou",
+            description = "Set the token by connecting",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     public void connect() throws Exception {
 
         JSONObject body = new JSONObject();

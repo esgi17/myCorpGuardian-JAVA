@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import org.json.JSONObject;
 import pa.Models.*;
+import pa.annotations.TesterInfo;
 
 public class DeviceController {
     @FXML AnchorPane pane;
@@ -72,6 +73,11 @@ public class DeviceController {
         loadDevices();
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     public Device[] loadDevices() throws Exception {
         if(devicesList.getSelectionModel().isEmpty()){
             devices.add("No devices");
@@ -118,6 +124,11 @@ public class DeviceController {
         return res;
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     //Rempli la combobox avec tout les groupes
     public User[] fillUsersList() throws Exception {
         userList.getItems().clear();
@@ -129,6 +140,11 @@ public class DeviceController {
         return usersArray;
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     //Rempli la combobox avec tout les groupes
     public Pass[] fillPassesList() throws Exception {
         int k = 0;
@@ -151,6 +167,11 @@ public class DeviceController {
         return passesReturn;
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     //Rempli la combobox avec tout les groupes
     private void fillDeviceTypeList() throws Exception {
         deviceTypeList.getItems().clear();
@@ -158,6 +179,11 @@ public class DeviceController {
         deviceTypeList.setItems(devicesType);
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     public void enableUrl() {
         deviceTypeSelected = deviceTypeList.getSelectionModel().getSelectedIndex();
         if (deviceTypeSelected == 2){
@@ -168,6 +194,11 @@ public class DeviceController {
         }
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     private boolean stringVerif(Label label, TextField field, String text){
         boolean res = true;
         if (field.getText().equalsIgnoreCase( "" )) {
@@ -190,6 +221,11 @@ public class DeviceController {
     }
 
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     public void createDevice() throws Exception{
         if(stringVerif(nameLabel,nameField,"Name") && stringVerif(refLabel,refField,"Ref.")) {
             Alert alert = new Alert( Alert.AlertType.INFORMATION);
@@ -232,6 +268,11 @@ public class DeviceController {
         }
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     private void resetValues(){
         nameLabel.setText("Name");
         nameField.setText("");
@@ -242,6 +283,11 @@ public class DeviceController {
         headCreateDevice.setText("Create Device");
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     // Retourne le user selectionne
     private User getUserSelected() throws Exception {
         int userIndex = userList.getSelectionModel().getSelectedIndex();
@@ -254,6 +300,11 @@ public class DeviceController {
         return userSelected;
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     // Retourne le user selectionne
     private Pass getPassSelected() throws Exception {
         int passIndex = passList.getSelectionModel().getSelectedIndex();
@@ -266,6 +317,11 @@ public class DeviceController {
         return passSelected;
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     public void asignPass() throws Exception {
         JSONObject body = new JSONObject();
         body.put( "user_id", getUserSelected().getId());
@@ -281,10 +337,20 @@ public class DeviceController {
         }
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     public void getDeviceSelected(){
         deviceSelectedId = devicesList.getSelectionModel().getSelectedIndex();
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     public void deleteDevice() throws Exception {
         JSONObject empty = new JSONObject();
         Device[] devices = loadDevices();

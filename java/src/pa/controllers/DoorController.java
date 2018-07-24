@@ -18,6 +18,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import pa.Main;
 import pa.Models.*;
+import pa.annotations.TesterInfo;
 
 import java.util.ArrayList;
 
@@ -108,6 +109,11 @@ public class DoorController {
         fillGroupsList();
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     // Affiche la liste des doors
     private void fillDoorsList() throws Exception {
         Device devicesArray[] = ListDatas.getDevices();
@@ -121,6 +127,11 @@ public class DoorController {
         doorsList.setItems(doors);
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     //Rempli la combobox avec tout les groupes
     public Group[] fillGroupsList() throws Exception {
         if (isGroupAndDoorSelected()){
@@ -135,6 +146,11 @@ public class DoorController {
         return groupsArray;
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     public void allDays() {
         if(allDay.isSelected()){
             tuesdayOpenSlider.setDisable(true);
@@ -167,6 +183,11 @@ public class DoorController {
     }
 
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     public void setHour(){
         if(allDay.isSelected()){
             mondayOpen.textProperty().setValue(getHour(mondayOpenSlider.getValue()));
@@ -202,6 +223,11 @@ public class DoorController {
         }
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     private String getHour(double number){
         int hours = (int)number / 60;
         int minutes = (int) number % 60;
@@ -223,17 +249,28 @@ public class DoorController {
         return hour + ":" + minute;
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     public void writeDoor() throws Exception{
         doorLabel.setVisible(true);
         doorLabel.setText(doors.get(doorsList.getSelectionModel().getSelectedIndex()));
         load();
     }
+
     public void load() throws Exception{
         if (isGroupAndDoorSelected()){
             loadSchedules();
         }
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     // Verif sur un chaine de caractere
     private boolean stringVerification(){
         boolean res = true;
@@ -271,6 +308,11 @@ public class DoorController {
         return res;
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     public void addDoor() throws Exception {
         // Verif si champ vide
         if (stringVerification()) {
@@ -289,6 +331,11 @@ public class DoorController {
         fillDoorsList();
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     private int parseHour(String time){
         int res = 0;
         String hours = time.substring(0,2);
@@ -297,18 +344,33 @@ public class DoorController {
         return res;
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     public Group getGroup() throws Exception{
         Group[] groups = ListDatas.getGroups();
         int selectedGroupIndex = groupsList.getSelectionModel().getSelectedIndex();
         return groups[selectedGroupIndex];
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     public Door getDoor() throws Exception{
         Door[] doors = ListDatas.getDoors();
         int selectedDoorIndex = doorsList.getSelectionModel().getSelectedIndex();
         return doors[selectedDoorIndex];
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     private Schedule getSchedule(String groupId, String doorId, String day) throws Exception{
         boolean exist = false;
         Schedule[] schedules = ListDatas.getSchedule();
@@ -330,12 +392,22 @@ public class DoorController {
         }
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     private Schedule loadDailySchedule(String day) throws Exception{
         Door door = getDoor();
         Group group = getGroup();
         return getSchedule(group.getId(), door.getId(), day);
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     public void loadSchedules() throws Exception {
         if(isGroupAndDoorSelected()) {
             setScheduleLabel.setText("Set Schedule");
@@ -432,10 +504,20 @@ public class DoorController {
         }
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     private String getStringHour(double value){
         return getHour( value ) + ":00";
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     private void createSchedule(String h_start, String h_stop, int day) throws Exception {
         Group[] groups = ListDatas.getGroups();
         String group_id = groups[groupsList.getSelectionModel().getSelectedIndex()].getId();
@@ -454,6 +536,11 @@ public class DoorController {
     }
 
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     private void createSchedules() throws Exception{
         if(isGroupAndDoorSelected() && isGoodSchedule()){
             for(int i = 0 ; i < 7 ; i++){
@@ -502,6 +589,11 @@ public class DoorController {
         }
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     private Schedule[] getSchedulesSelected() throws Exception {
         Schedule[] schedules = ListDatas.getSchedule();
         int nbSchedules = 0;
@@ -524,6 +616,11 @@ public class DoorController {
         return schedulesInBdd;
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     public void deleteSchedule() throws Exception {
         if(isGroupAndDoorSelected()){
             Schedule[] schedules = getSchedulesSelected();
@@ -537,6 +634,11 @@ public class DoorController {
         }
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     public void deleteSchedules() throws Exception {
         deleteSchedule();
         Alert alert = new Alert( Alert.AlertType.INFORMATION);
@@ -547,6 +649,11 @@ public class DoorController {
     }
 
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     public void updateSchedules() throws Exception {
         deleteSchedule();
         createSchedules();
@@ -557,6 +664,11 @@ public class DoorController {
         alert.showAndWait();
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     private boolean isGoodSchedule(){
         boolean res = true;
         if(mondayOpenSlider.getValue() > mondayCloseSlider.getValue() ){

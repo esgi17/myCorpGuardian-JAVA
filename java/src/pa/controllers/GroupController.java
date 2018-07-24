@@ -8,6 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import pa.Models.*;
+import pa.annotations.TesterInfo;
 
 public class GroupController {
 
@@ -51,6 +52,11 @@ public class GroupController {
 
     private Group groupSelected = new Group();
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     // Affiche la liste des groupes
     private Group[] fillGroupList() throws Exception {
         Group res[] = ListDatas.getGroups();
@@ -63,12 +69,22 @@ public class GroupController {
         return res;
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     // Retourne le groupe selectionne
     private Group getGroupSelected() throws Exception {
         int groupIndex = groupList.getSelectionModel().getSelectedIndex();
         return fillGroupList()[groupIndex];
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     // Affiche la liste des users du groupe
     public User[] fillUsersList() throws Exception {
         groupSelected = getGroupSelected();
@@ -83,11 +99,21 @@ public class GroupController {
         return res;
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     // Cree une ligne dans la listview de users
     private String userCreateLine(User user){
         return user.getLastname().toUpperCase() + ", " + user.getFirstname();
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     private boolean isGoodGroupName() throws Exception {
         boolean res = true;
         Group groups[] = ListDatas.getGroups();
@@ -112,6 +138,11 @@ public class GroupController {
         }
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     public void createGroup() throws Exception {
         if(isGoodGroupName()){
             JSONObject body = new JSONObject();
@@ -127,6 +158,11 @@ public class GroupController {
         }
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     public void deleteGroup() throws Exception {
         if(Integer.parseInt(groupSelected.getId()) > 0){
             JSONObject body = new JSONObject();

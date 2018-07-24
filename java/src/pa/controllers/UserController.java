@@ -8,6 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import pa.Models.*;
+import pa.annotations.TesterInfo;
 
 public class UserController {
     @FXML ListView usersList;
@@ -54,6 +55,11 @@ public class UserController {
         fillGroupList();
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     // Affiche la liste des users
     private User[] fillUserList() throws Exception {
         User res[] = ListDatas.getUsers();
@@ -67,12 +73,22 @@ public class UserController {
     }
 
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     // Cree une ligne dans la listview de users
     private String userCreateLine(User user){
         return user.getLastname().toUpperCase() + ", " + user.getFirstname();
     }
 
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     //Rempli la combobox avec tout les groupes
     private void fillGroupList() throws Exception {
         listGroup.getItems().clear();
@@ -84,6 +100,11 @@ public class UserController {
     }
 
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     // Verif sur un chaine de caractere
     private boolean stringVerification(){
         boolean res = true;
@@ -127,6 +148,11 @@ public class UserController {
         return res;
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     // Execute requete add ou update d'un user
     private void addOrUpdateUser(String method, String id) throws Exception {
         // Verif si champ vide
@@ -169,6 +195,11 @@ public class UserController {
         }
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     // Connecté au bouton add user
     public void addUser() throws Exception {
         JSONObject empty = new JSONObject();
@@ -180,6 +211,11 @@ public class UserController {
         }
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     // Formulaire en mode update
     public void updateForm() throws Exception {
         head.setText("Update User");
@@ -193,6 +229,11 @@ public class UserController {
         listGroup.getSelectionModel().select(getGroup(userSelected.getIdGroup()));
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     public int getGroup(String group_id){
         int res = 0;
         for (int i = 0 ; i<groups.size() ; i++){
@@ -217,6 +258,11 @@ public class UserController {
         listGroup.getSelectionModel().clearSelection();
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     //Modifie user
     public void updateUser() throws Exception {
         fillUserList();
@@ -224,6 +270,11 @@ public class UserController {
         addOrUpdateUser("PUT", id);
     }
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     // Retourne le user selectionne
     private User getUserSelected() throws Exception {
         int userIndex = usersList.getSelectionModel().getSelectedIndex();
@@ -232,6 +283,11 @@ public class UserController {
     }
 
 
+    @TesterInfo(
+            createdBy = "Rou",
+            lastModified = "21/07/2018",
+            apiRoutes = "POST on '/' "
+    )
     // Supprimer user
     public void deleteUser() throws Exception {
         JSONObject body = new JSONObject();
