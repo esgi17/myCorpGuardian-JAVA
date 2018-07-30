@@ -16,12 +16,17 @@ public class Pass {
     /**
      * L'identifiant du Pass
      */
-    private int _idPass;
+    private String _id;
 
     /**
      * L'identifiant du User
      */
-    private int _idUser;
+    private String _idUser;
+
+    /**
+     * L'id de la device
+     */
+    private String _idDevice;
 
     /**
      * Constructeur de l'objet Pass
@@ -30,32 +35,33 @@ public class Pass {
      * @param idUser
      *              L'id du User affecté
      */
-    public void Pass(int idPass, int idUser) {
-        this._idPass = idPass;
+    public void Pass(String id, String idUser, String idDevice) {
+        this._id = id;
         this._idUser = idUser;
+        this._idDevice = idDevice;
     }
 
     /**
      * Getter : Récupération de l'id du pass
      * @return L'id du Pass
      */
-    public int get_idPass() {
-        return _idPass;
+    public String getId() {
+        return _id;
     }
 
     /**
      * Setter : Affectation de l'id du Pass
      * @param idPass L'id du Pass
      */
-    public void set_idPass(int idPass) {
-        this._idPass = _idPass;
+    public void setId(String id) {
+        this._id = id;
     }
 
     /**
      * Getter : Récupération de l'id du User
      * @return L'id du User
      */
-    public int get_idUser() {
+    public String getIdUser() {
         return _idUser;
     }
 
@@ -63,7 +69,23 @@ public class Pass {
      * Setter : Affectation de l'id du User
      * @param idUser L'id du User
      */
-    public void set_idUser(int idUser) {
-        this._idUser = _idUser;
+    public void setIdUser(String idUser) {
+        this._idUser = idUser;
+    }
+
+    /**
+     * Getter : Récupération de l'id du User
+     * @return L'id du User
+     */
+    public String getIdDevice() {
+        return _idDevice;
+    }
+
+    /**
+     * Setter : Affectation de l'id du User
+     * @param idDevice L'id du User
+     */
+    public void setIdDevice(String idDevice) {
+        this._idDevice = idDevice;
     }
 }

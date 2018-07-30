@@ -2,24 +2,12 @@ package pa.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import org.json.JSONArray;
 import org.json.JSONObject;
-import pa.Main;
 import pa.Models.*;
-
-import java.util.ArrayList;
+import pa.annotations.FunctionParsor;
 
 
 public class DoorController {
@@ -59,6 +47,7 @@ public class DoorController {
     @FXML Label newDoorRefLabel;
     @FXML TextField newDoorRefField;
     @FXML Button newDoorBtn;
+    @FXML Label setScheduleLabel;
 
     @FXML Label mondayLabel;
     @FXML Label tuesdayLabel;
@@ -73,10 +62,14 @@ public class DoorController {
     @FXML Button deleteBtn;
     @FXML Button updateBtn;
 
+    @FXML Label doorLabel;
+
+    @FXML CheckBox allDay;
+
     @FXML AnchorPane pane;
 
-    ObservableList<String> doors = FXCollections.observableArrayList();
-    ObservableList<String> groups = FXCollections.observableArrayList();
+    private ObservableList<String> doors = FXCollections.observableArrayList();
+    private ObservableList<String> groups = FXCollections.observableArrayList();
 
     public void openHomePage() throws Exception {
         NavHandler.openHomePage(pane);
@@ -98,20 +91,39 @@ public class DoorController {
         NavHandler.openEventPage(pane);
     }
 
-    // Affiche la liste des doors
-    public Door[] fillDoorsList() throws Exception {
-        Door doorsArray[] = ListDatas.getDoors();
-        doorsList.getItems().clear();
-        // Rempli le tableau de doors
-        for(int i=0 ; i< doorsArray.length ; i++ ){
-            doors.add(doorsArray[i].getName());
-        }
-        doorsList.setItems(doors);
-        return doorsArray;
+    public void initialize() throws Exception{
+        fillDoorsList();
+        fillGroupsList();
     }
 
-    //Rempli la combobox avec tout les groupes
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Load and return all the doors",
+            lastModified = "17/07/2018",
+            apiRoutes = "GET on '/door' "
+    )
+    private void fillDoorsList() throws Exception {
+        Device devicesArray[] = ListDatas.getDevices();
+        doorsList.getItems().clear();
+        // Rempli le tableau de doors
+        for(int i=0 ; i< devicesArray.length ; i++ ){
+            if(devicesArray[i].getDeviceTypeId().equalsIgnoreCase("1")) {
+                doors.add( devicesArray[i].getName() );
+            }
+        }
+        doorsList.setItems(doors);
+    }
+
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Load and return all the groups",
+            lastModified = "17/07/2018",
+            apiRoutes = "GET on '/group' "
+    )
     public Group[] fillGroupsList() throws Exception {
+        if (isGroupAndDoorSelected()){
+            loadSchedules();
+        }
         groupsList.getItems().clear();
         Group[] groupsArray = ListDatas.getGroups();
         for (int i = 0 ; i < groupsArray.length ; i++){
@@ -121,25 +133,114 @@ public class DoorController {
         return groupsArray;
     }
 
-
-    public void setHour(){
-        mondayOpen.textProperty().setValue(getHour(mondayOpenSlider.getValue()));
-        mondayClose.textProperty().setValue(getHour(mondayCloseSlider.getValue()));
-        tuesdayOpen.textProperty().setValue(getHour(tuesdayOpenSlider.getValue()));
-        tuesdayClose.textProperty().setValue(getHour(tuesdayCloseSlider.getValue()));
-        wednesdayOpen.textProperty().setValue(getHour(wednesdayOpenSlider.getValue()));
-        wednesdayClose.textProperty().setValue(getHour(wednesdayCloseSlider.getValue()));
-        thursdayOpen.textProperty().setValue(getHour(thursdayOpenSlider.getValue()));
-        thursdayClose.textProperty().setValue(getHour(thursdayCloseSlider.getValue()));
-        fridayOpen.textProperty().setValue(getHour(fridayOpenSlider.getValue()));
-        fridayClose.textProperty().setValue(getHour(fridayCloseSlider.getValue()));
-        saturdayOpen.textProperty().setValue(getHour(saturdayOpenSlider.getValue()));
-        saturdayClose.textProperty().setValue(getHour(saturdayCloseSlider.getValue()));
-        sundayOpen.textProperty().setValue(getHour(sundayOpenSlider.getValue()));
-        sundayClose.textProperty().setValue(getHour(sundayCloseSlider.getValue()));
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Set the same schedules everyday",
+            lastModified = "17/07/2018"
+    )
+    public void allDays() {
+        if(allDay.isSelected()){
+            tuesdayOpenSlider.setDisable(true);
+            tuesdayCloseSlider.setDisable(true);
+            wednesdayOpenSlider.setDisable(true);
+            wednesdayCloseSlider.setDisable(true);
+            thursdayOpenSlider.setDisable(true);
+            thursdayCloseSlider.setDisable(true);
+            fridayOpenSlider.setDisable(true);
+            fridayCloseSlider.setDisable(true);
+            saturdayOpenSlider.setDisable(true);
+            saturdayCloseSlider.setDisable(true);
+            sundayOpenSlider.setDisable(true);
+            sundayCloseSlider.setDisable(true);
+        }
+        else {
+            tuesdayOpenSlider.setDisable(false);
+            tuesdayCloseSlider.setDisable(false);
+            wednesdayOpenSlider.setDisable(false);
+            wednesdayCloseSlider.setDisable(false);
+            thursdayOpenSlider.setDisable(false);
+            thursdayCloseSlider.setDisable(false);
+            fridayOpenSlider.setDisable(false);
+            fridayCloseSlider.setDisable(false);
+            saturdayOpenSlider.setDisable(false);
+            saturdayCloseSlider.setDisable(false);
+            sundayOpenSlider.setDisable(false);
+            sundayCloseSlider.setDisable(false);
+        }
     }
 
-    public String getHour(double number){
+
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Set the hour on label with slider value",
+            lastModified = "17/07/2018"
+    )
+    public void setHour(){
+        if(allDay.isSelected()){
+            mondayOpen.textProperty().setValue(getHour(mondayOpenSlider.getValue()));
+            mondayClose.textProperty().setValue(getHour(mondayCloseSlider.getValue()));
+            tuesdayOpen.textProperty().setValue(getHour(mondayOpenSlider.getValue()));
+            tuesdayClose.textProperty().setValue(getHour(mondayCloseSlider.getValue()));
+            wednesdayOpen.textProperty().setValue(getHour(mondayOpenSlider.getValue()));
+            wednesdayClose.textProperty().setValue(getHour(mondayCloseSlider.getValue()));
+            thursdayOpen.textProperty().setValue(getHour(mondayOpenSlider.getValue()));
+            thursdayClose.textProperty().setValue(getHour(mondayCloseSlider.getValue()));
+            fridayOpen.textProperty().setValue(getHour(mondayOpenSlider.getValue()));
+            fridayClose.textProperty().setValue(getHour(mondayCloseSlider.getValue()));
+            saturdayOpen.textProperty().setValue(getHour(mondayOpenSlider.getValue()));
+            saturdayClose.textProperty().setValue(getHour(mondayCloseSlider.getValue()));
+            sundayOpen.textProperty().setValue(getHour(mondayOpenSlider.getValue()));
+            sundayClose.textProperty().setValue(getHour(mondayCloseSlider.getValue()));
+
+            tuesdayOpenSlider.setValue(mondayOpenSlider.getValue());
+            tuesdayCloseSlider.setValue(mondayCloseSlider.getValue());
+            wednesdayOpenSlider.setValue(mondayOpenSlider.getValue());
+            wednesdayCloseSlider.setValue(mondayCloseSlider.getValue());
+            thursdayOpenSlider.setValue(mondayOpenSlider.getValue());
+            thursdayCloseSlider.setValue(mondayCloseSlider.getValue());
+            fridayOpenSlider.setValue(mondayOpenSlider.getValue());
+            fridayCloseSlider.setValue(mondayCloseSlider.getValue());
+            saturdayOpenSlider.setValue(mondayOpenSlider.getValue());
+            saturdayCloseSlider.setValue(mondayCloseSlider.getValue());
+            sundayOpenSlider.setValue(mondayOpenSlider.getValue());
+            sundayCloseSlider.setValue(mondayCloseSlider.getValue());
+            tuesdayOpenSlider.setValue(mondayOpenSlider.getValue());
+            tuesdayCloseSlider.setValue(mondayCloseSlider.getValue());
+            wednesdayOpenSlider.setValue(mondayOpenSlider.getValue());
+            wednesdayCloseSlider.setValue(mondayCloseSlider.getValue());
+            thursdayOpenSlider.setValue(mondayOpenSlider.getValue());
+            thursdayCloseSlider.setValue(mondayCloseSlider.getValue());
+            fridayOpenSlider.setValue(mondayOpenSlider.getValue());
+            fridayCloseSlider.setValue(mondayCloseSlider.getValue());
+            saturdayOpenSlider.setValue(mondayOpenSlider.getValue());
+            saturdayCloseSlider.setValue(mondayCloseSlider.getValue());
+            sundayOpenSlider.setValue(mondayOpenSlider.getValue());
+            sundayCloseSlider.setValue(mondayCloseSlider.getValue());
+        }
+        else {
+            mondayOpen.textProperty().setValue(getHour(mondayOpenSlider.getValue()));
+            mondayClose.textProperty().setValue(getHour(mondayCloseSlider.getValue()));
+            tuesdayOpen.textProperty().setValue(getHour(tuesdayOpenSlider.getValue()));
+            tuesdayClose.textProperty().setValue(getHour(tuesdayCloseSlider.getValue()));
+            wednesdayOpen.textProperty().setValue(getHour(wednesdayOpenSlider.getValue()));
+            wednesdayClose.textProperty().setValue(getHour(wednesdayCloseSlider.getValue()));
+            thursdayOpen.textProperty().setValue(getHour(thursdayOpenSlider.getValue()));
+            thursdayClose.textProperty().setValue(getHour(thursdayCloseSlider.getValue()));
+            fridayOpen.textProperty().setValue(getHour(fridayOpenSlider.getValue()));
+            fridayClose.textProperty().setValue(getHour(fridayCloseSlider.getValue()));
+            saturdayOpen.textProperty().setValue(getHour(saturdayOpenSlider.getValue()));
+            saturdayClose.textProperty().setValue(getHour(saturdayCloseSlider.getValue()));
+            sundayOpen.textProperty().setValue(getHour(sundayOpenSlider.getValue()));
+            sundayClose.textProperty().setValue(getHour(sundayCloseSlider.getValue()));
+        }
+    }
+
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Transform slider value into hour",
+            lastModified = "17/07/2018"
+    )
+    private String getHour(double number){
         int hours = (int)number / 60;
         int minutes = (int) number % 60;
         minutes -= minutes % 5;
@@ -160,8 +261,29 @@ public class DoorController {
         return hour + ":" + minute;
     }
 
-    // Verif sur un chaine de caractere
-    public boolean stringVerification(){
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Display the selected door",
+            lastModified = "17/07/2018"
+    )
+    public void writeDoor() throws Exception{
+        doorLabel.setVisible(true);
+        doorLabel.setText(doors.get(doorsList.getSelectionModel().getSelectedIndex()));
+        load();
+    }
+
+    public void load() throws Exception{
+        if (isGroupAndDoorSelected()){
+            loadSchedules();
+        }
+    }
+
+    @FunctionParsor(
+            createdBy = "Robin Tersou",
+            description ="Test the textfield",
+            lastModified = "17/07/2018"
+    )
+    private boolean stringVerification(){
         boolean res = true;
         if (newDoorNameField.getText().equalsIgnoreCase( "" )) {
             newDoorNameLabel.setText("Empty Name");
@@ -174,7 +296,7 @@ public class DoorController {
             newDoorRefLabel.setText("Empty Ref.");
             res = false;
         } else{
-            newDoorNameLabel.setText("Ref.");
+            newDoorRefLabel.setText("Ref.");
         }
         for(int i=0 ; i < newDoorNameField.getText().length() ; i++){
             char car = newDoorNameField.getText().charAt(i);
@@ -197,30 +319,34 @@ public class DoorController {
         return res;
     }
 
-    public boolean addDoor() throws Exception {
-        // Verif si champ vide
-        if (!stringVerification()) {
-            return false;
-        } else {
-
-            //Creation door avec id de la device
+    @FunctionParsor(
+            createdBy = "Robin Tersou",
+            description ="Post a new door",
+            lastModified = "17/07/2018",
+            apiRoutes =  "POST on '/door' "
+    )
+    public void addDoor() throws Exception {
+        if (stringVerification()) {
             JSONObject bodyDoor = new JSONObject();
             bodyDoor.put( "name", newDoorNameField.getText());
             bodyDoor.put( "ref", newDoorRefField.getText());
 
-            String res = Api.callAPI( "POST", "door/", bodyDoor );
-            JSONObject apiReturn = new JSONObject( res );
-
-            if (apiReturn.getString( "success" ) == "true") {
-                return true;
-            } else {
-                System.out.println( apiReturn.toString() );
-                return false;
-            }
+            Api.callAPI( "POST", "door/", bodyDoor );
+            Alert alert = new Alert( Alert.AlertType.INFORMATION);
+            alert.setTitle(null);
+            alert.setHeaderText(null);
+            alert.setContentText("Door created");
+            alert.showAndWait();
         }
+        fillDoorsList();
     }
 
-    public int parseHour(String time){
+    @FunctionParsor(
+            createdBy = "Robin Tersou",
+            description ="Transform string hour from label into int value",
+            lastModified = "17/07/2018"
+    )
+    private int parseHour(String time){
         int res = 0;
         String hours = time.substring(0,2);
         String minutes = time.substring(3,5);
@@ -228,19 +354,37 @@ public class DoorController {
         return res;
     }
 
+    @FunctionParsor(
+            createdBy = "Robin Tersou",
+            description ="Return selected group",
+            lastModified = "17/07/2018",
+            apiRoutes =  "GET on '/group' "
+    )
     public Group getGroup() throws Exception{
         Group[] groups = ListDatas.getGroups();
         int selectedGroupIndex = groupsList.getSelectionModel().getSelectedIndex();
         return groups[selectedGroupIndex];
     }
 
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Return selected door",
+            lastModified = "17/07/2018",
+            apiRoutes = "GET on '/door' "
+    )
     public Door getDoor() throws Exception{
         Door[] doors = ListDatas.getDoors();
         int selectedDoorIndex = doorsList.getSelectionModel().getSelectedIndex();
         return doors[selectedDoorIndex];
     }
 
-    public Schedule getSchedule(String groupId, String doorId, String day) throws Exception{
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Recover the dailies schedules from the group and the door",
+            lastModified = "17/07/2018",
+            apiRoutes = "GET on '/schedule' "
+    )
+    private Schedule getSchedule(String groupId, String doorId, String day) throws Exception{
         boolean exist = false;
         Schedule[] schedules = ListDatas.getSchedule();
         Schedule schedule = new Schedule();
@@ -261,14 +405,27 @@ public class DoorController {
         }
     }
 
-    public Schedule loadDailySchedule(String day) throws Exception{
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Load a daily schedule",
+            lastModified = "17/07/2018",
+            apiRoutes = "GET on '/schedule' "
+    )
+    private Schedule loadDailySchedule(String day) throws Exception{
         Door door = getDoor();
         Group group = getGroup();
         return getSchedule(group.getId(), door.getId(), day);
     }
 
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Set all the schedules on sliders and labels",
+            lastModified = "17/07/2018"
+
+    )
     public void loadSchedules() throws Exception {
         if(isGroupAndDoorSelected()) {
+            setScheduleLabel.setText("Set Schedule");
             for (int i = 0; i < 7; i++) {
                 Schedule schedule = loadDailySchedule( Integer.toString( i ) );
                 if (schedule != null) {
@@ -304,6 +461,9 @@ public class DoorController {
                         default:
                             break;
                     }
+                    updateBtn.setDisable(false);
+                    deleteBtn.setDisable(false);
+                    createBtn.setDisable(true);
                 }else{
                     switch (i) {
                         case 0:
@@ -337,13 +497,24 @@ public class DoorController {
                         default:
                             break;
                     }
+                    updateBtn.setDisable(true);
+                    deleteBtn.setDisable(true);
+                    createBtn.setDisable(false);
                 }
                 setHour();
             }
         }
+        else{
+            setScheduleLabel.setText("Select a Door and a Group");
+        }
     }
 
-    public boolean isGroupAndDoorSelected(){
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Return if a group and a door are selected",
+            lastModified = "17/07/2018"
+    )
+    private boolean isGroupAndDoorSelected(){
 
         if(doorsList.getSelectionModel().getSelectedIndex()!=-1 && groupsList.getSelectionModel().getSelectedIndex()!=-1){
             return true;
@@ -353,11 +524,22 @@ public class DoorController {
         }
     }
 
-    public String getStringHour(double value){
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Return string hour",
+            lastModified = "17/07/2018"
+    )
+    private String getStringHour(double value){
         return getHour( value ) + ":00";
     }
 
-    public boolean createSchedule(String h_start, String h_stop, int day) throws Exception {
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Create a daily schedule",
+            lastModified = "17/07/2018",
+            apiRoutes = "POST on '/schedule' "
+    )
+    private void createSchedule(String h_start, String h_stop, int day) throws Exception {
         Group[] groups = ListDatas.getGroups();
         String group_id = groups[groupsList.getSelectionModel().getSelectedIndex()].getId();
         Door[] doors = ListDatas.getDoors();
@@ -372,41 +554,16 @@ public class DoorController {
 
         String res = Api.callAPI( "POST", "schedule/", body );
         JSONObject apiReturn = new JSONObject( res );
-
-        if (apiReturn.getString( "success" ) == "true") {
-            return true;
-        } else {
-            System.out.println( apiReturn.toString() );
-            return false;
-        }
     }
 
-    public void resetDayLabels(){/*
-        mondayOpenSlider.setValue(0);
-        mondayCloseSlider.setValue(0);
-        tuesdayOpenSlider.setValue(0);
-        tuesdayCloseSlider.setValue(0);
-        wednesdayOpenSlider.setValue(0);
-        wednesdayCloseSlider.setValue(0);
-        thursdayOpenSlider.setValue(0);
-        thursdayCloseSlider.setValue(0);
-        fridayOpenSlider.setValue(0);
-        fridayCloseSlider.setValue(0);
-        saturdayOpenSlider.setValue(0);
-        saturdayCloseSlider.setValue(0);
-        sundayOpenSlider.setValue(0);
-        sundayCloseSlider.setValue(0);*/
-        mondayLabel.setText("Monday");
-        tuesdayLabel.setText("Tuesday");
-        wednesdayLabel.setText("Wednesday");
-        thursdayLabel.setText("Thursday");
-        fridayLabel.setText("Friday");
-        saturdayLabel.setText("Saturday");
-        sundayLabel.setText("Sunday");
-        setHour();
-    }
 
-    public void createSchedules() throws Exception{
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Create all the schedules",
+            lastModified = "17/07/2018",
+            apiRoutes = "POST on '/schedule' "
+    )
+    private void createSchedules() throws Exception{
         if(isGroupAndDoorSelected() && isGoodSchedule()){
             for(int i = 0 ; i < 7 ; i++){
                 String h_start = "";
@@ -454,7 +611,13 @@ public class DoorController {
         }
     }
 
-    public Schedule[] getSchedulesSelected() throws Exception {
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Recover schedules",
+            lastModified = "17/07/2018",
+            apiRoutes = "GET on '/schedule' "
+    )
+    private Schedule[] getSchedulesSelected() throws Exception {
         Schedule[] schedules = ListDatas.getSchedule();
         int nbSchedules = 0;
         int j = 0;
@@ -476,7 +639,13 @@ public class DoorController {
         return schedulesInBdd;
     }
 
-    public void deleteSchedules() throws Exception {
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Create a daily schedule",
+            lastModified = "17/07/2018",
+            apiRoutes = "DELETE on '/schedule' "
+    )
+    public void deleteSchedule() throws Exception {
         if(isGroupAndDoorSelected()){
             Schedule[] schedules = getSchedulesSelected();
 
@@ -489,12 +658,38 @@ public class DoorController {
         }
     }
 
-    public void updateSchedules() throws Exception {
-        deleteSchedules();
-        createSchedules();
+    public void deleteSchedules() throws Exception {
+        deleteSchedule();
+        Alert alert = new Alert( Alert.AlertType.INFORMATION);
+        alert.setTitle(null);
+        alert.setHeaderText(null);
+        alert.setContentText("Schedule deleted");
+        alert.showAndWait();
     }
 
-    public boolean isGoodSchedule(){
+
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Upadate a schedule",
+            lastModified = "17/07/2018",
+            apiRoutes = "PUT on '/schedule' "
+    )
+    public void updateSchedules() throws Exception {
+        deleteSchedule();
+        createSchedules();
+        Alert alert = new Alert( Alert.AlertType.INFORMATION);
+        alert.setTitle(null);
+        alert.setHeaderText(null);
+        alert.setContentText("Schedule updated");
+        alert.showAndWait();
+    }
+
+    @FunctionParsor(
+            createdBy = "Antoine Cheval",
+            description ="Test if open is later than close",
+            lastModified = "17/07/2018"
+    )
+    private boolean isGoodSchedule(){
         boolean res = true;
         if(mondayOpenSlider.getValue() > mondayCloseSlider.getValue() ){
             mondayLabel.setText("Wrong Hour");
