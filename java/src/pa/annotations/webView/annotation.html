@@ -12,8 +12,35 @@ none
 </td><td>21/07/2018</td></tr>
 </tbody></table>
 <h1 class='title'>Device</h1><table class='table is-striped is-fullwidth is-hoverable'><thead><tr><th>Name</th><th>Description</th><th style='width:20%'>Created By</th><th style='width:20%'>Routes</th><th style='width:15%'>Last update</th></tr></thead><tbody>
+<tr><th>createDevice</th>
+<td>Create a device</td>
+<td style='white-space:nowrap;'>Antoine Cheval</td><td>
+POST on '/door' ,
+POST on '/captor',
+POST on '/camera'
+</td><td>17/07/2018</td></tr>
 <tr><th>getPassSelected</th>
 <td>Return the pass selected on the comboBox</td>
+<td style='white-space:nowrap;'>Antoine Cheval</td><td>
+none
+</td><td>17/07/2018</td></tr>
+<tr><th>stringVerif</th>
+<td>Test if string are ok for the textfield</td>
+<td style='white-space:nowrap;'>Antoine Cheval</td><td>
+none
+</td><td>17/07/2018</td></tr>
+<tr><th>resetValues</th>
+<td>Reset values of field and label</td>
+<td style='white-space:nowrap;'>Antoine Cheval</td><td>
+none
+</td><td>17/07/2018</td></tr>
+<tr><th>fillDeviceTypeList</th>
+<td>Load the devices type on the comboBox</td>
+<td style='white-space:nowrap;'>Antoine Cheval</td><td>
+none
+</td><td>17/07/2018</td></tr>
+<tr><th>getUserSelected</th>
+<td>Return the user selected on the comboBox</td>
 <td style='white-space:nowrap;'>Antoine Cheval</td><td>
 none
 </td><td>17/07/2018</td></tr>
@@ -27,18 +54,10 @@ PUT on '/pass'
 <td style='white-space:nowrap;'>Antoine Cheval</td><td>
 none
 </td><td>17/07/2018</td></tr>
-<tr><th>deleteDevice</th>
-<td>Delete devices from listview</td>
+<tr><th>fillUsersList</th>
+<td>Load all the users on the choiceBox</td>
 <td style='white-space:nowrap;'>Antoine Cheval</td><td>
-DELETE on '/door' ,
-DELETE on '/captor' ,
-DELETE on '/pass' ,
-DELETE on '/' 
-</td><td>17/07/2018</td></tr>
-<tr><th>stringVerif</th>
-<td>Test if string are ok for the textfield</td>
-<td style='white-space:nowrap;'>Antoine Cheval</td><td>
-none
+GET on '/user' 
 </td><td>17/07/2018</td></tr>
 <tr><th>fillPassesList</th>
 <td>Load all the disponible passes on the comboBox</td>
@@ -46,13 +65,8 @@ none
 GET on '/device' ,
 GET on '/pass' 
 </td><td>17/07/2018</td></tr>
-<tr><th>getUserSelected</th>
-<td>Return the user selected on the comboBox</td>
-<td style='white-space:nowrap;'>Antoine Cheval</td><td>
-none
-</td><td>17/07/2018</td></tr>
-<tr><th>fillDeviceTypeList</th>
-<td>Load the devices type on the comboBox</td>
+<tr><th>enableUrl</th>
+<td>Enable URL field if camera is chosen</td>
 <td style='white-space:nowrap;'>Antoine Cheval</td><td>
 none
 </td><td>17/07/2018</td></tr>
@@ -61,27 +75,13 @@ none
 <td style='white-space:nowrap;'>Antoine Cheval</td><td>
 GET on '/device' 
 </td><td>17/07/2018</td></tr>
-<tr><th>enableUrl</th>
-<td>Enable URL field if camera is chosen</td>
+<tr><th>deleteDevice</th>
+<td>Delete devices from listview</td>
 <td style='white-space:nowrap;'>Antoine Cheval</td><td>
-none
-</td><td>17/07/2018</td></tr>
-<tr><th>createDevice</th>
-<td>Create a device</td>
-<td style='white-space:nowrap;'>Antoine Cheval</td><td>
-POST on '/door' ,
-POST on '/captor',
-POST on '/camera'
-</td><td>17/07/2018</td></tr>
-<tr><th>fillUsersList</th>
-<td>Load all the users on the choiceBox</td>
-<td style='white-space:nowrap;'>Antoine Cheval</td><td>
-GET on '/user' 
-</td><td>17/07/2018</td></tr>
-<tr><th>resetValues</th>
-<td>Reset values of field and label</td>
-<td style='white-space:nowrap;'>Antoine Cheval</td><td>
-none
+DELETE on '/door' ,
+DELETE on '/captor' ,
+DELETE on '/pass' ,
+DELETE on '/' 
 </td><td>17/07/2018</td></tr>
 </tbody></table>
 <h1 class='title'>Door</h1><table class='table is-striped is-fullwidth is-hoverable'><thead><tr><th>Name</th><th>Description</th><th style='width:20%'>Created By</th><th style='width:20%'>Routes</th><th style='width:15%'>Last update</th></tr></thead><tbody>
@@ -100,53 +100,13 @@ none
 <td style='white-space:nowrap;'>Antoine Cheval</td><td>
 GET on '/schedule' 
 </td><td>17/07/2018</td></tr>
-<tr><th>isGoodSchedule</th>
-<td>Test if open is later than close</td>
+<tr><th>getStringHour</th>
+<td>Return string hour</td>
 <td style='white-space:nowrap;'>Antoine Cheval</td><td>
 none
 </td><td>17/07/2018</td></tr>
-<tr><th>updateSchedules</th>
-<td>Upadate a schedule</td>
-<td style='white-space:nowrap;'>Antoine Cheval</td><td>
-PUT on '/schedule' 
-</td><td>17/07/2018</td></tr>
-<tr><th>createSchedules</th>
-<td>Create all the schedules</td>
-<td style='white-space:nowrap;'>Antoine Cheval</td><td>
-POST on '/schedule' 
-</td><td>17/07/2018</td></tr>
-<tr><th>deleteSchedule</th>
-<td>Create a daily schedule</td>
-<td style='white-space:nowrap;'>Antoine Cheval</td><td>
-DELETE on '/schedule' 
-</td><td>17/07/2018</td></tr>
-<tr><th>loadDailySchedule</th>
-<td>Load a daily schedule</td>
-<td style='white-space:nowrap;'>Antoine Cheval</td><td>
-GET on '/schedule' 
-</td><td>17/07/2018</td></tr>
-<tr><th>allDays</th>
-<td>Set the same schedules everyday</td>
-<td style='white-space:nowrap;'>Antoine Cheval</td><td>
-none
-</td><td>17/07/2018</td></tr>
-<tr><th>writeDoor</th>
-<td>Display the selected door</td>
-<td style='white-space:nowrap;'>Antoine Cheval</td><td>
-none
-</td><td>17/07/2018</td></tr>
-<tr><th>stringVerification</th>
-<td>Test the textfield</td>
-<td style='white-space:nowrap;'>Robin Tersou</td><td>
-none
-</td><td>17/07/2018</td></tr>
-<tr><th>parseHour</th>
-<td>Transform string hour from label into int value</td>
-<td style='white-space:nowrap;'>Robin Tersou</td><td>
-none
-</td><td>17/07/2018</td></tr>
-<tr><th>getDoor</th>
-<td>Return selected door</td>
+<tr><th>fillDoorsList</th>
+<td>Load and return all the doors</td>
 <td style='white-space:nowrap;'>Antoine Cheval</td><td>
 GET on '/door' 
 </td><td>17/07/2018</td></tr>
@@ -155,28 +115,68 @@ GET on '/door'
 <td style='white-space:nowrap;'>Robin Tersou</td><td>
 POST on '/door' 
 </td><td>17/07/2018</td></tr>
-<tr><th>getSchedule</th>
-<td>Recover the dailies schedules from the group and the door</td>
+<tr><th>loadSchedules</th>
+<td>Set all the schedules on sliders and labels</td>
+<td style='white-space:nowrap;'>Antoine Cheval</td><td>
+none
+</td><td>17/07/2018</td></tr>
+<tr><th>parseHour</th>
+<td>Transform string hour from label into int value</td>
+<td style='white-space:nowrap;'>Robin Tersou</td><td>
+none
+</td><td>17/07/2018</td></tr>
+<tr><th>allDays</th>
+<td>Set the same schedules everyday</td>
+<td style='white-space:nowrap;'>Antoine Cheval</td><td>
+none
+</td><td>17/07/2018</td></tr>
+<tr><th>loadDailySchedule</th>
+<td>Load a daily schedule</td>
 <td style='white-space:nowrap;'>Antoine Cheval</td><td>
 GET on '/schedule' 
+</td><td>17/07/2018</td></tr>
+<tr><th>getDoor</th>
+<td>Return selected door</td>
+<td style='white-space:nowrap;'>Antoine Cheval</td><td>
+GET on '/door' 
+</td><td>17/07/2018</td></tr>
+<tr><th>writeDoor</th>
+<td>Display the selected door</td>
+<td style='white-space:nowrap;'>Antoine Cheval</td><td>
+none
 </td><td>17/07/2018</td></tr>
 <tr><th>getGroup</th>
 <td>Return selected group</td>
 <td style='white-space:nowrap;'>Robin Tersou</td><td>
 GET on '/group' 
 </td><td>17/07/2018</td></tr>
+<tr><th>setHour</th>
+<td>Set the hour on label with slider value</td>
+<td style='white-space:nowrap;'>Antoine Cheval</td><td>
+none
+</td><td>17/07/2018</td></tr>
+<tr><th>stringVerification</th>
+<td>Test the textfield</td>
+<td style='white-space:nowrap;'>Robin Tersou</td><td>
+none
+</td><td>17/07/2018</td></tr>
 <tr><th>fillGroupsList</th>
 <td>Load and return all the groups</td>
 <td style='white-space:nowrap;'>Antoine Cheval</td><td>
 GET on '/group' 
 </td><td>17/07/2018</td></tr>
-<tr><th>loadSchedules</th>
-<td>Set all the schedules on sliders and labels</td>
+<tr><th>getSchedule</th>
+<td>Recover the dailies schedules from the group and the door</td>
 <td style='white-space:nowrap;'>Antoine Cheval</td><td>
-none
+GET on '/schedule' 
 </td><td>17/07/2018</td></tr>
-<tr><th>getStringHour</th>
-<td>Return string hour</td>
+<tr><th>createSchedules</th>
+<td>Create all the schedules</td>
+<td style='white-space:nowrap;'>Antoine Cheval</td><td>
+POST on '/schedule' 
+</td><td>17/07/2018</td></tr>
+<tr><th>isGoodSchedule</th>
+<td>Test if open is later than close</td>
 <td style='white-space:nowrap;'>Antoine Cheval</td><td>
 none
 </td><td>17/07/2018</td></tr>
@@ -185,15 +185,15 @@ none
 <td style='white-space:nowrap;'>Antoine Cheval</td><td>
 POST on '/schedule' 
 </td><td>17/07/2018</td></tr>
-<tr><th>setHour</th>
-<td>Set the hour on label with slider value</td>
+<tr><th>updateSchedules</th>
+<td>Upadate a schedule</td>
 <td style='white-space:nowrap;'>Antoine Cheval</td><td>
-none
+PUT on '/schedule' 
 </td><td>17/07/2018</td></tr>
-<tr><th>fillDoorsList</th>
-<td>Load and return all the doors</td>
+<tr><th>deleteSchedule</th>
+<td>Create a daily schedule</td>
 <td style='white-space:nowrap;'>Antoine Cheval</td><td>
-GET on '/door' 
+DELETE on '/schedule' 
 </td><td>17/07/2018</td></tr>
 </tbody></table>
 <h1 class='title'>Group</h1><table class='table is-striped is-fullwidth is-hoverable'><thead><tr><th>Name</th><th>Description</th><th style='width:20%'>Created By</th><th style='width:20%'>Routes</th><th style='width:15%'>Last update</th></tr></thead><tbody>
@@ -234,15 +234,15 @@ GET on '/group'
 </td><td>13/07/2018</td></tr>
 </tbody></table>
 <h1 class='title'>Home</h1><table class='table is-striped is-fullwidth is-hoverable'><thead><tr><th>Name</th><th>Description</th><th style='width:20%'>Created By</th><th style='width:20%'>Routes</th><th style='width:15%'>Last update</th></tr></thead><tbody>
-<tr><th>setArmBtn</th>
-<td>Set the alarm button</td>
-<td style='white-space:nowrap;'>Angelo Deliessche</td><td>
-GET on '/state' 
-</td><td>02/07/2018</td></tr>
 <tr><th>armedOrDisarmed</th>
 <td>Initiation or stop the alarm</td>
 <td style='white-space:nowrap;'>Angelo Deliessche</td><td>
 PUT on '/state'
+</td><td>02/07/2018</td></tr>
+<tr><th>setArmBtn</th>
+<td>Set the alarm button</td>
+<td style='white-space:nowrap;'>Angelo Deliessche</td><td>
+GET on '/state' 
 </td><td>02/07/2018</td></tr>
 </tbody></table>
 <h1 class='title'>User</h1><table class='table is-striped is-fullwidth is-hoverable'><thead><tr><th>Name</th><th>Description</th><th style='width:20%'>Created By</th><th style='width:20%'>Routes</th><th style='width:15%'>Last update</th></tr></thead><tbody>
@@ -255,6 +255,16 @@ none
 <td>Return selected user</td>
 <td style='white-space:nowrap;'>Robin Tersou</td><td>
 GET on '/user' 
+</td><td>17/07/2018</td></tr>
+<tr><th>getGroup</th>
+<td>Return selected group</td>
+<td style='white-space:nowrap;'>Robin Tersou</td><td>
+POST on '/user' 
+</td><td>17/07/2018</td></tr>
+<tr><th>stringVerification</th>
+<td>Test the textfield</td>
+<td style='white-space:nowrap;'>Robin Tersou</td><td>
+none
 </td><td>17/07/2018</td></tr>
 <tr><th>userCreateLine</th>
 <td>Create a line with information about a user</td>
@@ -271,25 +281,10 @@ GET on '/user'
 <td style='white-space:nowrap;'>Robin Tersou</td><td>
 none
 </td><td>17/07/2018</td></tr>
-<tr><th>fillUserList</th>
-<td>Fill and return the list of users</td>
-<td style='white-space:nowrap;'>Robin Tersou</td><td>
-GET on '/user' 
-</td><td>17/07/2018</td></tr>
 <tr><th>updateUser</th>
 <td>Update a user</td>
 <td style='white-space:nowrap;'>Robin Tersou</td><td>
 PUT on '/user' 
-</td><td>17/07/2018</td></tr>
-<tr><th>addUser</th>
-<td>Add a user</td>
-<td style='white-space:nowrap;'>Robin Tersou</td><td>
-POST on '/user' 
-</td><td>17/07/2018</td></tr>
-<tr><th>deleteUser</th>
-<td>Delete a user</td>
-<td style='white-space:nowrap;'>Robin Tersou</td><td>
-DELETE on '/user' 
 </td><td>17/07/2018</td></tr>
 <tr><th>addOrUpdateUser</th>
 <td>Post or update a user</td>
@@ -297,33 +292,23 @@ DELETE on '/user'
 POST on '/user' ,
 PUT on '/user' 
 </td><td>17/07/2018</td></tr>
-<tr><th>stringVerification</th>
-<td>Test the textfield</td>
+<tr><th>fillUserList</th>
+<td>Fill and return the list of users</td>
 <td style='white-space:nowrap;'>Robin Tersou</td><td>
-none
+GET on '/user' 
 </td><td>17/07/2018</td></tr>
-<tr><th>getGroup</th>
-<td>Return selected group</td>
+<tr><th>deleteUser</th>
+<td>Delete a user</td>
+<td style='white-space:nowrap;'>Robin Tersou</td><td>
+DELETE on '/user' 
+</td><td>17/07/2018</td></tr>
+<tr><th>addUser</th>
+<td>Add a user</td>
 <td style='white-space:nowrap;'>Robin Tersou</td><td>
 POST on '/user' 
 </td><td>17/07/2018</td></tr>
 </tbody></table>
 <h1 class='title'>Event</h1><table class='table is-striped is-fullwidth is-hoverable'><thead><tr><th>Name</th><th>Description</th><th style='width:20%'>Created By</th><th style='width:20%'>Routes</th><th style='width:15%'>Last update</th></tr></thead><tbody>
-<tr><th>fillUserList</th>
-<td>Fill and return all users</td>
-<td style='white-space:nowrap;'>Antoine Cheval</td><td>
-GET on '/user' 
-</td><td>17/07/2018</td></tr>
-<tr><th>fillEventList</th>
-<td>Fill the event list depends on the door or the user selected</td>
-<td style='white-space:nowrap;'>Antoine Cheval</td><td>
-GET on '/event' 
-</td><td>17/07/2018</td></tr>
-<tr><th>getUser</th>
-<td>Return selected user</td>
-<td style='white-space:nowrap;'>Antoine Cheval</td><td>
-none
-</td><td>17/07/2018</td></tr>
 <tr><th>fillDoorEvent</th>
 <td>Fill the event list depends on door </td>
 <td style='white-space:nowrap;'>Antoine Cheval</td><td>
@@ -336,6 +321,11 @@ GET on '/event'
 GET on '/user' ,
 GET on '/event' 
 </td><td>17/07/2018</td></tr>
+<tr><th>getUserPassId</th>
+<td>Return id pass of the user </td>
+<td style='white-space:nowrap;'>Antoine Cheval</td><td>
+GET on '/pass' 
+</td><td>17/07/2018</td></tr>
 <tr><th>loadDatas</th>
 <td>Fill the 3 listView</td>
 <td style='white-space:nowrap;'>Antoine Cheval</td><td>
@@ -343,10 +333,10 @@ GET on '/door' ,
 GET on '/event' ,
 GET on '/user' 
 </td><td>17/07/2018</td></tr>
-<tr><th>getUserPassId</th>
-<td>Return id pass of the user </td>
+<tr><th>getUser</th>
+<td>Return selected user</td>
 <td style='white-space:nowrap;'>Antoine Cheval</td><td>
-GET on '/pass' 
+none
 </td><td>17/07/2018</td></tr>
 <tr><th>fillDoorList</th>
 <td>Fill and return all doors</td>
@@ -362,6 +352,16 @@ none
 <td>Return selected door</td>
 <td style='white-space:nowrap;'>Antoine Cheval</td><td>
 none
+</td><td>17/07/2018</td></tr>
+<tr><th>fillEventList</th>
+<td>Fill the event list depends on the door or the user selected</td>
+<td style='white-space:nowrap;'>Antoine Cheval</td><td>
+GET on '/event' 
+</td><td>17/07/2018</td></tr>
+<tr><th>fillUserList</th>
+<td>Fill and return all users</td>
+<td style='white-space:nowrap;'>Antoine Cheval</td><td>
+GET on '/user' 
 </td><td>17/07/2018</td></tr>
 </tbody></table>
 </div></div></div></section></body></html>

@@ -107,7 +107,6 @@ public class UserController {
         boolean res = true;
         if (firstname.getText().equalsIgnoreCase( "" )) {
             labelFirstname.setText("Empty Firstname");
-            labelLastname.setStyle("-fx-color:red");
             res = false;
         } else{
             labelFirstname.setText("Firstname");
@@ -115,7 +114,6 @@ public class UserController {
 
         if (lastname.getText().equalsIgnoreCase( "" )) {
             labelLastname.setText( "Empty Lastname" );
-            labelLastname.setStyle("-fx-color:red");
             res = false;
         }else{
             labelLastname.setText("Lastname");
@@ -125,7 +123,6 @@ public class UserController {
             char car = firstname.getText().charAt(i);
             if(!Character.isLetter(car)){
                 labelFirstname.setText("Incorrect character in Firstname");
-                labelLastname.setStyle("-fx-color:red");
                 res = false;
             }
         }
@@ -134,7 +131,6 @@ public class UserController {
             char car = lastname.getText().charAt(i);
             if(!Character.isLetter(car)){
                 labelLastname.setText("Incorrect character in Lastname");
-                labelLastname.setStyle("-fx-color:red");
                 res = false;
             }
         }
@@ -152,7 +148,6 @@ public class UserController {
             apiRoutes = {"POST on '/user' ", "PUT on '/user' "}
     )
     private void addOrUpdateUser(String method, String id) throws Exception {
-        // Verif si champ vide
         if (stringVerification()){
             //Creation json user
             JSONObject body = new JSONObject();
@@ -160,7 +155,7 @@ public class UserController {
             body.put( "lastname", lastname.getText() );
             body.put( "job", job.getText() );
 
-            //Si c'est update on passe l'id
+            //If it's an update put id
             if(method.equalsIgnoreCase("PUT")){
                 Alert alert = new Alert( Alert.AlertType.INFORMATION);
                 alert.setTitle(null);
@@ -176,7 +171,7 @@ public class UserController {
                 alert.setContentText("User created");
                 alert.showAndWait();
             }
-            // Recuperation de l'id du groupe
+            // Recover group id
             if (listGroup.getValue() != null) {
                 String groupId = listGroup.getValue().toString().substring( 0, listGroup.getValue().toString().indexOf( " " ) );
                 body.put( "group_id", groupId );
@@ -185,7 +180,6 @@ public class UserController {
             }
             String res = Api.callAPI( method, "user/", body );
             JSONObject apiReturn = new JSONObject( res );
-            //Raz champs
             fillUserList();
             createForm();
         }

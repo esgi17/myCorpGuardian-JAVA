@@ -83,7 +83,6 @@ public class RunParsor {
                         nbRoutes--;
                     }
                     pw.println( "</td><td>" + functionParsor.lastModified() + "</td></tr>" );
-
                 }
             }
             pw.println("</tbody></table>");

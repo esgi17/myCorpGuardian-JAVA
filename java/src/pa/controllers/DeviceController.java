@@ -32,7 +32,6 @@ public class DeviceController {
     @FXML Label asignLabel;
 
     private ObservableList<String> devices = FXCollections.observableArrayList();
-
     private ObservableList<String> users = FXCollections.observableArrayList();
     private ObservableList<String> devicesType = FXCollections.observableArrayList();
     private ObservableList<String> passes = FXCollections.observableArrayList();
@@ -84,7 +83,6 @@ public class DeviceController {
             devices.add("No devices");
             devicesList.setItems(devices);
         }
-
         if(allCheck.isSelected()){
             passCheck.setSelected(true);
             cameraCheck.setSelected(true);
@@ -120,7 +118,6 @@ public class DeviceController {
             }
         }
         devicesList.setItems(devices);
-
         return res;
     }
 
@@ -263,7 +260,6 @@ public class DeviceController {
                 default:
                     headCreateDevice.setText( "Select a Device Type" );
                     break;
-
             }
         }
     }

@@ -40,7 +40,6 @@ public class DoorController {
     @FXML Label sundayClose;
     @FXML Slider sundayCloseSlider;
 
-    @FXML Button loadDoorsBtn;
     @FXML ListView doorsList;
     @FXML Label newDoorNameLabel;
     @FXML TextField newDoorNameField;
@@ -105,7 +104,6 @@ public class DoorController {
     private void fillDoorsList() throws Exception {
         Device devicesArray[] = ListDatas.getDevices();
         doorsList.getItems().clear();
-        // Rempli le tableau de doors
         for(int i=0 ; i< devicesArray.length ; i++ ){
             if(devicesArray[i].getDeviceTypeId().equalsIgnoreCase("1")) {
                 doors.add( devicesArray[i].getName() );
@@ -191,6 +189,21 @@ public class DoorController {
             saturdayClose.textProperty().setValue(getHour(mondayCloseSlider.getValue()));
             sundayOpen.textProperty().setValue(getHour(mondayOpenSlider.getValue()));
             sundayClose.textProperty().setValue(getHour(mondayCloseSlider.getValue()));
+
+            tuesdayOpenSlider.setValue(mondayOpenSlider.getValue());
+            tuesdayCloseSlider.setValue(mondayCloseSlider.getValue());
+            wednesdayOpenSlider.setValue(mondayOpenSlider.getValue());
+            wednesdayCloseSlider.setValue(mondayCloseSlider.getValue());
+            thursdayOpenSlider.setValue(mondayOpenSlider.getValue());
+            thursdayCloseSlider.setValue(mondayCloseSlider.getValue());
+            fridayOpenSlider.setValue(mondayOpenSlider.getValue());
+            fridayCloseSlider.setValue(mondayCloseSlider.getValue());
+            saturdayOpenSlider.setValue(mondayOpenSlider.getValue());
+            saturdayCloseSlider.setValue(mondayCloseSlider.getValue());
+            sundayOpenSlider.setValue(mondayOpenSlider.getValue());
+            sundayCloseSlider.setValue(mondayCloseSlider.getValue());
+
+
         }
         else {
             mondayOpen.textProperty().setValue(getHour(mondayOpenSlider.getValue()));

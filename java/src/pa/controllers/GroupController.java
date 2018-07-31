@@ -90,7 +90,6 @@ public class GroupController {
         User res[] = groupSelected.getUsers();
         usersFromGroup.setText("Users from "+ groupSelected.getName()+" ( " + res.length +" ) :");
         usersList.getItems().clear();
-        // Rempli le tableau de users
         for(int i=0 ; i<res.length ; i++ ){
             users.add(userCreateLine(res[i]));
         }
