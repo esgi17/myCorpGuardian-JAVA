@@ -29,7 +29,8 @@ public class Main extends Application {
             openHomePage();
 
         } else {
-            openLoginPage();
+            openPluginsPage();
+            //openLoginPage();
         }
     }
 
@@ -64,6 +65,15 @@ public class Main extends Application {
     public void openHomePage() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("View/home.fxml"));
         primaryStage.setTitle("My Corp Guardian - Home");
+        primaryStage.setScene(new Scene(root, 900, 600));
+        primaryStage.getIcons().add(new Image("pa/View/pic/icone.png"));
+        primaryStage.setResizable(false);
+        primaryStage.show();
+    }
+
+    public void openPluginsPage() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("View/plugin.fxml"));
+        primaryStage.setTitle("My Corp Guardian - Plugins");
         primaryStage.setScene(new Scene(root, 900, 600));
         primaryStage.getIcons().add(new Image("pa/View/pic/icone.png"));
         primaryStage.setResizable(false);
