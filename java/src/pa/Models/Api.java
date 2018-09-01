@@ -3,6 +3,8 @@ package pa.Models;
 
 import java.io.*;
 import java.net.*;
+
+import javafx.scene.control.Alert;
 import org.json.*;
 
 
@@ -50,8 +52,6 @@ public class Api {
         con.setRequestProperty("Authorization",getToken());
 
         try {
-            int responseCode = con.getResponseCode();
-
             BufferedReader in = new BufferedReader(
                     new InputStreamReader( con.getInputStream() ) );
             String inputLine;
@@ -65,6 +65,11 @@ public class Api {
             String res = response.toString();
             return res;
         }catch (Exception e){
+            Alert alert = new Alert( Alert.AlertType.ERROR);
+            alert.setTitle(null);
+            alert.setHeaderText(null);
+            alert.setContentText("API Get Error \n" + e);
+            alert.showAndWait();
             return "";
         }
 
@@ -97,7 +102,11 @@ public class Api {
             return res;
         }
         catch(Exception e){
-            System.out.println( e );
+            Alert alert = new Alert( Alert.AlertType.ERROR);
+            alert.setTitle(null);
+            alert.setHeaderText(null);
+            alert.setContentText("API Post Error \n" + e);
+            alert.showAndWait();
             return "";
         }
 
@@ -134,6 +143,11 @@ public class Api {
             return res;
         }
         catch (Exception e){
+            Alert alert = new Alert( Alert.AlertType.ERROR);
+            alert.setTitle(null);
+            alert.setHeaderText(null);
+            alert.setContentText("API Put Error\n" + e);
+            alert.showAndWait();
             return "";
         }
     }
@@ -168,6 +182,11 @@ public class Api {
             String res = response.toString();
             return res;
         }catch (Exception e){
+            Alert alert = new Alert( Alert.AlertType.ERROR);
+            alert.setTitle(null);
+            alert.setHeaderText(null);
+            alert.setContentText("API Delete Error\n" + e);
+            alert.showAndWait();
             return "";
         }
     }
@@ -180,11 +199,14 @@ public class Api {
         try{
             String res = callAPI("GET", "",empty);
             if(res.equalsIgnoreCase("")){
-                System.out.println("pas ok");
+                Alert alert = new Alert( Alert.AlertType.ERROR);
+                alert.setTitle(null);
+                alert.setHeaderText(null);
+                alert.setContentText("Token Error");
+                alert.showAndWait();
                 return false;
             }
             else {
-                System.out.println("ok");
                 return true;
             }
         }catch (Exception e) {

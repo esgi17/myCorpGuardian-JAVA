@@ -334,6 +334,13 @@ public class DeviceController {
             alert.setContentText("Pass assigned");
             alert.showAndWait();
         }
+        else {
+            Alert alert = new Alert( Alert.AlertType.ERROR);
+            alert.setTitle(null);
+            alert.setHeaderText(null);
+            alert.setContentText("Pass not assigned");
+            alert.showAndWait();
+        }
     }
 
     @FunctionParsor(
@@ -374,6 +381,13 @@ public class DeviceController {
             alert.setTitle(null);
             alert.setHeaderText(null);
             alert.setContentText("Device deleted");
+            alert.showAndWait();
+        }
+        else {
+            Alert alert = new Alert( Alert.AlertType.ERROR);
+            alert.setTitle(null);
+            alert.setHeaderText(null);
+            alert.setContentText("Device not deleted");
             alert.showAndWait();
         }
         loadDevices();

@@ -1,6 +1,7 @@
 package pa.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -31,6 +32,9 @@ public class LoginController {
             apiRoutes = "POST on '/' "
     )
     public void connect() throws Exception {
+        Alert alert = new Alert( Alert.AlertType.INFORMATION);
+        alert.setTitle(null);
+        alert.setHeaderText(null);
 
         JSONObject body = new JSONObject();
         body.put( "login", login.getText() );
@@ -38,14 +42,21 @@ public class LoginController {
 
         String res = Api.callAPI( "POST", "", body );
         if(!res.equalsIgnoreCase("")){
-            System.out.println(res);
             JSONObject ret = new JSONObject( res );
-            System.out.println(ret);
             Api.setToken( ret.getString( "token" ) );
 
             if (ret.getString( "success" ) == "true") {
                 openHomePage();
             }
+            else {
+                alert.setContentText("Invalid Login or Password");
+                alert.showAndWait();
+            }
+        }
+        else {
+
+            alert.setContentText("Connexion Error ");
+            alert.showAndWait();
         }
     }
 
