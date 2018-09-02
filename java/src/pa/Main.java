@@ -6,8 +6,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import pa.plugins.PluginLoader;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static pa.Models.Api.checkToken;
 import static pa.Models.Api.getToken;
@@ -16,6 +18,8 @@ import static pa.Models.Api.getToken;
 public class Main extends Application {
     public static Stage primaryStage;
 
+    private ArrayList<Class> pluginsClass;
+
     public void start(Stage primaryStage) throws Exception{
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("My Corp Guardian");
@@ -23,15 +27,31 @@ public class Main extends Application {
         initApp();
     }
 
-    private void initApp() throws IOException {
+    private void initApp() throws Exception {
         System.out.println("App initializing..."); // LOG
-        if( checkLogin() ) {
-            openHomePage();
+        if( !checkLogin() ) {
+            // Récupérer en base les plugins autorisés pour l'utilisateur
+            initPlugins();
 
+            // Une fois que tous les modules ont été chargés
+            openHomePage();
         } else {
             openPluginsPage();
             //openLoginPage();
         }
+    }
+
+    private boolean initPlugins() throws Exception {
+        try {
+
+            PluginLoader pluginLoader = new PluginLoader();
+            this.pluginsClass = pluginLoader.getPluginsClass();
+        } catch( Exception e ) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
     }
 
 

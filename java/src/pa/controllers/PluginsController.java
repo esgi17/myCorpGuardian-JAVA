@@ -4,13 +4,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import pa.plugins.PluginLoader;
+import pa.plugins.Plugins;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PluginsController {
@@ -29,7 +31,7 @@ public class PluginsController {
         fileChooser.setTitle("Open Resource File");
         FileChooser.ExtensionFilter fileExtensions =
                 new FileChooser.ExtensionFilter(
-                        "Textes","*.txt");
+                        "Jar","*.jar");
         fileChooser.getExtensionFilters().add(fileExtensions);
         List<File> files = fileChooser.showOpenMultipleDialog(stage);
         if (files != null) {
@@ -41,27 +43,52 @@ public class PluginsController {
         }
     }
 
-    public void install () {
-        Plugins pluginsInstall = new Plugins();
-        pluginsInstallPaths = pluginsInstall.install(pluginsPaths);
-        for(int i = 0 ; i < pluginsInstallPaths.size() ; i++){
-            String path = pluginsInstallPaths.get(i);
-            pluginsInstallName.add(path.substring(path.lastIndexOf('\\') + 1,path.length()));
+    public void install () throws Exception {
+        PluginLoader pluginLoader = new PluginLoader();
+        ArrayList<String> paths = new ArrayList<String>();
+        paths.addAll(pluginsPaths);
+        Plugins[] tmpPlugins = pluginLoader.loadPlugins(paths, 0);
+        for(int i = 0 ; i < tmpPlugins.length ; i++){
+            String name = tmpPlugins[i].getName();
+            tmpPlugins[i].plug();
+            pluginsInstallName.add(name);
+
         }
         pluginInstallList.setItems(pluginsInstallName);
         Alert alert = new Alert( Alert.AlertType.INFORMATION);
         alert.setTitle(null);
         alert.setHeaderText(null);
-        alert.setContentText(pluginsInstallPaths.size() + " Plugins Installed");
+        alert.setContentText(pluginsInstallName.size() + " Plugins Installed");
         alert.showAndWait();
         pluginList.getItems().clear();
         pluginsNames.clear();
         pluginsPaths.clear();
+        //System.out.println(pluginsPaths);
+      /*  PluginLoader pluginsInstall = new PluginLoader();
+        //pluginsInstall.setPluginsPath(pluginsPaths);
+        Plugins[] tmpPlugins = pluginsInstall.loadPlugins();
+        System.out.println(tmpPlugins[0].getName());
+
+        for(int i = 0 ; i < tmpPlugins.length ; i++){
+            String name = tmpPlugins[i].getName();
+            tmpPlugins[i].plug();
+            pluginsInstallName.add(name);
+
+        }
+        pluginInstallList.setItems(pluginsInstallName);
+        Alert alert = new Alert( Alert.AlertType.INFORMATION);
+        alert.setTitle(null);
+        alert.setHeaderText(null);
+        alert.setContentText(pluginsInstallName.size() + " Plugins Installed");
+        alert.showAndWait();
+        pluginList.getItems().clear();
+        pluginsNames.clear();
+        pluginsPaths.clear();*/
     }
 
 
     public void uninstall () {
-        int index = pluginInstallList.getSelectionModel().getSelectedIndex();
+      /*  int index = pluginInstallList.getSelectionModel().getSelectedIndex();
         if (index != -1){
             String path = pluginsInstallPaths.get(index);
             String name = pluginsInstallName.get(index);
@@ -73,8 +100,8 @@ public class PluginsController {
             alert.setContentText(name + " uninstall");
             alert.showAndWait();
 
-            Plugins pluginsUninstall = new Plugins();
-            pluginsUninstall.uninstall(path);
+            PluginLoader pluginsUninstall = new PluginLoader();
+           // pluginsUninstall.uninstall(path);
         }
         else {
             Alert alert = new Alert( Alert.AlertType.ERROR);
@@ -83,5 +110,6 @@ public class PluginsController {
             alert.setContentText("No Plugin selected");
             alert.showAndWait();
         }
+        */
     }
 }
