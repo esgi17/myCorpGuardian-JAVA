@@ -5,4 +5,5 @@ public interface Plugins {
     public void plug();
     public void unplug();
     public String getName();
+    void fillDeviceList() throws Exception;
 }

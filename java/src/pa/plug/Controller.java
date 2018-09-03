@@ -12,10 +12,11 @@ import pa.Models.Camera;
 import pa.Models.Device;
 import pa.Models.ListDatas;
 import pa.Models.Pass;
+import pa.plugins.Plugins;
 
 import java.io.File;
 
-public class Controller {
+public class Controller implements Plugins {
     @FXML StackPane stack;
     @FXML ListView devicesList;
 
@@ -25,16 +26,13 @@ public class Controller {
         fillDeviceList();
     }
 
-    public Camera[] fillDeviceList () throws Exception {
-        int k = 0;
+    public void fillDeviceList () throws Exception {
         devicesList.getItems().clear();
         Camera[] cameraArray = ListDatas.getCamera();
-        Camera[] camerasReturn = new Camera[cameraArray.length];
         for (int i = 0 ; i < cameraArray.length ; i++){
             cameras.add(cameraArray[i].getUrl());
         }
         devicesList.setItems(cameras);
-        return camerasReturn;
     }
 
     public void launchVideo() {
@@ -49,12 +47,25 @@ public class Controller {
             media = new Media(file.toURI().toString());
             mediaplayer = new MediaPlayer(media);
             mediaview = new MediaView(mediaplayer);
-
             stack.getChildren().setAll(mediaview);
-
             mediaview.fitWidthProperty().bind(stack.widthProperty());
             mediaview.fitHeightProperty().bind(stack.heightProperty());
             mediaplayer.play();
         }
     }
+
+
+    public void print(String str) {
+
+    }
+    public void plug() {
+
+    }
+    public void unplug() {
+
+    }
+    public String getName() {
+        return null;
+    }
+
 }
