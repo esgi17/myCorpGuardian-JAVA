@@ -26,12 +26,17 @@
                         <Insets bottom="30.0" />
                      </VBox.margin>
                   </Label>
+                  <Label alignment="CENTER" onMouseClicked="#openPluginsPage" prefHeight="30.0" prefWidth="900.0" styleClass="nav" text="Manage your plugins" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB" size="20.0" />
+                     </font>
+                  </Label>
                   <Label alignment="CENTER" onMouseClicked="#openUserPage" prefHeight="30.0" prefWidth="900.0" styleClass="nav" text="Manage your users " textFill="WHITE">
                      <font>
                         <Font name="Berlin Sans FB" size="20.0" />
                      </font>
                      <VBox.margin>
-                        <Insets top="40.0" />
+                        <Insets top="30.0" />
                      </VBox.margin>
                   </Label>
                   <Label alignment="CENTER" onMouseClicked="#openGroupPage" prefHeight="30.0" prefWidth="900.0" styleClass="nav" text="Manage your groups " textFill="WHITE">
@@ -66,9 +71,17 @@
                         <Insets top="30.0" />
                      </VBox.margin>
                   </Label>
+                  <Label fx:id="mapLabel" alignment="CENTER" onMouseClicked="#openMapPage" prefHeight="30.0" prefWidth="900.0" styleClass="nav" text="Manage your plan" textFill="WHITE" visible="false">
+                     <font>
+                        <Font name="Berlin Sans FB" size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                  </Label>
                   <ToggleButton fx:id="armBtn" mnemonicParsing="false" onMouseClicked="#armedOrDisarmed" prefWidth="200.0">
                      <VBox.margin>
-                        <Insets left="350.0" top="80.0" />
+                        <Insets left="350.0" top="20.0" />
                      </VBox.margin>
                      <font>
                         <Font name="Berlin Sans FB" size="20.0" />

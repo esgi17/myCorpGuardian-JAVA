@@ -29,30 +29,11 @@ public class Main extends Application {
 
     private void initApp() throws Exception {
         System.out.println("App initializing..."); // LOG
-        if( !checkLogin() ) {
-            if( initPlugins() ) {
-                Map2DPlugins[] map2D = PluginManager.getInstance().getMap2DPluginsList().toArray(new Map2DPlugins[0]);
-                if( map2D.length > 0 ) {
-                    System.out.println(map2D[0].getName());
-                }
-            }
+        if( checkLogin() ) {
             openHomePage();
         } else {
-            openPluginsPage();
+            openLoginPage();
         }
-    }
-
-
-
-    private boolean initPlugins() throws Exception {
-        try {
-            PluginLoader pluginLoader = new PluginLoader();
-            return true;
-        } catch( Exception e ) {
-            e.printStackTrace();
-            return false;
-        }
-
     }
 
 

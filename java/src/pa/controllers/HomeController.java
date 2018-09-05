@@ -1,6 +1,7 @@
 package pa.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 import org.json.JSONArray;
@@ -8,11 +9,15 @@ import org.json.JSONObject;
 import pa.Models.Api;
 import pa.Models.NavHandler;
 import pa.annotations.FunctionParsor;
+import pa.plugins.Map2DPlugins;
+import pa.plugins.PluginLoader;
+import pa.plugins.PluginManager;
 
 public class HomeController{
 
     @FXML AnchorPane pane;
     @FXML ToggleButton armBtn;
+    @FXML Label mapLabel;
 
 
     public void openDevicePage() throws Exception {
@@ -35,7 +40,44 @@ public class HomeController{
         NavHandler.openEventPage(pane);
     }
 
+    public void openPluginsPage() throws Exception {
+        NavHandler.openPluginsPage(pane);
+    }
+
+    public void openMapPage() throws Exception {
+        if( PluginManager.getInstance().isActive("Map2Dplugin")) {
+            Map2DPlugins[] map2D = PluginManager.getInstance().getMap2DPluginsList().toArray(new Map2DPlugins[0]);
+            System.out.println(map2D.length);
+            if( map2D.length > 0 ) {
+                System.out.println(map2D[0].getName());
+                NavHandler.openMapPage(pane);
+            }
+        }
+    }
+
+    private boolean initPlugins() throws Exception {
+        try {
+            PluginLoader pluginLoader = new PluginLoader();
+            return true;
+        } catch( Exception e ) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
     public void initialize() throws Exception{
+        if( initPlugins() ) {
+            Map2DPlugins[] map2D = PluginManager.getInstance().getMap2DPluginsList().toArray(new Map2DPlugins[0]);
+            if( map2D.length > 0 ) {
+                System.out.println(map2D[0].getName());
+            }
+        }else {
+            System.out.println( "ERROOOOR" );
+        }
+        if( PluginManager.getInstance().isActive("Map2Dplugin")){
+            mapLabel.setVisible(true);
+        }
         setArmBtn();
     }
 

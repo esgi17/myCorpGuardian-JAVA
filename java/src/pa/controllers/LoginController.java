@@ -46,6 +46,7 @@ public class LoginController {
             Api.setToken( ret.getString( "token" ) );
 
             if (ret.getString( "success" ) == "true") {
+                System.out.println( "SUCCESS" );
                 openHomePage();
             }
             else {

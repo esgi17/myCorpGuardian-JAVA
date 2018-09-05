@@ -28,8 +28,12 @@ public class PluginLoader {
 
     public PluginLoader() {
         // Get installed and active plugin
+        System.out.println( "0" );
         this.pluginsPath = this.getActivePlugins();
+        System.out.println( "1" );
         this.loadPlugins();
+        System.out.println( "2" );
+        System.out.println( this.pluginsPath );
     }
 
     public PluginLoader(ArrayList<String> paths) {
@@ -38,6 +42,7 @@ public class PluginLoader {
     }
 
     private void loadPlugins() {
+
         if (this.pluginsPath.isEmpty()) {
             return;
         }

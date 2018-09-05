@@ -213,4 +213,13 @@ public abstract class ListDatas {
         return device;
     }
 
+    public static void postWall(String x1, String y1, String x2, String y2) throws Exception{
+        JSONObject body = new JSONObject();
+        body.put( "x1", x1 );
+        body.put( "y1", y1);
+        body.put( "x2", x2);
+        body.put( "y2", y2);
+        Api.callAPI( "POST", "wall/", body );
+    }
+
 }

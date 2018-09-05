@@ -22,6 +22,10 @@ public class Device {
      */
     private String _device_type_id;
 
+
+    private String _x;
+
+    private String _y;
     /**
      * Constructeur de l'objet Door
      *
@@ -34,8 +38,11 @@ public class Device {
      * @param device_type_id
      *                      id de la device
      */
-    public void Door( String id, String ref, String name, String device_type_id ) {
+    public void Device( String x, String y,String id, String ref, String name, String device_type_id ) {
+
         this._id = id;
+        this._x = x;
+        this._y = y;
         this._ref = ref;
         this._name = name;
         this._device_type_id = device_type_id;
@@ -107,6 +114,20 @@ public class Device {
      */
     public void setDeviceTypeId(String device_type_id) {
         this._device_type_id = device_type_id;
+    }
+
+    public String getX() {
+        return _x;
+    }
+    public void setX(String x) {
+        this._x = x;
+    }
+
+    public String getY() {
+        return _y;
+    }
+    public void setY(String y) {
+        this._y = y;
     }
 
 }

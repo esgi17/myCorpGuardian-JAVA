@@ -6,6 +6,4 @@ public interface Map2DPlugins {
     public void plug();
     public void unplug();
     public String getName();
-
-
 }

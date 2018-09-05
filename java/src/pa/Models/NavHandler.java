@@ -4,6 +4,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import pa.Main;
+import pa.plugins.Map2DPlugins;
+import pa.plugins.PluginManager;
+
 import static pa.Models.Api.checkToken;
 
 
@@ -99,6 +102,23 @@ public abstract class NavHandler {
             openLoginPage(pane);
         }
     }
+
+    public static void openPluginsPage(AnchorPane pane) throws IOException {
+        if(checkToken()) {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation( Main.class.getResource( "View/plugin.fxml" ) );
+            Main.primaryStage.setTitle( "My Corp Guardian - Plugin" );
+            pane = (AnchorPane) loader.load();
+            Scene scene = new Scene( pane );
+            Main.primaryStage.setScene( scene );
+            Main.primaryStage.show();
+        }
+        else {
+            openLoginPage(pane);
+        }
+    }
+
+
     public static void openLoginPage(AnchorPane pane) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("View/login.fxml"));
@@ -107,5 +127,22 @@ public abstract class NavHandler {
         Scene scene = new Scene(pane);
         Main.primaryStage.setScene(scene);
         Main.primaryStage.show();
+    }
+
+    public static void openMapPage(AnchorPane pane) throws Exception{
+        if(checkToken() && PluginManager.getInstance().isActive("Map2Dplugin")) {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation( Main.class.getResource( "View/sample.fxml" ) );
+            Map2DPlugins[] map2D = PluginManager.getInstance().getMap2DPluginsList().toArray(new Map2DPlugins[0]);
+            loader.setController(map2D[0]);
+            Main.primaryStage.setTitle( "My Corp Guardian - MAP" );
+            pane = (AnchorPane) loader.load();
+            Scene scene = new Scene( pane );
+            Main.primaryStage.setScene( scene );
+            Main.primaryStage.show();
+        }
+        else {
+            openLoginPage(pane);
+        }
     }
 }
