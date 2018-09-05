@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Map2DPlugin">
+    <output-path>$PROJECT_DIR$/out/artifacts/Map2DPlugin</output-path>
+    <root id="archive" name="Map2DPlugin.jar">
+      <element id="module-output" name="Map2D_2" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/Map2D_2/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>

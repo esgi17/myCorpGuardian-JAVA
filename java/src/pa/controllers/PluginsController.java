@@ -8,7 +8,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import pa.plugins.Map2DPlugins;
 import pa.plugins.PluginLoader;
+import pa.plugins.PluginManager;
 import pa.plugins.Plugins;
 
 import java.io.File;
@@ -43,47 +45,23 @@ public class PluginsController {
         }
     }
 
-    public void install () throws Exception {
-        PluginLoader pluginLoader = new PluginLoader();
+    public void install () {
         ArrayList<String> paths = new ArrayList<String>();
         paths.addAll(pluginsPaths);
-        Plugins[] tmpPlugins = pluginLoader.loadPlugins(paths, 0);
-        for(int i = 0 ; i < tmpPlugins.length ; i++){
-            String name = tmpPlugins[i].getName();
-            tmpPlugins[i].plug();
-            pluginsInstallName.add(name);
+        PluginLoader pluginLoader = new PluginLoader(paths);
 
-        }
-        pluginInstallList.setItems(pluginsInstallName);
+        ObservableList<String> tmpList = FXCollections.observableArrayList();
+
+        tmpList.addAll(PluginManager.getInstance().getInstalledPlugins());
+        pluginInstallList.setItems(tmpList);
         Alert alert = new Alert( Alert.AlertType.INFORMATION);
         alert.setTitle(null);
         alert.setHeaderText(null);
-        alert.setContentText(pluginsInstallName.size() + " Plugins Installed");
+        alert.setContentText(tmpList.size() + " Plugins Installed");
         alert.showAndWait();
         pluginList.getItems().clear();
         pluginsNames.clear();
         pluginsPaths.clear();
-        //System.out.println(pluginsPaths);
-      /*  PluginLoader pluginsInstall = new PluginLoader();
-        //pluginsInstall.setPluginsPath(pluginsPaths);
-        Plugins[] tmpPlugins = pluginsInstall.loadPlugins();
-        System.out.println(tmpPlugins[0].getName());
-
-        for(int i = 0 ; i < tmpPlugins.length ; i++){
-            String name = tmpPlugins[i].getName();
-            tmpPlugins[i].plug();
-            pluginsInstallName.add(name);
-
-        }
-        pluginInstallList.setItems(pluginsInstallName);
-        Alert alert = new Alert( Alert.AlertType.INFORMATION);
-        alert.setTitle(null);
-        alert.setHeaderText(null);
-        alert.setContentText(pluginsInstallName.size() + " Plugins Installed");
-        alert.showAndWait();
-        pluginList.getItems().clear();
-        pluginsNames.clear();
-        pluginsPaths.clear();*/
     }
 
 

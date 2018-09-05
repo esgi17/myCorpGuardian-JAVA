@@ -99,28 +99,6 @@ public abstract class ListDatas {
         return  passEmpty;
     }
 
-    public static Camera[] getCamera() throws Exception {
-        JSONObject empty = new JSONObject();
-
-        // Recupere resultat requete
-        String json = Api.callAPI("GET", "camera/", empty);
-        if (!json.equalsIgnoreCase("")) {
-            JSONObject obj = new JSONObject( json );
-            JSONArray jArray = new JSONArray( obj.getString( "datas" ) );
-            Camera[] cameras = new Camera[jArray.length()];
-
-            for (int i = 0; i < jArray.length(); i++) {
-                JSONObject camera = jArray.getJSONObject( i );
-                cameras[i] = new Camera();
-                cameras[i].setId( camera.getString( "id" ) );
-                cameras[i].setIdDevice( camera.getString( "device_id" ) );
-                cameras[i].setUrl( camera.getString( "url" ) );
-            }
-            return cameras;
-        }
-        Camera[] cameraEmpty = new Camera[0];
-        return  cameraEmpty;
-    }
 
     public static User[] createUsersArray(JSONArray usersArray) throws Exception {
         User[] users = new User[usersArray.length()];
