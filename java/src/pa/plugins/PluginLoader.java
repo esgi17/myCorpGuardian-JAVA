@@ -60,7 +60,7 @@ public class PluginLoader {
     }
 
 
-    private boolean initializeLoader(ArrayList<String> pluginsPath) {
+    private boolean initializeLoader(ArrayList<String> pluginsPath) throws MalformedURLException {
 
         if( pluginsPath.isEmpty() ) {
             System.out.println("Erreur : Aucun fichier ");
@@ -80,15 +80,13 @@ public class PluginLoader {
             }
             JarFile jar;
             URL url;
+            url = f[i].toURL();
             try {
-                url = f[i].toURL();
+
                 System.out.println("URL : " + url);
                 loader = new URLClassLoader(new URL[] {url});
                 jar = new JarFile(f[i].getAbsolutePath());
 
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-                break;
             } catch ( IOException e ) {
                 e.printStackTrace();
                 break;
@@ -111,10 +109,10 @@ public class PluginLoader {
                     tmp = tmp.replaceAll("/", ".");
                     try {
                         tmpClass = Class.forName(tmp, true, loader);
-                        for( i = 0 ; i < tmpClass.getInterfaces().length ; i++ ) {
+                        for( int k = 0 ; k < tmpClass.getInterfaces().length ; k++ ) {
                             String map2DInterface = "interface pa.plugins.Map2DPlugins";
                             String CameraInterface = "interface pa.plugins.CameraPlugins";
-                            String interfaceName = tmpClass.getInterfaces()[i].toString();
+                            String interfaceName = tmpClass.getInterfaces()[k].toString();
                             if(interfaceName.equals(CameraInterface))  {
                                 CameraPlugins pl = (CameraPlugins) tmpClass.getDeclaredConstructor().newInstance();
                                 this.pluginManager.getCameraPluginsList().add(pl);
@@ -130,7 +128,7 @@ public class PluginLoader {
                 }
             }
             try {
-                System.out.println("URL : " + pluginsPath.get(i));
+                System.out.println("URL3 : " + pluginsPath.get(i));
                 if( !pluginsPath.get(i).substring(0, 33).equals("src/pa/plugins/plugins_installed/") ) {
                     savePlugin(url, name);
 

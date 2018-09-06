@@ -1,5 +1,3 @@
-import Models.Device;
-import Models.Wall;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,11 +13,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import pa.Models.Api;
 import pa.Models.ListDatas;
+import pa.Models.NavHandler;
+import pa.Models.Wall;
 import pa.plugins.Map2DPlugins;
 import pa.plugins.Plugins;
 
@@ -27,6 +28,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.SocketPermission;
 
 public class Map2D implements Map2DPlugins {
 
@@ -42,8 +44,9 @@ public class Map2D implements Map2DPlugins {
     @FXML TextField nameWallField;
     @FXML javafx.scene.control.ListView wallList;
     @FXML javafx.scene.control.ListView deviceList;
+    @FXML AnchorPane pane;
 
-    private ObservableList<Wall> walls = FXCollections.observableArrayList();
+    private ObservableList<pa.Models.Wall> walls = FXCollections.observableArrayList();
     private ObservableList<String> wallsName = FXCollections.observableArrayList();
 
     private ObservableList<pa.Models.Device> devices = FXCollections.observableArrayList();
@@ -51,17 +54,35 @@ public class Map2D implements Map2DPlugins {
 
 
     public void initialize () throws Exception {
+        wallList.getItems().clear();
+        deviceList.getItems().clear();
+        devices.clear();
+        devicesName.clear();
+        walls.clear();
+        wallsName.clear();
+        fillDeviceList();
         drawWalls("");
         fillWallList();
-        fillDeviceList();
     }
 
-    public void fillWallList () {
+    public void openHomePage() throws Exception {
+        NavHandler.openHomePage(pane);
+    }
 
+    public void fillWallList () throws Exception {
+        pa.Models.Wall[] wallsLoad = ListDatas.getWalls();
+        wallList.getItems().clear();
+        for(int i=0 ; i<wallsLoad.length ; i++){
+            System.out.println(i);
+            walls.add(wallsLoad[i]);
+            wallsName.add(wallsLoad[i].getName());
+            drawExistingWall(wallsLoad[i]);
+        }
+        wallList.setItems(wallsName);
     }
 
     public void fillDeviceList () throws Exception {
-        pa.Models.Device[] res = ListDatas.getDevices();
+        pa.Models.Device[] res = ListDatas.getDevicesXY();
         deviceList.getItems().clear();
         for(int i=0 ; i< res.length ; i++ ){
             switch(res[i].getDeviceTypeId()){
@@ -85,7 +106,12 @@ public class Map2D implements Map2DPlugins {
                     break;
             }
         }
-        deviceList.setItems(devices);
+        deviceList.setItems(devicesName);
+    }
+
+    public void drawExistingWall(Wall wall){
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.strokeLine( Double.parseDouble(wall.getX1()), Double.parseDouble(wall.getY1()), Double.parseDouble(wall.getX2()), Double.parseDouble(wall.getY2()));
     }
 
     public void draw (int shape) {
@@ -121,59 +147,58 @@ public class Map2D implements Map2DPlugins {
 
                         if (shape == 0) {
                             gc.strokeLine( beginX, beginY, endX, endY );
-                            Wall wall = new Wall();
+                            pa.Models.Wall wall = new pa.Models.Wall();
                             wall.Wall(nameWallField.getText(), Long.toString( beginX /5*5), Long.toString( beginY/5*5 ), Long.toString( endX/5*5 ), Long.toString( endY/5*5 ) );
                             walls.add( wall );
-                            //body.put( "name", nameWallField.getText() );
                             try{
-                                ListDatas.postWall(wall.getX1(),wall.getY1(),wall.getX2(),wall.getY2());
+                                ListDatas.postWall(wall.getName(),wall.getX1(),wall.getY1(),wall.getX2(),wall.getY2());
                             }
                             catch (Exception e){
-
+                                System.out.println(e);
                             }
                             wallsName.add(wall.getName());
                             nameWallField.setText("");
 
                         } else if (shape == 1) {
                             gc.strokeRect( beginX, beginY, endX - beginX, endY - beginY );
-                            Wall wall1 = new Wall();
+                            pa.Models.Wall wall1 = new pa.Models.Wall();
                             wall1.Wall(nameRoomField.getText() + "O", Long.toString( beginX/5*5 ), Long.toString( beginY/5*5 ), Long.toString( beginX/5*5 ), Long.toString( endY/5*5 ) );
                             walls.add( wall1 );
                             try{
-                                ListDatas.postWall(wall1.getX1(),wall1.getY1(),wall1.getX2(),wall1.getY2());
+                                ListDatas.postWall(wall1.getName(),wall1.getX1(),wall1.getY1(),wall1.getX2(),wall1.getY2());
                             }
                             catch (Exception e){
 
                             }
                             wallsName.add(wall1.getName());
 
-                            Wall wall2 = new Wall();
+                            pa.Models.Wall wall2 = new pa.Models.Wall();
                             wall2.Wall(nameRoomField.getText() + "N", Long.toString( beginX/5*5 ), Long.toString( beginY/5*5 ), Long.toString( endX/5*5 ), Long.toString( beginY/5*5 ) );
                             walls.add( wall2 );
                             try{
-                                ListDatas.postWall(wall2.getX1(),wall2.getY1(),wall2.getX2(),wall2.getY2());
+                                ListDatas.postWall(wall2.getName(),wall2.getX1(),wall2.getY1(),wall2.getX2(),wall2.getY2());
                             }
                             catch (Exception e){
 
                             }
                             wallsName.add(wall2.getName());
 
-                            Wall wall3 = new Wall();
+                            pa.Models.Wall wall3 = new pa.Models.Wall();
                             wall3.Wall(nameRoomField.getText() + "E", Long.toString( endX/5*5 ), Long.toString( beginY/5*5 ), Long.toString( endX/5*5 ), Long.toString( endY/5*5 ) );
                             walls.add( wall3 );
                             try{
-                                ListDatas.postWall(wall3.getX1(),wall3.getY1(),wall3.getX2(),wall3.getY2());
+                                ListDatas.postWall(wall3.getName(),wall3.getX1(),wall3.getY1(),wall3.getX2(),wall3.getY2());
                             }
                             catch (Exception e){
 
                             }
                             wallsName.add(wall3.getName());
 
-                            Wall wall4 = new Wall();
+                            pa.Models.Wall wall4 = new pa.Models.Wall();
                             wall4.Wall(nameRoomField.getText() + "S", Long.toString( endX/5*5 ), Long.toString( endY/5*5 ), Long.toString( beginX/5*5 ), Long.toString( endY/5*5 ) );
                             walls.add( wall4 );
                             try{
-                                ListDatas.postWall(wall4.getX1(),wall4.getY1(),wall4.getX2(),wall4.getY2());
+                                ListDatas.postWall(wall4.getName(),wall4.getX1(),wall4.getY1(),wall4.getX2(),wall4.getY2());
                             }
                             catch (Exception e){
 
@@ -256,9 +281,10 @@ public class Map2D implements Map2DPlugins {
         }
     }
 
-    public void deleteWall () {
+    public void deleteWall () throws Exception{
         int index = wallList.getSelectionModel().getSelectedIndex();
         if (index != -1){
+            ListDatas.deleteWall(wallsName.get(index));
             drawWalls(wallsName.get(index));
             wallsName.remove(index);
             walls.remove(index);
@@ -289,11 +315,14 @@ public class Map2D implements Map2DPlugins {
         int index = deviceList.getSelectionModel().getSelectedIndex();
         setLabelPos(0);
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        if(index != -1) {
+        if(index != -1 ) {
+
             drawWalls("");
-            gc.setLineWidth(5);
-            gc.strokeRect(Double.parseDouble(devices.get( index ).getX())-5,Double.parseDouble(devices.get( index ).getY())-5,10,10);
-            gc.setLineWidth(1);
+            if(devices.get(index).getX()!=null && devices.get(index).getY()!=null) {
+                gc.setLineWidth( 5 );
+                gc.strokeRect( Double.parseDouble( devices.get( index ).getX() ) - 5, Double.parseDouble( devices.get( index ).getY() ) - 5, 10, 10 );
+                gc.setLineWidth( 1 );
+            }
             drawBox.setOnMouseClicked( new EventHandler<MouseEvent>() {
                 // @Override
                 public void handle(MouseEvent event) {
@@ -302,6 +331,11 @@ public class Map2D implements Map2DPlugins {
                     gc.strokeRect(X-5,Y-5,10,10);
                     devices.get( index ).setX(Long.toString(X));
                     devices.get( index ).setY(Long.toString(Y));
+                    try{
+                        ListDatas.putDevice(devices.get(index).getName(),devices.get(index).getX(),devices.get(index).getY());
+                    } catch (Exception e){
+                        System.out.println(e);
+                    }
                     drawWalls("");
                     drawBox.setOnMouseClicked(null);
                     drawBox.setOnMouseMoved(null);
@@ -313,7 +347,9 @@ public class Map2D implements Map2DPlugins {
     public void drawDevices () {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         for (int i = 0 ; i<devices.size() ; i++){
-            gc.strokeRect(Long.parseLong(devices.get(i).getX())-5,Long.parseLong(devices.get(i).getY())-5,10,10);
+            if(devices.get(i).getX()!=null && devices.get(i).getY()!=null) {
+                gc.strokeRect( Long.parseLong( devices.get( i ).getX() ) - 5, Long.parseLong( devices.get( i ).getY() ) - 5, 10, 10 );
+            }
         }
     }
 

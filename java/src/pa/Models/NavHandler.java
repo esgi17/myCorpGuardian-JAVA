@@ -130,7 +130,7 @@ public abstract class NavHandler {
     }
 
     public static void openMapPage(AnchorPane pane) throws Exception{
-        if(checkToken() && PluginManager.getInstance().isActive("Map2Dplugin")) {
+        if(checkToken() && PluginManager.getInstance().isActive("Map2DPlugin")) {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation( Main.class.getResource( "View/sample.fxml" ) );
             Map2DPlugins[] map2D = PluginManager.getInstance().getMap2DPluginsList().toArray(new Map2DPlugins[0]);

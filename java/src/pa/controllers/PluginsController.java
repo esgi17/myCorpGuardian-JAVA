@@ -4,10 +4,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import pa.Models.NavHandler;
 import pa.plugins.Map2DPlugins;
 import pa.plugins.PluginLoader;
 import pa.plugins.PluginManager;
@@ -21,6 +23,7 @@ public class PluginsController {
     @FXML AnchorPane pane;
     @FXML ListView pluginList;
     @FXML ListView pluginInstallList;
+    @FXML Label title;
 
     private ObservableList<String> pluginsNames = FXCollections.observableArrayList();
     private ObservableList<String> pluginsPaths = FXCollections.observableArrayList();
@@ -89,5 +92,17 @@ public class PluginsController {
             alert.showAndWait();
         }
         */
+    }
+
+    public void openHomePage() throws Exception {
+        NavHandler.openHomePage(pane);
+    }
+
+    public void setPluginManagement () {
+        title.setText("Plugins Management");
+    }
+
+    public void setHomeReturn () {
+        title.setText("Return to Home");
     }
 }

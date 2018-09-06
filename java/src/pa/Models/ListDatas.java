@@ -1,5 +1,6 @@
 package pa.Models;
 
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.json.JSONArray;
@@ -197,6 +198,34 @@ public abstract class ListDatas {
         }
     }
 
+    public static Device[] getDevicesXY() throws Exception {
+        JSONObject empty = new JSONObject();
+
+        // Recupere resultat requete
+        String json = Api.callAPI("GET", "device/", empty);
+        if (!json.equalsIgnoreCase("")) {
+            JSONObject datas = new JSONObject( json );
+            JSONArray jArray = new JSONArray( datas.getString( "datas" ) );
+            Device[] devices = new Device[jArray.length()];
+
+            for (int i = 0; i < jArray.length(); i++) {
+                JSONObject device = jArray.getJSONObject( i );
+                devices[i] = new Device();
+                devices[i].setId( device.getString( "id" ) );
+                devices[i].setName( device.getString( "name" ) );
+                devices[i].setRef( device.getString( "ref" ) );
+                devices[i].setX( device.getString( "x" ) );
+                devices[i].setY( device.getString( "y" ) );
+                devices[i].setDeviceTypeId( device.getString( "device_type_id" ) );
+            }
+            return devices;
+        }
+        else{
+            Device[] deviceEmpty = new Device[0];
+            return  deviceEmpty;
+        }
+    }
+
     public static Device getDevice(String id) throws Exception {
         JSONObject empty = new JSONObject();
         Device device = new Device();
@@ -213,13 +242,57 @@ public abstract class ListDatas {
         return device;
     }
 
-    public static void postWall(String x1, String y1, String x2, String y2) throws Exception{
+    public static Wall[] getWalls() throws Exception {
+        JSONObject empty = new JSONObject();
+
+        // Recupere resultat requete
+        String json = Api.callAPI("GET", "wall/", empty);
+        if (!json.equalsIgnoreCase("")) {
+            JSONObject datas = new JSONObject( json );
+            JSONArray jArray = new JSONArray( datas.getString( "datas" ) );
+            Wall[] walls = new Wall[jArray.length()];
+
+            for (int i = 0; i < jArray.length(); i++) {
+                JSONObject wall = jArray.getJSONObject( i );
+                walls[i] = new Wall();
+                walls[i].setId( wall.getString( "id" ) );
+                walls[i].setName( wall.getString( "name" ) );
+                walls[i].setX1( wall.getString( "x1" ) );
+                walls[i].setY1( wall.getString( "y1" ) );
+                walls[i].setX2( wall.getString( "x2" ) );
+                walls[i].setY2( wall.getString( "y2" ) );
+            }
+            return walls;
+        }
+        else{
+            Wall[] wallEmpty = new Wall[0];
+            return  wallEmpty;
+        }
+    }
+
+
+
+    public static void postWall(String name, String x1, String y1, String x2, String y2) throws Exception{
         JSONObject body = new JSONObject();
+        body.put( "name", name );
         body.put( "x1", x1 );
         body.put( "y1", y1);
         body.put( "x2", x2);
         body.put( "y2", y2);
         Api.callAPI( "POST", "wall/", body );
+    }
+
+    public static void putDevice(String name, String x, String y) throws Exception{
+        JSONObject body = new JSONObject();
+        body.put( "name", name );
+        body.put( "x", x );
+        body.put( "y", y );
+        Api.callAPI( "PUT", "device/", body );
+    }
+
+    public static void deleteWall(String name) throws Exception {
+        JSONObject empty = new JSONObject();
+        Api.callAPI( "DELETE", "wall/"+ name, empty );
     }
 
 }

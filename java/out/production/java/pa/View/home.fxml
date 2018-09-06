@@ -36,7 +36,7 @@
                         <Font name="Berlin Sans FB" size="20.0" />
                      </font>
                      <VBox.margin>
-                        <Insets top="30.0" />
+                        <Insets top="25.0" />
                      </VBox.margin>
                   </Label>
                   <Label alignment="CENTER" onMouseClicked="#openGroupPage" prefHeight="30.0" prefWidth="900.0" styleClass="nav" text="Manage your groups " textFill="WHITE">
@@ -44,7 +44,7 @@
                         <Font name="Berlin Sans FB" size="20.0" />
                      </font>
                      <VBox.margin>
-                        <Insets top="30.0" />
+                        <Insets top="25.0" />
                      </VBox.margin>
                   </Label>
                   <Label alignment="CENTER" onMouseClicked="#openDoorPage" prefHeight="30.0" prefWidth="900.0" styleClass="nav" text="Manage your schedules " textFill="WHITE">
@@ -52,7 +52,7 @@
                         <Font name="Berlin Sans FB" size="20.0" />
                      </font>
                      <VBox.margin>
-                        <Insets top="30.0" />
+                        <Insets top="25.0" />
                      </VBox.margin>
                   </Label>
                   <Label alignment="CENTER" onMouseClicked="#openEventPage" prefHeight="30.0" prefWidth="900.0" styleClass="nav" text="Manage your events" textFill="WHITE">
@@ -60,7 +60,7 @@
                         <Font name="Berlin Sans FB" size="20.0" />
                      </font>
                      <VBox.margin>
-                        <Insets top="30.0" />
+                        <Insets top="25.0" />
                      </VBox.margin>
                   </Label>
                   <Label alignment="CENTER" onMouseClicked="#openDevicePage" prefHeight="30.0" prefWidth="900.0" styleClass="nav" text="Manage your devices " textFill="WHITE">
@@ -68,7 +68,7 @@
                         <Font name="Berlin Sans FB" size="20.0" />
                      </font>
                      <VBox.margin>
-                        <Insets top="30.0" />
+                        <Insets top="25.0" />
                      </VBox.margin>
                   </Label>
                   <Label fx:id="mapLabel" alignment="CENTER" onMouseClicked="#openMapPage" prefHeight="30.0" prefWidth="900.0" styleClass="nav" text="Manage your plan" textFill="WHITE" visible="false">
@@ -76,7 +76,7 @@
                         <Font name="Berlin Sans FB" size="20.0" />
                      </font>
                      <VBox.margin>
-                        <Insets top="30.0" />
+                        <Insets top="25.0" />
                      </VBox.margin>
                   </Label>
                   <ToggleButton fx:id="armBtn" mnemonicParsing="false" onMouseClicked="#armedOrDisarmed" prefWidth="200.0">

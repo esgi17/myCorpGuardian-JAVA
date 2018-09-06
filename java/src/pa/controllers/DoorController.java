@@ -520,11 +520,6 @@ public class DoorController {
             return true;
         }
         else{
-            Alert alert = new Alert( Alert.AlertType.ERROR);
-            alert.setTitle(null);
-            alert.setHeaderText(null);
-            alert.setContentText("Please select a Group and a Door");
-            alert.showAndWait();
             return false;
         }
     }

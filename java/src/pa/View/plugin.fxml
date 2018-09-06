@@ -45,7 +45,7 @@
                   </Button>
                </children>
             </VBox>
-            <Label alignment="CENTER" prefWidth="900.0" text="Plugins management" textFill="WHITE">
+            <Label fx:id="title" alignment="CENTER" onMouseClicked="#openHomePage" onMouseEntered="#setHomeReturn" onMouseExited="#setPluginManagement" prefWidth="900.0" text="Plugins Management" textFill="WHITE">
                <font>
                   <Font name="Berlin Sans FB Demi Bold" size="18.0" />
                </font>

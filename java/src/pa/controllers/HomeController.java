@@ -24,6 +24,7 @@ public class HomeController{
         NavHandler.openDevicePage(pane);
     }
 
+
     public void openUserPage() throws Exception {
         NavHandler.openUserPage(pane);
     }
@@ -45,7 +46,7 @@ public class HomeController{
     }
 
     public void openMapPage() throws Exception {
-        if( PluginManager.getInstance().isActive("Map2Dplugin")) {
+        if( PluginManager.getInstance().isActive("Map2DPlugin")) {
             Map2DPlugins[] map2D = PluginManager.getInstance().getMap2DPluginsList().toArray(new Map2DPlugins[0]);
             System.out.println(map2D.length);
             if( map2D.length > 0 ) {
@@ -75,7 +76,7 @@ public class HomeController{
         }else {
             System.out.println( "ERROOOOR" );
         }
-        if( PluginManager.getInstance().isActive("Map2Dplugin")){
+        if( PluginManager.getInstance().isActive("Map2DPlugin")){
             mapLabel.setVisible(true);
         }
         setArmBtn();
