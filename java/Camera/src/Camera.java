@@ -34,9 +34,14 @@ public class Camera implements CameraPlugins {
         fillDeviceList();
     }
 
-    public void fillDeviceList () throws Exception {
+    public void fillDeviceList () {
         devicesList.getItems().clear();
-        pa.Models.Camera[] cameraArray = ListDatas.getCamera();
+        pa.Models.Camera[] cameraArray = new pa.Models.Camera[0];
+        try {
+            cameraArray = ListDatas.getCamera();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         for (int i = 0 ; i < cameraArray.length ; i++){
             cameras.add(cameraArray[i].getUrl());
         }
