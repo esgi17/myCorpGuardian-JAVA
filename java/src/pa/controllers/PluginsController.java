@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
@@ -24,11 +25,16 @@ public class PluginsController {
     @FXML ListView pluginList;
     @FXML ListView pluginInstallList;
     @FXML Label title;
+    @FXML Button enableButton;
 
     private ObservableList<String> pluginsNames = FXCollections.observableArrayList();
     private ObservableList<String> pluginsPaths = FXCollections.observableArrayList();
     private ObservableList<String> pluginsInstallPaths = FXCollections.observableArrayList();
     private ObservableList<String> pluginsInstallName = FXCollections.observableArrayList();
+
+    public void initialize () {
+        //charger plugins dans pluginInstallList
+    }
 
     public void loadPlugins () {
         Stage stage = new Stage();
@@ -65,6 +71,30 @@ public class PluginsController {
         pluginList.getItems().clear();
         pluginsNames.clear();
         pluginsPaths.clear();
+    }
+
+    public void enablePlugin () {
+        int index = pluginInstallList.getSelectionModel().getSelectedIndex();
+        if (index != -1){
+            //Si t'as besoin du nom :
+            //String name = pluginsInstallName.get(index);
+            /*
+            if( le plugin est enable){
+                disable le
+                enableButton.setText("Disable");
+            }
+            else {
+                enable le
+                enableButton.setText("Enable");
+            }*/
+        }
+        else {
+            Alert alert = new Alert( Alert.AlertType.ERROR);
+            alert.setTitle(null);
+            alert.setHeaderText(null);
+            alert.setContentText("No Plugin selected");
+            alert.showAndWait();
+        }
     }
 
 
