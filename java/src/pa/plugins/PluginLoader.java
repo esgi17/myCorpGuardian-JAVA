@@ -14,7 +14,7 @@ import java.util.jar.JarFile;
 public class PluginLoader {
 
     // Chemin de la liste des plugins
-    private String listPluginsPath = "src/pa/plugins/plugins_installed/plugin-list.txt";
+    private String listPluginsPath = "src/pa/plugins_installed/plugin-list.txt";
 
     // Chamin de la liste des classes
     private ArrayList<Class> listClasses;
@@ -154,8 +154,10 @@ public class PluginLoader {
             BufferedReader file = new BufferedReader(new FileReader(listPluginsPath));
             String line;
             while ( (line = file.readLine()) != null ) {
-                String tmp = PluginManager.getInstance().getPluginPath(line);
-                tmpPaths.add(tmp);
+                if(!line.equals("")) {
+                    String tmp = PluginManager.getInstance().getPluginPath(line);
+                    tmpPaths.add(tmp);
+                }
             }
             file.close();
         } catch (FileNotFoundException e) {
