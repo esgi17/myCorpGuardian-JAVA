@@ -88,12 +88,12 @@
                               <Font name="Berlin Sans FB" size="20.0" />
                            </font>
                            <HBox.margin>
-                              <Insets left="350.0" />
+                              <Insets left="350.0" top="50.0" />
                            </HBox.margin>
                         </ToggleButton>
                         <Button fx:id="cameraButton" mnemonicParsing="false" onMouseClicked="#openCameraPage" prefWidth="100.0" text="Camera View" visible="false">
                            <HBox.margin>
-                              <Insets left="220.0" top="5.0" />
+                              <Insets left="220.0" top="55.0" />
                            </HBox.margin>
                         </Button>
                      </children>

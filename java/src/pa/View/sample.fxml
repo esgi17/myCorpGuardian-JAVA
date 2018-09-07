@@ -70,7 +70,7 @@
                      <children>
                         <Button mnemonicParsing="false" onMouseClicked="#openHomePage" prefWidth="150.0" style="-fx-border-color: #e2e2e2; -fx-background-color: #1d1d1d; -fx-text-fill: #d8d8d8;" text="Home">
                            <HBox.margin>
-                              <Insets left="225.0" top="50.0" />
+                              <Insets left="500.0" right="10.0" top="10.0" />
                            </HBox.margin>
                         </Button>
                      </children>

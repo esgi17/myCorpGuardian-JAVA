@@ -135,4 +135,10 @@ public class PluginsController {
     public void setHomeReturn () {
         title.setText("Return to Home");
     }
+
+    public void clear () {
+        pluginList.getItems().clear();
+        pluginsPaths.clear();
+        pluginsPaths.clear();
+    }
 }
