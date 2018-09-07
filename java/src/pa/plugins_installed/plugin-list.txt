@@ -1,0 +1,1 @@
+CameraPlugin:src/pa/plugins_installed/CameraPlugin.jar

@@ -17,6 +17,7 @@ import pa.plugins.PluginManager;
 import pa.plugins.Plugins;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +35,11 @@ public class PluginsController {
 
     public void initialize () {
         //charger plugins dans pluginInstallList
+        ObservableList<String> tmpList = FXCollections.observableArrayList();
+
+        tmpList.addAll(PluginManager.getInstance().getInstalledPlugins());
+        pluginInstallList.setItems(tmpList);
+
     }
 
     public void loadPlugins () {
@@ -63,6 +69,7 @@ public class PluginsController {
 
         tmpList.addAll(PluginManager.getInstance().getInstalledPlugins());
         pluginInstallList.setItems(tmpList);
+
         Alert alert = new Alert( Alert.AlertType.INFORMATION);
         alert.setTitle(null);
         alert.setHeaderText(null);
@@ -73,20 +80,33 @@ public class PluginsController {
         pluginsPaths.clear();
     }
 
-    public void enablePlugin () {
+    public void selectedPlugin() throws IOException {
         int index = pluginInstallList.getSelectionModel().getSelectedIndex();
         if (index != -1){
             //Si t'as besoin du nom :
-            //String name = pluginsInstallName.get(index);
-            /*
-            if( le plugin est enable){
-                disable le
+            String name = pluginInstallList.getSelectionModel().getSelectedItem().toString();
+            if( PluginManager.getInstance().isActive(name) ) {
                 enableButton.setText("Disable");
-            }
-            else {
-                enable le
+            } else {
                 enableButton.setText("Enable");
-            }*/
+            }
+
+        }
+    }
+
+    public void enablePlugin () throws IOException {
+        int index = pluginInstallList.getSelectionModel().getSelectedIndex();
+        if (index != -1){
+            //Si t'as besoin du nom :
+            String name = pluginInstallList.getSelectionModel().getSelectedItem().toString();
+            System.out.println("NAME :"+ name);
+            if( PluginManager.getInstance().isActive(name) ) {
+                enableButton.setText("Disable");
+                PluginManager.getInstance().disablePlugin(name);
+            } else {
+                enableButton.setText("Enable");
+                PluginManager.getInstance().enablePlugin(name);
+            }
         }
         else {
             Alert alert = new Alert( Alert.AlertType.ERROR);
@@ -98,30 +118,30 @@ public class PluginsController {
     }
 
 
-    public void uninstall () {
-      /*  int index = pluginInstallList.getSelectionModel().getSelectedIndex();
+    public void uninstall () throws IOException {
+        int index = pluginInstallList.getSelectionModel().getSelectedIndex();
         if (index != -1){
-            String path = pluginsInstallPaths.get(index);
-            String name = pluginsInstallName.get(index);
-            pluginsInstallPaths.remove(index);
-            pluginsInstallName.remove(index);
-            Alert alert = new Alert( Alert.AlertType.INFORMATION);
-            alert.setTitle(null);
-            alert.setHeaderText(null);
-            alert.setContentText(name + " uninstall");
-            alert.showAndWait();
+            String name = pluginInstallList.getSelectionModel().getSelectedItem().toString();
+            if( PluginManager.getInstance().uninstallPlugin(name) ) {
 
-            PluginLoader pluginsUninstall = new PluginLoader();
-           // pluginsUninstall.uninstall(path);
+                Alert alert = new Alert( Alert.AlertType.INFORMATION);
+                alert.setTitle(null);
+                alert.setHeaderText(null);
+                alert.setContentText(name + " uninstall");
+                alert.showAndWait();
+            } else {
+                System.out.println("Erreur lors de la desinstallation");
+            }
         }
         else {
             Alert alert = new Alert( Alert.AlertType.ERROR);
             alert.setTitle(null);
             alert.setHeaderText(null);
-            alert.setContentText("No Plugin selected");
+            alert.setContentText("No Plugin selected...");
             alert.showAndWait();
         }
-        */
+        initialize();
+
     }
 
     public void openHomePage() throws Exception {

@@ -23,9 +23,9 @@ public class PluginManager {
 
     private List<Map2DPlugins> map2DPluginsList = new ArrayList<>();
 
-    private String plugin_list = "src/pa/plugins/plugins_installed/plugin-list.txt";
+    private String plugin_list = "src/pa/plugins_installed/plugin-list.txt";
 
-    private String plugin_dir = "src/pa/plugins/plugins_installed";
+    private String plugin_dir = "src/pa/plugins_installed";
 
     public boolean isActive(String name) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(plugin_list));
@@ -39,17 +39,22 @@ public class PluginManager {
         return false;
     }
 
-    public boolean uninstallPlugin( String fileName ) {
+    public boolean uninstallPlugin( String pluginName ) throws IOException {
         // Supprimer le jar du repertoire
-        return true;
+        if( isActive(pluginName) ) {
+            disablePlugin(pluginName);
+        }
+        File file = new File(plugin_dir + "\\" +pluginName +".jar");
+        return file.delete();
+
     }
 
-    public boolean activePlugin( String name ) throws IOException {
+    public boolean enablePlugin( String name ) throws IOException {
         // Ecrire le plugin dans le fichier
         if( !isActive(name) ) {
             try {
                 PrintWriter file = new PrintWriter(new BufferedWriter(new FileWriter(plugin_list, true)));
-                file.println(name + ":" + plugin_dir + "/" + name + ".jar");
+                file.println("\n" + name + ":" + plugin_dir + "/" + name + ".jar");
                 file.close();
 
             } catch( IOException e) {
@@ -97,6 +102,25 @@ public class PluginManager {
 
     public boolean disablePlugin( String pluginName ) {
         // Supprimer le plugin dans le fichier
+        String line;
+        StringBuffer sb = new StringBuffer();
+        String name;
+        try {
+            FileInputStream fis = new FileInputStream(plugin_list);
+            BufferedReader reader  = new BufferedReader(new InputStreamReader(fis));
+            while( (line = reader.readLine()) != null) {
+                if( pluginName.equals(getPluginName(line))) {
+                    line = "";
+                }
+                sb.append(line);
+            }
+            reader.close();
+            BufferedWriter out = new BufferedWriter(new FileWriter(plugin_list));
+            out.write(sb.toString());
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return true;
     }
 

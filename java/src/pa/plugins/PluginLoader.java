@@ -169,7 +169,7 @@ public class PluginLoader {
 
     public boolean savePlugin(URL path, String name) throws IOException {
         PluginManager.getInstance().saveJarFile(path, name);
-        PluginManager.getInstance().activePlugin(name);
+        PluginManager.getInstance().enablePlugin(name);
         return true;
     }
 }
