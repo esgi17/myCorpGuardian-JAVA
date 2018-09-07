@@ -2,10 +2,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
+import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
@@ -51,15 +53,23 @@ public class Camera implements CameraPlugins {
             Media media;
             MediaPlayer mediaplayer;
             MediaView mediaview;
-
-            final File file = new File(cameras.get(index));
-            media = new Media(file.toURI().toString());
-            mediaplayer = new MediaPlayer(media);
-            mediaview = new MediaView(mediaplayer);
-            stack.getChildren().setAll(mediaview);
-            mediaview.fitWidthProperty().bind(stack.widthProperty());
-            mediaview.fitHeightProperty().bind(stack.heightProperty());
-            mediaplayer.play();
+            try {
+                final File file = new File(cameras.get(index));
+                media = new Media(file.toURI().toString());
+                mediaplayer = new MediaPlayer(media);
+                mediaview = new MediaView(mediaplayer);
+                stack.getChildren().setAll(mediaview);
+                mediaview.fitWidthProperty().bind(stack.widthProperty());
+                mediaview.fitHeightProperty().bind(stack.heightProperty());
+                mediaplayer.play();
+            } catch (MediaException e) {
+                e.printStackTrace();
+                Alert alert = new Alert( Alert.AlertType.INFORMATION);
+                alert.setTitle(null);
+                alert.setHeaderText(null);
+                alert.setContentText("Url not found");
+                alert.showAndWait();
+            }
         }
     }
 

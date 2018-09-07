@@ -56,7 +56,7 @@ public class LoginController {
         }
         else {
 
-            alert.setContentText("Connexion Error ");
+            alert.setContentText("Invalid Login or Password");
             alert.showAndWait();
         }
     }

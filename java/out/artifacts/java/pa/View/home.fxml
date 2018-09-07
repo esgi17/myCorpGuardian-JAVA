@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="pane" maxHeight="600.0" maxWidth="900.0" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" stylesheets="@css/home.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pa.controllers.HomeController">
+  <children>
+  <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="900.0" styleClass="background">
+         <children>
+            <VBox prefHeight="600.0" prefWidth="900.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="900.0" text="Welcome into MyCorpGuardian APP" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB" size="40.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="900.0" text="The best solution to secure your company" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB" size="22.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label alignment="CENTER" onMouseClicked="#openPluginsPage" prefHeight="30.0" prefWidth="900.0" styleClass="nav" text="Manage your plugins" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" onMouseClicked="#openUserPage" prefHeight="30.0" prefWidth="900.0" styleClass="nav" text="Manage your users " textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB" size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="25.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label alignment="CENTER" onMouseClicked="#openGroupPage" prefHeight="30.0" prefWidth="900.0" styleClass="nav" text="Manage your groups " textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB" size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="25.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label alignment="CENTER" onMouseClicked="#openDoorPage" prefHeight="30.0" prefWidth="900.0" styleClass="nav" text="Manage your schedules " textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB" size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="25.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label alignment="CENTER" onMouseClicked="#openEventPage" prefHeight="30.0" prefWidth="900.0" styleClass="nav" text="Manage your events" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB" size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="25.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label alignment="CENTER" onMouseClicked="#openDevicePage" prefHeight="30.0" prefWidth="900.0" styleClass="nav" text="Manage your devices " textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB" size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="25.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="mapLabel" alignment="CENTER" onMouseClicked="#openMapPage" prefHeight="30.0" prefWidth="900.0" styleClass="nav" text="Manage your plan" textFill="WHITE" visible="false">
+                     <font>
+                        <Font name="Berlin Sans FB" size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="25.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox prefHeight="38.0" prefWidth="200.0">
+                     <children>
+                        <ToggleButton fx:id="armBtn" mnemonicParsing="false" onMouseClicked="#armedOrDisarmed" prefWidth="200.0">
+                           <font>
+                              <Font name="Berlin Sans FB" size="20.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="350.0" top="50.0" />
+                           </HBox.margin>
+                        </ToggleButton>
+                        <Button fx:id="cameraButton" mnemonicParsing="false" onMouseClicked="#openCameraPage" prefWidth="100.0" text="Camera View" visible="false">
+                           <HBox.margin>
+                              <Insets left="220.0" top="55.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </VBox>
+         </children>
+      </AnchorPane>
+  </children>
+</AnchorPane>

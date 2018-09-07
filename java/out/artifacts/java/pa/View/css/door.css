@@ -1,0 +1,30 @@
+.background {
+    -fx-background-color: transparent, derive(#1d1d1d,20%);
+}
+
+.button {
+    -fx-border-color: #e2e2e2;
+    -fx-background-color: #1d1d1d;
+    -fx-text-fill: #d8d8d8;
+    -fx-font-size: 14px;
+}
+
+.combo-box {
+    -fx-border-color: #e2e2e2;
+    -fx-background-color: #1d1d1d;
+    -fx-text-fill: white;
+}
+.label {
+  -fx-text-fill: white;
+}
+
+.list-cell {
+  -fx-font-size: 14px;
+}
+
+.door {
+  -fx-background-color: #2f2648;
+  -fx-border-color: #e2e2e2;
+  -fx-font-size: 14px;
+  -fx-text-fill: white;
+}

@@ -130,7 +130,7 @@ public class PluginLoader {
             }
             try {
                 System.out.println("URL3 : " + pluginsPath.get(i));
-                if( !pluginsPath.get(i).substring(0, 33).equals("src/pa/plugins_installed/") ) {
+                if( !pluginsPath.get(i).substring(0, 25).equals("src/pa/plugins_installed/") ) {
                     savePlugin(url, name);
 
                 }

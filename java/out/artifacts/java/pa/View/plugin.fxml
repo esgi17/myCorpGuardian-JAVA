@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="pane" maxHeight="600.0" maxWidth="900.0" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" stylesheets="@css/home.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pa.controllers.PluginsController">
+  <children>
+  <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="900.0" styleClass="background">
+         <children>
+            <VBox prefHeight="600.0" prefWidth="450.0">
+               <children>
+                  <Button mnemonicParsing="false" onMouseClicked="#loadPlugins" prefWidth="200.0" text="Load plugins">
+                     <VBox.margin>
+                        <Insets bottom="50.0" left="125.0" top="50.0" />
+                     </VBox.margin>
+                  </Button>
+                  <ListView fx:id="pluginList" prefHeight="350.0" prefWidth="340.0">
+                     <VBox.margin>
+                        <Insets bottom="50.0" left="50.0" right="50.0" />
+                     </VBox.margin>
+                  </ListView>
+                  <Button mnemonicParsing="false" onMouseClicked="#install" prefWidth="200.0" text="Install">
+                     <VBox.margin>
+                        <Insets left="125.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onMouseClicked="#clear" prefWidth="200.0" text="Clear">
+                     <VBox.margin>
+                        <Insets left="125.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox layoutX="450.0" prefHeight="600.0" prefWidth="450.0">
+               <children>
+                  <Button fx:id="enableButton" mnemonicParsing="false" onMouseClicked="#enablePlugin" prefWidth="200.0" text="Enable">
+                     <VBox.margin>
+                        <Insets bottom="50.0" left="125.0" top="50.0" />
+                     </VBox.margin>
+                  </Button>
+                  <ListView fx:id="pluginInstallList" onMouseClicked="#selectedPlugin" prefHeight="350.0" prefWidth="340.0">
+                     <VBox.margin>
+                        <Insets bottom="50.0" left="50.0" right="50.0" />
+                     </VBox.margin>
+                  </ListView>
+                  <Button mnemonicParsing="false" onMouseClicked="#uninstall" prefWidth="200.0" text="Uninstall">
+                     <VBox.margin>
+                        <Insets left="125.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <Label fx:id="title" alignment="CENTER" onMouseClicked="#openHomePage" onMouseEntered="#setHomeReturn" onMouseExited="#setPluginManagement" prefWidth="900.0" text="Plugins Management" textFill="WHITE">
+               <font>
+                  <Font name="Berlin Sans FB Demi Bold" size="18.0" />
+               </font>
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
+            </Label>
+         </children>
+      </AnchorPane>
+  </children>
+</AnchorPane>

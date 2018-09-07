@@ -65,11 +65,11 @@ public class Api {
             String res = response.toString();
             return res;
         }catch (Exception e){
-            Alert alert = new Alert( Alert.AlertType.ERROR);
+            /*Alert alert = new Alert( Alert.AlertType.ERROR);
             alert.setTitle(null);
             alert.setHeaderText(null);
             alert.setContentText("API Get Error \n" + e);
-            alert.showAndWait();
+            alert.showAndWait();*/
             return "";
         }
 
@@ -102,11 +102,11 @@ public class Api {
             return res;
         }
         catch(Exception e){
-            Alert alert = new Alert( Alert.AlertType.ERROR);
+            /*Alert alert = new Alert( Alert.AlertType.ERROR);
             alert.setTitle(null);
             alert.setHeaderText(null);
             alert.setContentText("API Post Error \n" + e);
-            alert.showAndWait();
+            alert.showAndWait();*/
             return "";
         }
 
@@ -143,11 +143,11 @@ public class Api {
             return res;
         }
         catch (Exception e){
-            Alert alert = new Alert( Alert.AlertType.ERROR);
+            /*Alert alert = new Alert( Alert.AlertType.ERROR);
             alert.setTitle(null);
             alert.setHeaderText(null);
             alert.setContentText("API Put Error\n" + e);
-            alert.showAndWait();
+            alert.showAndWait();*/
             return "";
         }
     }
