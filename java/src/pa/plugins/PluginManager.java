@@ -48,7 +48,7 @@ public class PluginManager {
         // Ecrire le plugin dans le fichier
         if( !isActive(name) ) {
             try {
-                PrintWriter file = new PrintWriter(new BufferedWriter(new FileWriter(plugin_list)));
+                PrintWriter file = new PrintWriter(new BufferedWriter(new FileWriter(plugin_list, true)));
                 file.println(name + ":" + plugin_dir + "/" + name + ".jar");
                 file.close();
 
