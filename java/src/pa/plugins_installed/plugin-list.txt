@@ -1,1 +1,2 @@
-CameraPlugin:src/pa/plugins_installed/CameraPlugin.jar
+
+Map2DPlugin:src/pa/plugins_installed/Map2DPlugin.jar

@@ -46,7 +46,6 @@ public class PluginManager {
         }
         File file = new File(plugin_dir + "\\" +pluginName +".jar");
         return file.delete();
-
     }
 
     public boolean enablePlugin( String name ) throws IOException {

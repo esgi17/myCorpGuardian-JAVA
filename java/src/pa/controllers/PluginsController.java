@@ -39,7 +39,6 @@ public class PluginsController {
 
         tmpList.addAll(PluginManager.getInstance().getInstalledPlugins());
         pluginInstallList.setItems(tmpList);
-
     }
 
     public void loadPlugins () {
@@ -69,7 +68,6 @@ public class PluginsController {
 
         tmpList.addAll(PluginManager.getInstance().getInstalledPlugins());
         pluginInstallList.setItems(tmpList);
-
         Alert alert = new Alert( Alert.AlertType.INFORMATION);
         alert.setTitle(null);
         alert.setHeaderText(null);
@@ -120,11 +118,11 @@ public class PluginsController {
 
     public void uninstall () throws IOException {
         int index = pluginInstallList.getSelectionModel().getSelectedIndex();
-        if (index != -1){
+        if (index != -1) {
             String name = pluginInstallList.getSelectionModel().getSelectedItem().toString();
-            if( PluginManager.getInstance().uninstallPlugin(name) ) {
+            if (PluginManager.getInstance().uninstallPlugin(name)) {
 
-                Alert alert = new Alert( Alert.AlertType.INFORMATION);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle(null);
                 alert.setHeaderText(null);
                 alert.setContentText(name + " uninstall");
@@ -132,16 +130,14 @@ public class PluginsController {
             } else {
                 System.out.println("Erreur lors de la desinstallation");
             }
-        }
-        else {
-            Alert alert = new Alert( Alert.AlertType.ERROR);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle(null);
             alert.setHeaderText(null);
             alert.setContentText("No Plugin selected...");
             alert.showAndWait();
         }
         initialize();
-
     }
 
     public void openHomePage() throws Exception {

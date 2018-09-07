@@ -30,6 +30,7 @@ public class PluginLoader {
         // Get installed and active plugin
         System.out.println( "0" );
         this.pluginsPath = this.getActivePlugins();
+        System.out.println(pluginsPath);
         System.out.println( "1" );
         this.loadPlugins();
         System.out.println( "2" );
@@ -129,7 +130,7 @@ public class PluginLoader {
             }
             try {
                 System.out.println("URL3 : " + pluginsPath.get(i));
-                if( !pluginsPath.get(i).substring(0, 33).equals("src/pa/plugins/plugins_installed/") ) {
+                if( !pluginsPath.get(i).substring(0, 33).equals("src/pa/plugins_installed/") ) {
                     savePlugin(url, name);
 
                 }
