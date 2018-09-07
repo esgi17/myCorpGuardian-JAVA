@@ -1,6 +1,7 @@
 package pa.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
@@ -9,6 +10,7 @@ import org.json.JSONObject;
 import pa.Models.Api;
 import pa.Models.NavHandler;
 import pa.annotations.FunctionParsor;
+import pa.plugins.CameraPlugins;
 import pa.plugins.Map2DPlugins;
 import pa.plugins.PluginLoader;
 import pa.plugins.PluginManager;
@@ -18,6 +20,7 @@ public class HomeController{
     @FXML AnchorPane pane;
     @FXML ToggleButton armBtn;
     @FXML Label mapLabel;
+    @FXML Button cameraButton;
 
 
     public void openDevicePage() throws Exception {
@@ -43,6 +46,16 @@ public class HomeController{
 
     public void openPluginsPage() throws Exception {
         NavHandler.openPluginsPage(pane);
+    }
+
+    public void openCameraPage() throws Exception {
+        if( PluginManager.getInstance().isActive("CameraPlugin")) {
+            CameraPlugins[] camera = PluginManager.getInstance().getCameraPluginsList().toArray(new CameraPlugins[0]);
+            System.out.println(camera.length);
+            if( camera.length > 0 ) {
+                NavHandler.openCameraPage(pane);
+            }
+        }
     }
 
     public void openMapPage() throws Exception {
@@ -73,11 +86,18 @@ public class HomeController{
             if( map2D.length > 0 ) {
                 System.out.println(map2D[0].getName());
             }
+            CameraPlugins[] camera = PluginManager.getInstance().getCameraPluginsList().toArray(new CameraPlugins[0]);
+            if( camera.length > 0 ) {
+                System.out.println(camera[0].getName());
+            }
         }else {
             System.out.println( "ERROOOOR" );
         }
         if( PluginManager.getInstance().isActive("Map2DPlugin")){
             mapLabel.setVisible(true);
+        }
+        if( PluginManager.getInstance().isActive("CameraPlugin")){
+            cameraButton.setVisible(true);
         }
         setArmBtn();
     }

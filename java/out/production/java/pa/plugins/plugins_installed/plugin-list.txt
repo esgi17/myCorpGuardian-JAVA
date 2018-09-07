@@ -1,1 +1,0 @@
-Map2DPlugin:src/pa/plugins/plugins_installed/Map2DPlugin.jar

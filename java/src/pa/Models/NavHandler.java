@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import pa.Main;
+import pa.plugins.CameraPlugins;
 import pa.plugins.Map2DPlugins;
 import pa.plugins.PluginManager;
 
@@ -136,6 +137,23 @@ public abstract class NavHandler {
             Map2DPlugins[] map2D = PluginManager.getInstance().getMap2DPluginsList().toArray(new Map2DPlugins[0]);
             loader.setController(map2D[0]);
             Main.primaryStage.setTitle( "My Corp Guardian - MAP" );
+            pane = (AnchorPane) loader.load();
+            Scene scene = new Scene( pane );
+            Main.primaryStage.setScene( scene );
+            Main.primaryStage.show();
+        }
+        else {
+            openLoginPage(pane);
+        }
+    }
+
+    public static void openCameraPage(AnchorPane pane) throws Exception{
+        if(checkToken() && PluginManager.getInstance().isActive("CameraPlugin")) {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation( Main.class.getResource( "View/camera.fxml" ) );
+            CameraPlugins[] camera = PluginManager.getInstance().getCameraPluginsList().toArray(new CameraPlugins[0]);
+            loader.setController(camera[0]);
+            Main.primaryStage.setTitle( "My Corp Guardian - CAMERA" );
             pane = (AnchorPane) loader.load();
             Scene scene = new Scene( pane );
             Main.primaryStage.setScene( scene );
